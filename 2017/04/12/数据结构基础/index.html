@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构基础 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="zhangliting blog IT" />
+  
+  
+  
+  
+  <meta name="description" content="原文地址：github.com/kdn251/interviews
+译文出自：掘金翻译计划
+译者：王下邀月熊
+校对者：PhxNirvana、根号三
+这个 链接 用来查看本翻译与英文版是否有差别（如果你没有看到 README.md 发生变化，那就意味着这份翻译文档是最新的）。
+
+
+Interviews
+软件工程技术面试个人指南。
+Maintainer - Kevin Naughton Jr.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构基础">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/12/数据结构基础/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="原文地址：github.com/kdn251/interviews
+译文出自：掘金翻译计划
+译者：王下邀月熊
+校对者：PhxNirvana、根号三
+这个 链接 用来查看本翻译与英文版是否有差别（如果你没有看到 README.md 发生变化，那就意味着这份翻译文档是最新的）。
+
+
+Interviews
+软件工程技术面试个人指南。
+Maintainer - Kevin Naughton Jr.">
+<meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
+<meta property="og:updated_time" content="2017-04-11T14:29:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构基础">
+<meta name="twitter:description" content="原文地址：github.com/kdn251/interviews
+译文出自：掘金翻译计划
+译者：王下邀月熊
+校对者：PhxNirvana、根号三
+这个 链接 用来查看本翻译与英文版是否有差别（如果你没有看到 README.md 发生变化，那就意味着这份翻译文档是最新的）。
+
+
+Interviews
+软件工程技术面试个人指南。
+Maintainer - Kevin Naughton Jr.">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../css/style.css">
+
+  <script src="../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../index.html">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-数据结构基础" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="../../../../images/pose.jpg" rel="gallery_cj1dna12n0009nstuc7ow27i1">
+        <img src="../../../../images/pose.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      数据结构基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="" class="article-date">
+	  <time datetime="2017-04-11T15:19:55.000Z" itemprop="datePublished">April 11, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<ul>
+<li>原文地址：<a href="https://github.com/kdn251/interviews" target="_blank" rel="external">github.com/kdn251/interviews</a></li>
+<li>译文出自：<a href="https://github.com/xitu/gold-miner" target="_blank" rel="external">掘金翻译计划</a></li>
+<li>译者：<a href="https://github.com/wxyyxc1992" target="_blank" rel="external">王下邀月熊</a></li>
+<li>校对者：<a href="https://github.com/phxnirvana" target="_blank" rel="external">PhxNirvana</a>、<a href="https://github.com/sqrthree" target="_blank" rel="external">根号三</a></li>
+<li>这个 <a href="https://github.com/xitu/interviews/compare/master...kdn251:master" target="_blank" rel="external">链接</a> 用来查看本翻译与英文版是否有差别（如果你没有看到 README.md 发生变化，那就意味着这份翻译文档是最新的）。</li>
+</ul>
+</blockquote>
+<h1 id="Interviews"><a href="#Interviews" class="headerlink" title="Interviews"></a>Interviews</h1><blockquote>
+<p>软件工程技术面试个人指南。</p>
+<p>Maintainer - <a href="https://github.com/kdn251" target="_blank" rel="external">Kevin Naughton Jr.</a></p>
+</blockquote>
+<h2 id="其他语言版本"><a href="#其他语言版本" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><ul>
+<li><a href="./README.md">English</a></li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#在线练习">在线练习</a></li>
+<li><a href="#在线面试编程">在线面试编程</a></li>
+<li><a href="#数据结构">数据结构</a></li>
+<li><a href="#算法">算法</a></li>
+<li><a href="#位运算">位运算</a></li>
+<li><a href="#算法复杂度分析">算法复杂度分析</a></li>
+<li><a href="#视频教程">视频教程</a></li>
+<li><a href="#面试书籍">面试书籍</a></li>
+<li><a href="#计算机科学与技术资讯">计算机科学与技术资讯</a></li>
+<li><a href="#文件结构">文件结构</a></li>
+</ul>
+<h2 id="在线练习"><a href="#在线练习" class="headerlink" title="在线练习"></a>在线练习</h2><ul>
+<li><a href="https://leetcode.com/" target="_blank" rel="external">LeetCode</a></li>
+<li><a href="https://vjudge.net/" target="_blank" rel="external">Virtual Judge</a></li>
+<li><a href="https://www.careercup.com/" target="_blank" rel="external">CareerCup</a></li>
+<li><a href="https://www.hackerrank.com/" target="_blank" rel="external">HackerRank</a></li>
+<li><a href="https://codefights.com/" target="_blank" rel="external">CodeFights</a></li>
+<li><a href="https://open.kattis.com/" target="_blank" rel="external">Kattis</a></li>
+<li><a href="https://www.hackerearth.com" target="_blank" rel="external">HackerEarth</a></li>
+</ul>
+<h2 id="在线面试编程"><a href="#在线面试编程" class="headerlink" title="在线面试编程"></a>在线面试编程</h2><ul>
+<li><a href="http://www.gainlo.co/#!/" target="_blank" rel="external">Gainlo</a></li>
+<li><a href="https://refdash.com/" target="_blank" rel="external">Refdash</a></li>
+</ul>
+<a id="more"></a>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h3><ul>
+<li>链表即是由节点（Node）组成的线性集合，每个节点可以利用指针指向其他节点。它是一种包含了多个节点的、能够用于表示序列的数据结构。</li>
+<li><strong>单向链表</strong>: 链表中的节点仅指向下一个节点，并且最后一个节点指向空。</li>
+<li><strong>双向链表</strong>: 其中每个节点具有两个指针 p、n，使得 p 指向先前节点并且 n 指向下一个节点；最后一个节点的 n 指针指向 null。</li>
+<li><strong>循环链表</strong>：每个节点指向下一个节点并且最后一个节点指向第一个节点的链表。</li>
+<li>时间复杂度:<ul>
+<li>索引: <code>O(n)</code></li>
+<li>搜索: <code>O(n)</code></li>
+<li>插入: <code>O(1)</code></li>
+<li>移除: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><ul>
+<li>栈是元素的集合，其包含了两个基本操作：push 操作可以用于将元素压入栈，pop 操作可以将栈顶元素移除。</li>
+<li>遵循后入先出（LIFO）原则。</li>
+<li>时间复杂度:<ul>
+<li>索引: <code>O(n)</code></li>
+<li>搜索: <code>O(n)</code></li>
+<li>插入: <code>O(1)</code></li>
+<li>移除: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li>队列是元素的集合，其包含了两个基本操作：enqueue 操作可以用于将元素插入到队列中，而 dequeeu 操作则是将元素从队列中移除。</li>
+<li>遵循先入先出原则 (FIFO)。</li>
+<li>时间复杂度:<ul>
+<li>索引: <code>O(n)</code></li>
+<li>搜索: <code>O(n)</code></li>
+<li>插入: <code>O(1)</code></li>
+<li>移除: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><ul>
+<li>树是无向、连通的无环图。</li>
+</ul>
+<h3 id="Binary-Tree"><a href="#Binary-Tree" class="headerlink" title="Binary Tree"></a>Binary Tree</h3><ul>
+<li>二叉树即是每个节点最多包含左子节点与右子节点这两个节点的树形数据结构。</li>
+<li><strong>满二叉树</strong>: 树中的每个节点仅包含 0 或 2 个节点。</li>
+<li><strong>完美二叉树（Perfect Binary Tree）</strong>: 二叉树中的每个叶节点都拥有两个子节点，并且具有相同的高度。</li>
+<li><strong>完全二叉树</strong>: 除最后一层外，每一层上的结点数均达到最大值；在最后一层上只缺少右边的若干结点。</li>
+</ul>
+<h3 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h3><ul>
+<li>二叉搜索树（BST）是一种特殊的二叉树，其任何节点中的值都会大于或者等于其左子树中存储的值并且小于或者等于其右子树中存储的值。</li>
+<li>时间复杂度:<ul>
+<li>索引: <code>O(log(n))</code></li>
+<li>搜索: <code>O(log(n))</code></li>
+<li>插入: <code>O(log(n))</code></li>
+<li>删除: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/BST.png?raw=true" alt="Binary Search Tree" width="400" height="500"></p>
+<h3 id="Trie"><a href="#Trie" class="headerlink" title="Trie"></a>Trie</h3><ul>
+<li>字典树，又称基数树或者前缀树，能够用于存储键为字符串的动态集合或者关联数组的搜索树。树中的节点并没有直接存储关联键值，而是该节点在树中的挂载位置决定了其关联键值。某个节点的所有子节点都拥有相同的前缀，整棵树的根节点则是空字符串。</li>
+</ul>
+<p><img src="/images/trie.png?raw=true" alt="Alt text" title="Trie"></p>
+<h3 id="Fenwick-Tree"><a href="#Fenwick-Tree" class="headerlink" title="Fenwick Tree"></a>Fenwick Tree</h3><ul>
+<li>树状数组又称 Binary Indexed Tree，其表现形式为树，不过本质上是以数组实现。数组中的下标代表着树中的顶点，每个顶点的父节点或者子节点的下标能够通过位运算获得。数组中的每个元素包含了预计算的区间值之和，在整棵树更新的过程中同样会更新这些预计算的值。</li>
+<li>时间复杂度:<ul>
+<li>区间求值: <code>O(log(n))</code></li>
+<li>更新: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/fenwickTree.png?raw=true" alt="Alt text" title="Fenwick Tree"></p>
+<h3 id="Segment-Tree"><a href="#Segment-Tree" class="headerlink" title="Segment Tree"></a>Segment Tree</h3><ul>
+<li>线段树是用于存放间隔或者线段的树形数据结构，它允许快速的查找某一个节点在若干条线段中出现的次数.</li>
+<li>时间复杂度:<ul>
+<li>区间查询: <code>O(log(n))</code></li>
+<li>更新: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/segmentTree.png?raw=true" alt="Alt text" title="Segment Tree"></p>
+<h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>堆是一种特殊的基于树的满足某些特性的数据结构，整个堆中的所有父子节点的键值都会满足相同的排序条件。堆更准确地可以分为最大堆与最小堆，在最大堆中，父节点的键值永远大于或者等于子节点的值，并且整个堆中的最大值存储于根节点；而最小堆中，父节点的键值永远小于或者等于其子节点的键值，并且整个堆中的最小值存储于根节点。</li>
+<li>时间复杂度:<ul>
+<li>访问: <code>O(log(n))</code></li>
+<li>搜索: <code>O(log(n))</code></li>
+<li>插入: <code>O(log(n))</code></li>
+<li>移除: <code>O(log(n))</code></li>
+<li>移除最大值 / 最小值: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/heap.png?raw=true" alt="Max Heap" width="400" height="500"></p>
+<h3 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h3><ul>
+<li>哈希能够将任意长度的数据映射到固定长度的数据。哈希函数返回的即是哈希值，如果两个不同的键得到相同的哈希值，即将这种现象称为碰撞。</li>
+<li><strong>Hash Map</strong>: Hash Map 是一种能够建立起键与值之间关系的数据结构，Hash Map 能够使用哈希函数将键转化为桶或者槽中的下标，从而优化对于目标值的搜索速度。</li>
+<li>碰撞解决<ul>
+<li><strong>链地址法（Separate Chaining）</strong>: 链地址法中，每个桶是相互独立的，包含了一系列索引的列表。搜索操作的时间复杂度即是搜索桶的时间（固定时间）与遍历列表的时间之和。</li>
+<li><strong>开地址法（Open Addressing）</strong>: 在开地址法中，当插入新值时，会判断该值对应的哈希桶是否存在，如果存在则根据某种算法依次选择下一个可能的位置，直到找到一个尚未被占用的地址。所谓开地址法也是指某个元素的位置并不永远由其哈希值决定。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/hash.png?raw=true" alt="Alt text" title="Hashing"></p>
+<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><ul>
+<li>图是一种数据元素间为多对多关系的数据结构，加上一组基本操作构成的抽象数据类型。<ul>
+<li><strong>无向图（Undirected Graph）</strong>: 无向图具有对称的邻接矩阵，因此如果存在某条从节点 u 到节点 v 的边，反之从 v 到 u 的边也存在。</li>
+<li><strong>有向图（Directed Graph）</strong>: 有向图的邻接矩阵是非对称的，即如果存在从 u 到 v 的边并不意味着一定存在从 v 到 u 的边。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/graph.png?raw=true" alt="Graph" width="400" height="500"></p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><ul>
+<li>稳定: 否</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>O(nlog(n))</code></li>
+<li>最坏时间: <code>O(n^2)</code></li>
+<li>平均时间: <code>O(nlog(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/quicksort.gif?raw=true" alt="Alt text" title="Quicksort"></p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><ul>
+<li>归并排序是典型的分治算法，它不断地将某个数组分为两个部分，分别对左子数组与右子数组进行排序，然后将两个数组合并为新的有序数组。</li>
+<li>稳定: 是</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>O(nlog(n))</code></li>
+<li>最坏时间: <code>O(nlog(n))</code></li>
+<li>平均时间: <code>O(nlog(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/mergesort.gif?raw=true" alt="Alt text" title="Mergesort"></p>
+<h4 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h4><ul>
+<li>桶排序将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>Ω(n + k)</code></li>
+<li>最坏时间: <code>O(n^2)</code></li>
+<li>平均时间:<code>Θ(n + k)</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/bucketsort.png?raw=true" alt="Alt text" title="Bucket Sort"></p>
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><ul>
+<li>基数排序类似于桶排序，将数组分割到有限数目的桶中；不过其在分割之后并没有让每个桶单独地进行排序，而是直接进行了合并操作。</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>Ω(nk)</code></li>
+<li>最坏时间: <code>O(nk)</code></li>
+<li>平均时间: <code>Θ(nk)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="图算法"><a href="#图算法" class="headerlink" title="图算法"></a>图算法</h3><h4 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h4><ul>
+<li>深度优先算法是一种优先遍历子节点而不是回溯的算法。</li>
+<li>时间复杂度: <code>O(|V| + |E|)</code></li>
+</ul>
+<p><img src="/images/dfsbfs.gif?raw=true" alt="Alt text" title="DFS / BFS Traversal"></p>
+<h4 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h4><ul>
+<li>广度优先搜索是优先遍历邻居节点而不是子节点的图遍历算法。</li>
+<li>时间复杂度: <code>O(|V| + |E|)</code></li>
+</ul>
+<p><img src="/images/dfsbfs.gif?raw=true" alt="Alt text" title="DFS / BFS Traversal"></p>
+<h4 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h4><ul>
+<li>拓扑排序是对于有向图节点的线性排序，如果存在某条从 u 到 v 的边，则认为 u 的下标先于 v。</li>
+<li>时间复杂度: <code>O(|V| + |E|)</code></li>
+</ul>
+<h4 id="Dijkstra-算法"><a href="#Dijkstra-算法" class="headerlink" title="Dijkstra 算法"></a>Dijkstra 算法</h4><ul>
+<li><strong>Dijkstra 算法</strong> 用于计算有向图中单源最短路径问题。</li>
+<li>时间复杂度: <code>O(|V|^2)</code></li>
+</ul>
+<p><img src="/images/dijkstra.gif?raw=true" alt="Alt text" title="Dijkstra&#39;s"></p>
+<h4 id="Bellman-Ford-算法"><a href="#Bellman-Ford-算法" class="headerlink" title="Bellman-Ford 算法"></a>Bellman-Ford 算法</h4><ul>
+<li><strong>Bellman-Ford 算法</strong>是在带权图中计算从单一源点出发到其他节点的最短路径的算法。</li>
+<li>尽管算法复杂度大于 Dijkstra 算法，但是它适用于包含了负值边的图。</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>O(|E|)</code></li>
+</ul>
+<ul>
+<li>最坏时间: <code>O(|V||E|)</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/bellman-ford.gif?raw=true" alt="Alt text" title="Bellman-Ford"></p>
+<h4 id="Floyd-Warshall-算法"><a href="#Floyd-Warshall-算法" class="headerlink" title="Floyd-Warshall 算法"></a>Floyd-Warshall 算法</h4><ul>
+<li><strong>Floyd-Warshall 算法</strong> 能够用于在无环带权图中寻找任意节点的最短路径。</li>
+<li>时间复杂度:<ul>
+<li>最优时间: <code>O(|V|^3)</code></li>
+<li>最坏时间: <code>O(|V|^3)</code></li>
+<li>平均时间: <code>O(|V|^3)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Prim-算法"><a href="#Prim-算法" class="headerlink" title="Prim 算法"></a>Prim 算法</h4><ul>
+<li><strong>Prim 算法</strong>是用于在带权无向图中计算最小生成树的贪婪算法。换言之，Prim 算法能够在图中抽取出连接所有节点的边的最小代价子集。</li>
+<li>时间复杂度: <code>O(|V|^2)</code></li>
+</ul>
+<p><img src="/images/prim.gif?raw=true" alt="Alt text" title="Prim&#39;s Algorithm"></p>
+<h4 id="Kruskal-算法"><a href="#Kruskal-算法" class="headerlink" title="Kruskal 算法"></a>Kruskal 算法</h4><ul>
+<li><strong>Kruskal 算法</strong>同样是计算图的最小生成树的算法，与 Prim 的区别在于并不需要图是连通的。</li>
+<li>时间复杂度: <code>O(|E|log|V|)</code></li>
+</ul>
+<p><img src="/images/kruskal.gif?raw=true" alt="Alt text" title="Kruskal&#39;s Algorithm"></p>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><ul>
+<li>位运算即是在位级别进行操作的技术，合适的位运算能够帮助我们得到更快地运算速度与更小的内存使用。</li>
+<li>测试第 k 位: <code>s &amp; (1 &lt;&lt; k)</code></li>
+<li>设置第 k 位: <code>s |= (1 &lt;&lt; k)</code></li>
+<li>第 k 位置零: <code>s &amp;= ~(1 &lt;&lt; k)</code></li>
+<li>切换第 k 位值: <code>s ^= ~(1 &lt;&lt; k)</code></li>
+<li>乘以 2: <code>s &lt;&lt; n</code></li>
+<li>除以 2: <code>s &gt;&gt; n</code></li>
+<li>交集: <code>s &amp; t</code></li>
+<li>并集: <code>s | t</code></li>
+<li>减法: <code>s &amp; ~t</code></li>
+<li>交换 <code>x = x ^ y ^ (y = x)</code></li>
+<li>取出最小非 0 位（Extract lowest set bit）: <code>s &amp; (-s)</code></li>
+<li>取出最小 0 位（Extract lowest unset bit）: <code>~s &amp; (s + 1)</code></li>
+<li>交换值:<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">x ^= y;</div><div class="line">y ^= x;</div><div class="line">x ^= y;</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><h4 id="大-O-表示"><a href="#大-O-表示" class="headerlink" title="大 O 表示"></a>大 O 表示</h4><ul>
+<li><strong>大 O 表示</strong> 用于表示某个算法的上限，往往用于描述最坏的情况。</li>
+</ul>
+<p><img src="/images/bigO.png?raw=true" alt="Alt text" title="Theta Notation"></p>
+<h4 id="小-O-表示"><a href="#小-O-表示" class="headerlink" title="小 O 表示"></a>小 O 表示</h4><ul>
+<li><strong>小 O 表示</strong>用于描述某个算法的渐进上界，不过二者要更为紧密。</li>
+</ul>
+<h4 id="大-Ω-表示"><a href="#大-Ω-表示" class="headerlink" title="大 Ω 表示"></a>大 Ω 表示</h4><ul>
+<li><strong>大 Ω 表示</strong>用于描述某个算法的渐进下界。</li>
+</ul>
+<p><img src="/images/bigOmega.png?raw=true" alt="Alt text" title="Theta Notation"></p>
+<h4 id="小-ω-表示"><a href="#小-ω-表示" class="headerlink" title="小 ω 表示"></a>小 ω 表示</h4><ul>
+<li><strong>Little Omega Notation</strong>用于描述某个特定算法的下界，不过不一定很靠近。</li>
+</ul>
+<h4 id="Theta-Θ-表示"><a href="#Theta-Θ-表示" class="headerlink" title="Theta Θ 表示"></a>Theta Θ 表示</h4><ul>
+<li><strong>Theta Notation</strong>用于描述某个确定算法的确界。</li>
+</ul>
+<p><img src="/images/theta.png?raw=true" alt="Alt text" title="Theta Notation"></p>
+<h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h2><ul>
+<li>Data Structures<ul>
+<li><a href="https://www.youtube.com/watch?v=mFPmKGIrQs4&amp;index=1&amp;list=PL-XXv-cvA_iAlnI-BQr9hjqADPBtujFJd" target="_blank" rel="external">UC Berkeley Data Structures</a></li>
+<li><a href="https://www.youtube.com/watch?v=T0yzrZL1py0&amp;list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf&amp;index=1" target="_blank" rel="external">MIT Advanced Data Structures</a></li>
+</ul>
+</li>
+<li>Algorithms<ul>
+<li><a href="https://www.youtube.com/watch?v=HtSuA80QTyo&amp;list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb&amp;index=1" target="_blank" rel="external">MIT Introduction to Algorithms</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PL6ogFv-ieghdoGKGg2Bik3Gl1glBTEu8c" target="_blank" rel="external">MIT Advanced Algorithms</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="面试书籍"><a href="#面试书籍" class="headerlink" title="面试书籍"></a>面试书籍</h2><ul>
+<li>Competitive Programming 3 - Steven Halim &amp; Felix Halim</li>
+<li>Cracking The Coding Interview - Gayle Laakmann McDowell</li>
+<li>Cracking The PM Interview - Gayle Laakmann McDowell &amp; Jackie Bavaro</li>
+</ul>
+<h2 id="计算机科学与技术资讯"><a href="#计算机科学与技术资讯" class="headerlink" title="计算机科学与技术资讯"></a>计算机科学与技术资讯</h2><ul>
+<li><a href="https://news.ycombinator.com/" target="_blank" rel="external">Hacker News</a></li>
+<li><a href="https://lobste.rs/" target="_blank" rel="external">Lobsters</a></li>
+</ul>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── Array</div><div class="line">│   ├── bestTimeToBuyAndSellStock.java</div><div class="line">│   ├── findTheCelebrity.java</div><div class="line">│   ├── gameOfLife.java</div><div class="line">│   ├── increasingTripletSubsequence.java</div><div class="line">│   ├── insertInterval.java</div><div class="line">│   ├── longestConsecutiveSequence.java</div><div class="line">│   ├── maximumProductSubarray.java</div><div class="line">│   ├── maximumSubarray.java</div><div class="line">│   ├── mergeIntervals.java</div><div class="line">│   ├── missingRanges.java</div><div class="line">│   ├── productOfArrayExceptSelf.java</div><div class="line">│   ├── rotateImage.java</div><div class="line">│   ├── searchInRotatedSortedArray.java</div><div class="line">│   ├── spiralMatrixII.java</div><div class="line">│   ├── subsetsII.java</div><div class="line">│   ├── subsets.java</div><div class="line">│   ├── summaryRanges.java</div><div class="line">│   ├── wiggleSort.java</div><div class="line">│   └── wordSearch.java</div><div class="line">├── Backtracking</div><div class="line">│   ├── androidUnlockPatterns.java</div><div class="line">│   ├── generalizedAbbreviation.java</div><div class="line">│   └── letterCombinationsOfAPhoneNumber.java</div><div class="line">├── BinarySearch</div><div class="line">│   ├── closestBinarySearchTreeValue.java</div><div class="line">│   ├── firstBadVersion.java</div><div class="line">│   ├── guessNumberHigherOrLower.java</div><div class="line">│   ├── pow(x,n).java</div><div class="line">│   └── sqrt(x).java</div><div class="line">├── BitManipulation</div><div class="line">│   ├── binaryWatch.java</div><div class="line">│   ├── countingBits.java</div><div class="line">│   ├── hammingDistance.java</div><div class="line">│   ├── maximumProductOfWordLengths.java</div><div class="line">│   ├── numberOf1Bits.java</div><div class="line">│   ├── sumOfTwoIntegers.java</div><div class="line">│   └── utf-8Validation.java</div><div class="line">├── BreadthFirstSearch</div><div class="line">│   ├── binaryTreeLevelOrderTraversal.java</div><div class="line">│   ├── cloneGraph.java</div><div class="line">│   ├── pacificAtlanticWaterFlow.java</div><div class="line">│   ├── removeInvalidParentheses.java</div><div class="line">│   ├── shortestDistanceFromAllBuildings.java</div><div class="line">│   ├── symmetricTree.java</div><div class="line">│   └── wallsAndGates.java</div><div class="line">├── DepthFirstSearch</div><div class="line">│   ├── balancedBinaryTree.java</div><div class="line">│   ├── battleshipsInABoard.java</div><div class="line">│   ├── convertSortedArrayToBinarySearchTree.java</div><div class="line">│   ├── maximumDepthOfABinaryTree.java</div><div class="line">│   ├── numberOfIslands.java</div><div class="line">│   ├── populatingNextRightPointersInEachNode.java</div><div class="line">│   └── sameTree.java</div><div class="line">├── Design</div><div class="line">│   └── zigzagIterator.java</div><div class="line">├── DivideAndConquer</div><div class="line">│   ├── expressionAddOperators.java</div><div class="line">│   └── kthLargestElementInAnArray.java</div><div class="line">├── DynamicProgramming</div><div class="line">│   ├── bombEnemy.java</div><div class="line">│   ├── climbingStairs.java</div><div class="line">│   ├── combinationSumIV.java</div><div class="line">│   ├── countingBits.java</div><div class="line">│   ├── editDistance.java</div><div class="line">│   ├── houseRobber.java</div><div class="line">│   ├── paintFence.java</div><div class="line">│   ├── paintHouseII.java</div><div class="line">│   ├── regularExpressionMatching.java</div><div class="line">│   ├── sentenceScreenFitting.java</div><div class="line">│   ├── uniqueBinarySearchTrees.java</div><div class="line">│   └── wordBreak.java</div><div class="line">├── HashTable</div><div class="line">│   ├── binaryTreeVerticalOrderTraversal.java</div><div class="line">│   ├── findTheDifference.java</div><div class="line">│   ├── groupAnagrams.java</div><div class="line">│   ├── groupShiftedStrings.java</div><div class="line">│   ├── islandPerimeter.java</div><div class="line">│   ├── loggerRateLimiter.java</div><div class="line">│   ├── maximumSizeSubarraySumEqualsK.java</div><div class="line">│   ├── minimumWindowSubstring.java</div><div class="line">│   ├── sparseMatrixMultiplication.java</div><div class="line">│   ├── strobogrammaticNumber.java</div><div class="line">│   ├── twoSum.java</div><div class="line">│   └── uniqueWordAbbreviation.java</div><div class="line">├── LinkedList</div><div class="line">│   ├── addTwoNumbers.java</div><div class="line">│   ├── deleteNodeInALinkedList.java</div><div class="line">│   ├── mergeKSortedLists.java</div><div class="line">│   ├── palindromeLinkedList.java</div><div class="line">│   ├── plusOneLinkedList.java</div><div class="line">│   ├── README.md</div><div class="line">│   └── reverseLinkedList.java</div><div class="line">├── Queue</div><div class="line">│   └── movingAverageFromDataStream.java</div><div class="line">├── README.md</div><div class="line">├── Sort</div><div class="line">│   ├── meetingRoomsII.java</div><div class="line">│   └── meetingRooms.java</div><div class="line">├── Stack</div><div class="line">│   ├── binarySearchTreeIterator.java</div><div class="line">│   ├── decodeString.java</div><div class="line">│   ├── flattenNestedListIterator.java</div><div class="line">│   └── trappingRainWater.java</div><div class="line">├── String</div><div class="line">│   ├── addBinary.java</div><div class="line">│   ├── countAndSay.java</div><div class="line">│   ├── decodeWays.java</div><div class="line">│   ├── editDistance.java</div><div class="line">│   ├── integerToEnglishWords.java</div><div class="line">│   ├── longestPalindrome.java</div><div class="line">│   ├── longestSubstringWithAtMostKDistinctCharacters.java</div><div class="line">│   ├── minimumWindowSubstring.java</div><div class="line">│   ├── multiplyString.java</div><div class="line">│   ├── oneEditDistance.java</div><div class="line">│   ├── palindromePermutation.java</div><div class="line">│   ├── README.md</div><div class="line">│   ├── reverseVowelsOfAString.java</div><div class="line">│   ├── romanToInteger.java</div><div class="line">│   ├── validPalindrome.java</div><div class="line">│   └── validParentheses.java</div><div class="line">├── Tree</div><div class="line">│   ├── binaryTreeMaximumPathSum.java</div><div class="line">│   ├── binaryTreePaths.java</div><div class="line">│   ├── inorderSuccessorInBST.java</div><div class="line">│   ├── invertBinaryTree.java</div><div class="line">│   ├── lowestCommonAncestorOfABinaryTree.java</div><div class="line">│   ├── sumOfLeftLeaves.java</div><div class="line">│   └── validateBinarySearchTree.java</div><div class="line">├── Trie</div><div class="line">│   ├── addAndSearchWordDataStructureDesign.java</div><div class="line">│   ├── implementTrie.java</div><div class="line">│   └── wordSquares.java</div><div class="line">└── TwoPointers</div><div class="line">    ├── 3Sum.java</div><div class="line">    ├── 3SumSmaller.java</div><div class="line">    ├── mergeSortedArray.java</div><div class="line">    ├── minimumSizeSubarraySum.java</div><div class="line">    ├── moveZeros.java</div><div class="line">    ├── removeDuplicatesFromSortedArray.java</div><div class="line">    ├── reverseString.java</div><div class="line">    └── sortColors.java</div><div class="line"></div><div class="line">18 directories, 124 files</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/算法/">算法</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/算法/">算法</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/04/12/数据结构基础/" data-title="数据结构基础" data-url="http://zhangliting.github.io/2017/04/12/数据结构基础/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangliting"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="../../../../css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../../03/29/MyBatis-入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MyBatis 入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Interviews"><span class="nav-number">1.</span> <span class="nav-text">Interviews</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其他语言版本"><span class="nav-number">1.1.</span> <span class="nav-text">其他语言版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线练习"><span class="nav-number">1.3.</span> <span class="nav-text">在线练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线面试编程"><span class="nav-number">1.4.</span> <span class="nav-text">在线面试编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">1.5.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linked-List"><span class="nav-number">1.5.1.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">1.5.2.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">1.5.3.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tree"><span class="nav-number">1.5.4.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Tree"><span class="nav-number">1.5.5.</span> <span class="nav-text">Binary Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Search-Tree"><span class="nav-number">1.5.6.</span> <span class="nav-text">Binary Search Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trie"><span class="nav-number">1.5.7.</span> <span class="nav-text">Trie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fenwick-Tree"><span class="nav-number">1.5.8.</span> <span class="nav-text">Fenwick Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Segment-Tree"><span class="nav-number">1.5.9.</span> <span class="nav-text">Segment Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heap"><span class="nav-number">1.5.10.</span> <span class="nav-text">Heap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashing"><span class="nav-number">1.5.11.</span> <span class="nav-text">Hashing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph"><span class="nav-number">1.5.12.</span> <span class="nav-text">Graph</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">1.6.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.6.1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#桶排序"><span class="nav-number">1.6.1.3.</span> <span class="nav-text">桶排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-number">1.6.1.4.</span> <span class="nav-text">基数排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图算法"><span class="nav-number">1.6.2.</span> <span class="nav-text">图算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">深度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">广度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dijkstra-算法"><span class="nav-number">1.6.2.4.</span> <span class="nav-text">Dijkstra 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bellman-Ford-算法"><span class="nav-number">1.6.2.5.</span> <span class="nav-text">Bellman-Ford 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Floyd-Warshall-算法"><span class="nav-number">1.6.2.6.</span> <span class="nav-text">Floyd-Warshall 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prim-算法"><span class="nav-number">1.6.2.7.</span> <span class="nav-text">Prim 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kruskal-算法"><span class="nav-number">1.6.2.8.</span> <span class="nav-text">Kruskal 算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">1.7.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法复杂度分析"><span class="nav-number">1.8.</span> <span class="nav-text">算法复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大-O-表示"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">大 O 表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小-O-表示"><span class="nav-number">1.8.0.2.</span> <span class="nav-text">小 O 表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大-Ω-表示"><span class="nav-number">1.8.0.3.</span> <span class="nav-text">大 Ω 表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小-ω-表示"><span class="nav-number">1.8.0.4.</span> <span class="nav-text">小 ω 表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Theta-Θ-表示"><span class="nav-number">1.8.0.5.</span> <span class="nav-text">Theta Θ 表示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频教程"><span class="nav-number">1.9.</span> <span class="nav-text">视频教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试书籍"><span class="nav-number">1.10.</span> <span class="nav-text">面试书籍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机科学与技术资讯"><span class="nav-number">1.11.</span> <span class="nav-text">计算机科学与技术资讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构"><span class="nav-number">1.12.</span> <span class="nav-text">文件结构</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+<script src="../../../../js/bootstrap.js"></script>
+<script src="../../../../js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>
