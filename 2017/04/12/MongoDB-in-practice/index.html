@@ -14,7 +14,8 @@
   <meta name="description" content="#MongoDB in Priactice
 
 1. install安装路径 G:\Tools\MongoDB
-2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diagl">
+2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容
+12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB in practice">
 <meta property="og:url" content="http://zhangliting.github.io/2017/04/12/MongoDB-in-practice/index.html">
@@ -22,15 +23,17 @@
 <meta property="og:description" content="#MongoDB in Priactice
 
 1. install安装路径 G:\Tools\MongoDB
-2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diagl">
+2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容
+12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diag">
 <meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
-<meta property="og:updated_time" content="2017-04-11T18:35:49.000Z">
+<meta property="og:updated_time" content="2017-04-17T14:08:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB in practice">
 <meta name="twitter:description" content="#MongoDB in Priactice
 
 1. install安装路径 G:\Tools\MongoDB
-2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diagl">
+2. onfig新建mongodb.config放到G:\Tools\MongoDB\bin内容
+12345## 数据库文件目录 dbpath=G:/Tools/MongoDB/data ## 日志目录 logpath=G:/Tools/MongoDB/log/mongo.log diag">
 <meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
@@ -119,7 +122,7 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="../../../../images/pose.jpg" rel="gallery_cj1dvznk00009p4tumylby6mm">
+      <a class="article-gallery-img fancybox" href="../../../../images/pose.jpg" rel="gallery_cj1m9yh9l000efotu8l0avqz1">
         <img src="../../../../images/pose.jpg" itemprop="image">
       </a>
     
@@ -149,14 +152,15 @@
         <p>#MongoDB in Priactice</p>
 <hr>
 <h2 id="1-install"><a href="#1-install" class="headerlink" title="1. install"></a>1. install</h2><p>安装路径 <code>G:\Tools\MongoDB</code></p>
-<h2 id="2-onfig"><a href="#2-onfig" class="headerlink" title="2. onfig"></a>2. onfig</h2><p>新建<code>mongodb.config</code>放到<code>G:\Tools\MongoDB\bin</code><br>内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## 数据库文件目录 </div><div class="line">dbpath=G:/Tools/MongoDB/data </div><div class="line">## 日志目录 </div><div class="line">logpath=G:/Tools/MongoDB/log/mongo.log </div><div class="line">diaglog=3</div></pre></td></tr></table></figure></p>
+<h2 id="2-onfig"><a href="#2-onfig" class="headerlink" title="2. onfig"></a>2. onfig</h2><p>新建<code>mongodb.config</code>放到<code>G:\Tools\MongoDB\bin</code><br>内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## 数据库文件目录 </div><div class="line">dbpath=G:/Tools/MongoDB/data </div><div class="line">## 日志目录 </div><div class="line">logpath=G:/Tools/MongoDB/log/mongo.log </div><div class="line">diaglog=3</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="3-start-mongodb"><a href="#3-start-mongodb" class="headerlink" title="3. start mongodb"></a>3. start mongodb</h2><p><code>mongod --config g:\Tools\MongoDB\bin\mongodb.config</code><br><strong>将MongoDB服务器作为Windows服务运行</strong><br><code>mongod --config g:\Tools\MongoDB\bin\mongodb.config --install</code></p>
 <h2 id="4-connect-mongodb"><a href="#4-connect-mongodb" class="headerlink" title="4. connect mongodb"></a>4. connect mongodb</h2><p><code>mongo</code><br>we can use <strong>robomongo</strong> to operator mongodb with GUI</p>
 <h2 id="5-Spring-Support"><a href="#5-Spring-Support" class="headerlink" title="5. Spring Support"></a>5. Spring Support</h2><pre><code>1. use springdata JAP
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public interface PersonDao extends MongoRepository&lt;Person, ObjectId&gt; &#123;</div><div class="line"></div><div class="line">    @Query(value = &quot;&#123;&apos;age&apos; : &#123;&apos;$gte&apos; : ?0, &apos;$lte&apos; : ?1&#125;, &apos;name&apos;:?2 &#125;&quot;,fields=&quot;&#123; &apos;name&apos; : 1, &apos;age&apos; : 1&#125;&quot;)</div><div class="line">    List&lt;Person&gt; findByAge(int age1, int age2, String name);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonDao</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">Person</span>, <span class="title">ObjectId</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Query</span>(value = <span class="string">"&#123;'age' : &#123;'$gte' : ?0, '$lte' : ?1&#125;, 'name':?2 &#125;"</span>,fields=<span class="string">"&#123; 'name' : 1, 'age' : 1&#125;"</span>)</div><div class="line">    <span class="function">List&lt;Person&gt; <span class="title">findByAge</span><span class="params">(<span class="keyword">int</span> age1, <span class="keyword">int</span> age2, String name)</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <pre><code>2. use mongoTemplate
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">@Repository(&quot;personMongoImpl&quot;)</div><div class="line">public class PersonMongoImpl implements PersonMongoDao &#123;</div><div class="line"></div><div class="line">    @Resource</div><div class="line">    private MongoTemplate mongoTemplate;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;Person&gt; findAll() &#123;</div><div class="line">        return mongoTemplate.findAll(Person.class,&quot;person&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void insertPerson(Person person) &#123;</div><div class="line">        mongoTemplate.insert(person,&quot;person&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void removePerson(String userName) &#123;</div><div class="line">        mongoTemplate.remove(Query.query(Criteria.where(&quot;name&quot;).is(userName)),&quot;person&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void updatePerson() &#123;</div><div class="line">        mongoTemplate.updateMulti(Query.query(Criteria.where(&quot;age&quot;).gt(3).lte(5)), Update.update(&quot;age&quot;,3),&quot;person&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;Person&gt; findForRequery(String userName) &#123;</div><div class="line">        return mongoTemplate.find(Query.query(Criteria.where(&quot;name&quot;).is(userName)),Person.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Repository</span>(<span class="string">"personMongoImpl"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonMongoImpl</span> <span class="keyword">implements</span> <span class="title">PersonMongoDao</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Resource</span></div><div class="line">    <span class="keyword">private</span> MongoTemplate mongoTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Person&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mongoTemplate.findAll(Person.class,<span class="string">"person"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertPerson</span><span class="params">(Person person)</span> </span>&#123;</div><div class="line">        mongoTemplate.insert(person,<span class="string">"person"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removePerson</span><span class="params">(String userName)</span> </span>&#123;</div><div class="line">        mongoTemplate.remove(Query.query(Criteria.where(<span class="string">"name"</span>).is(userName)),<span class="string">"person"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updatePerson</span><span class="params">()</span> </span>&#123;</div><div class="line">        mongoTemplate.updateMulti(Query.query(Criteria.where(<span class="string">"age"</span>).gt(<span class="number">3</span>).lte(<span class="number">5</span>)), Update.update(<span class="string">"age"</span>,<span class="number">3</span>),<span class="string">"person"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Person&gt; <span class="title">findForRequery</span><span class="params">(String userName)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mongoTemplate.find(Query.query(Criteria.where(<span class="string">"name"</span>).is(userName)),Person.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -200,6 +204,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="../../17/HashMap-工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HashMap 工作原理
+        
+      </div>
+    </a>
   
   
     <a href="../RESTful-API/" id="article-nav-older" class="article-nav-link-wrap">

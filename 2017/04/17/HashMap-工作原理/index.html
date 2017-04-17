@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hashmap 工作原理 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="zhangliting blog IT" />
+  
+  
+  
+  
+  <meta name="description" content="HashMap 工作原理
+概念
+hash算法，将任何变量或对象，计算一个唯一的值。
+map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数据。12345678static class Entry&amp;lt;K, V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt;&amp;#123;final K key;V value;Entry&amp;lt;K, V&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap 工作原理">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/17/HashMap-工作原理/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="HashMap 工作原理
+概念
+hash算法，将任何变量或对象，计算一个唯一的值。
+map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数据。12345678static class Entry&amp;lt;K, V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt;&amp;#123;final K key;V value;Entry&amp;lt;K, V&amp;">
+<meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
+<meta property="og:updated_time" content="2017-04-17T13:55:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap 工作原理">
+<meta name="twitter:description" content="HashMap 工作原理
+概念
+hash算法，将任何变量或对象，计算一个唯一的值。
+map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数据。12345678static class Entry&amp;lt;K, V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt;&amp;#123;final K key;V value;Entry&amp;lt;K, V&amp;">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../css/style.css">
+
+  <script src="../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../index.html">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-HashMap-工作原理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="../../../../images/pose.jpg" rel="gallery_cj1m9yh8u0001fotu2a9zzu1j">
+        <img src="../../../../images/pose.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      HashMap 工作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="" class="article-date">
+	  <time datetime="2017-04-17T13:49:04.000Z" itemprop="datePublished">April 17, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="HashMap-工作原理"><a href="#HashMap-工作原理" class="headerlink" title="HashMap 工作原理"></a>HashMap 工作原理</h1><hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>hash算法，将任何变量或对象，计算一个唯一的值。</li>
+<li>map, 将对象通过key,映射到值。<h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><code>hashmap</code>使用内部类:Entry<k, v="">存数据。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">final</span> K key;</div><div class="line">V value;</div><div class="line">Entry&lt;K, V&gt; next;<span class="comment">// liek linkedList</span></div><div class="line"><span class="keyword">final</span> <span class="keyword">int</span> hash;<span class="comment">// avoid computation everytime.</span></div><div class="line">...<span class="comment">//More code goes here</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</k,></li>
+</ul>
+<p>table默认大小16。为了优化，size=2^N.<br>举例：size=17, size-1=16。<br>16=0…010000, and h &amp; (size-1) ，不管h是多少，结果只能是16 or 0.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The table, resized as necessary. Length MUST Always be a power of two.</div><div class="line"> */</div><div class="line"><span class="keyword">transient</span> Entry[] table;</div></pre></td></tr></table></figure></p>
+<p>rehashes. avoid all data in the same index of array.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// the "rehash" function in JAVA 7 that takes the hashcode of the key</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> h)</span> </span>&#123;</div><div class="line">    h ^= (h &gt;&gt;&gt; <span class="number">20</span>) ^ (h &gt;&gt;&gt; <span class="number">12</span>);</div><div class="line">    <span class="keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="number">7</span>) ^ (h &gt;&gt;&gt; <span class="number">4</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// the "rehash" function in JAVA 8 that directly takes the key</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> h;</div><div class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">    &#125;</div><div class="line"><span class="comment">// the function that returns the index from the rehashed hash</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexFor</span><span class="params">(<span class="keyword">int</span> h, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);<span class="comment">//取模运算的优化</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><img src="/images/internal_storage_java_hashmap.jpg" alt="hashmap"></p>
+<h2 id="Put方法解析"><a href="#Put方法解析" class="headerlink" title="Put方法解析"></a>Put方法解析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* Associates the specified value with the specified key in this map. If the</div><div class="line">* map previously contained a mapping for the key, the old value is</div><div class="line">* replaced.</div><div class="line">*</div><div class="line">* <span class="doctag">@param</span> key</div><div class="line">*            key with which the specified value is to be associated</div><div class="line">* <span class="doctag">@param</span> value</div><div class="line">*            value to be associated with the specified key</div><div class="line">* <span class="doctag">@return</span> the previous value associated with &lt;tt&gt;key&lt;/tt&gt;, or &lt;tt&gt;null&lt;/tt&gt;</div><div class="line">*         if there was no mapping for &lt;tt&gt;key&lt;/tt&gt;. (A &lt;tt&gt;null&lt;/tt&gt; return</div><div class="line">*         can also indicate that the map previously associated</div><div class="line">*         &lt;tt&gt;null&lt;/tt&gt; with &lt;tt&gt;key&lt;/tt&gt;.)</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">    <span class="keyword">return</span> putForNullKey(value);</div><div class="line">    <span class="keyword">int</span> hash = hash(key.hashCode());</div><div class="line">    <span class="keyword">int</span> i = indexFor(hash, table.length);</div><div class="line">    <span class="keyword">for</span> (Entry&lt;K , V&gt; e = table[i]; e != <span class="keyword">null</span>; e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</div><div class="line">            V oldValue = e.value;</div><div class="line">            e.value = value;</div><div class="line">            e.recordAccess(<span class="keyword">this</span>);</div><div class="line">            <span class="keyword">return</span> oldValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    modCount++;</div><div class="line">    addEntry(hash, key, value, i);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>if (key == null) put table[0].// hash(null) == 0.</li>
+<li>object.hashCode()计算对象的hash值，再使用HashMap的hash()避免所有数据都是一个的hash值。</li>
+<li>indexFor(hash, table.length)计算具体的索引。</li>
+<li>HashMap内部是一个数组，每个一个元素是一个Entry(LinkedList)。如果当前索引已经有值，遍历当前的Entry，判断 key.equals(k) ，如果是true,replace value. 否则就检查Entry的next, until Entry.next == null, store value</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">st=&gt;start</div><div class="line">key_is_null=&gt;condition: key != null?</div><div class="line">hashcode=&gt;operation: hashCode(),hash();</div><div class="line">indexFor=&gt;operation: indexFor();</div><div class="line">index=&gt;operation: indexFor();</div><div class="line">store=&gt;operation: put talbe[0];</div><div class="line">exist=&gt;condition: iterator, key.equals(k)?</div><div class="line">replace=&gt;operation: replace value;</div><div class="line">put=&gt;operation: put value;</div><div class="line">e=&gt;end</div><div class="line"></div><div class="line">st-&gt;key_is_null</div><div class="line">key_is_null(no)-&gt;store(right)-&gt;e</div><div class="line">key_is_null(yes)-&gt;hashcode-&gt;indexFor-&gt;exist</div><div class="line">exist(yes)-&gt;replace-&gt;e</div><div class="line">exist(no,left)-&gt;put(right)-&gt;e</div></pre></td></tr></table></figure>
+<h2 id="get-方法解析"><a href="#get-方法解析" class="headerlink" title="get()方法解析"></a>get()方法解析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* Returns the value to which the specified key is mapped, or &#123;<span class="doctag">@code</span> null&#125;</div><div class="line">* if this map contains no mapping for the key.</div><div class="line">*</div><div class="line">* &lt;p&gt;</div><div class="line">* More formally, if this map contains a mapping from a key &#123;<span class="doctag">@code</span> k&#125; to a</div><div class="line">* value &#123;<span class="doctag">@code</span> v&#125; such that &#123;<span class="doctag">@code</span> (key==null ? k==null :</div><div class="line">* key.equals(k))&#125;, then this method returns &#123;<span class="doctag">@code</span> v&#125;; otherwise it returns</div><div class="line">* &#123;<span class="doctag">@code</span> null&#125;. (There can be at most one such mapping.)</div><div class="line">*</div><div class="line">* &lt;/p&gt;&lt;p&gt;</div><div class="line">* A return value of &#123;<span class="doctag">@code</span> null&#125; does not &lt;i&gt;necessarily&lt;/i&gt; indicate that</div><div class="line">* the map contains no mapping for the key; it's also possible that the map</div><div class="line">* explicitly maps the key to &#123;<span class="doctag">@code</span> null&#125;. The &#123;<span class="doctag">@link</span> #containsKey</div><div class="line">* containsKey&#125; operation may be used to distinguish these two cases.</div><div class="line">*</div><div class="line">* <span class="doctag">@see</span> #put(Object, Object)</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">    <span class="keyword">return</span> getForNullKey();</div><div class="line">    <span class="keyword">int</span> hash = hash(key.hashCode());</div><div class="line">    <span class="keyword">for</span> (Entry&lt;K , V&gt; e = table[indexFor(hash, table.length)]; e != <span class="keyword">null</span>; e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">            <span class="keyword">return</span> e.value;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>if key == null, 返回talbe[0]。</li>
+<li>根据hash(key.hashCode()),indexFor()找到entry。</li>
+<li>遍历entry，找到key.equals(k), or return null</li>
+</ol>
+<h2 id="HashMap初始容量"><a href="#HashMap初始容量" class="headerlink" title="HashMap初始容量"></a>HashMap初始容量</h2><p>HashMap初始容量是16，如果有16000条数据，平均每次get()，put()，remove()需要遍历1000次。<br>所以需要合理的初始化容量。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span></span></div></pre></td></tr></table></figure></p>
+<p><code>size</code>: the size of key-value store in hashmap.<br><code>threshold</code>: threshold = capacity * loadFactor.</p>
+<p>当put()时候，检查size&gt; threshold，如果是true，自动扩大2倍容量。并且重新分配。<br><img src="/images/resizing_of_java_hashmap.jpg" alt="auto_size"></p>
+<h2 id="HashMap是线程不安全的"><a href="#HashMap是线程不安全的" class="headerlink" title="HashMap是线程不安全的"></a>HashMap是线程不安全的</h2><ul>
+<li>因为存在自动扩容，现存可能获得扩容前的索引，导致拿到的错误数据。</li>
+<li>两个现存同时扩容，可能引起死循环。</li>
+</ul>
+<p><strong>方案：</strong></p>
+<ul>
+<li>[ ] <code>HashTable</code>：CRUD使用synchronized，不是高效的。</li>
+<li>[X] <code>ConcurrentHashMap</code>：只synchronized buckets(Entry),如果hash不一样，就不会影响效率。</li>
+</ul>
+<h2 id="Java-8-优化HashMap"><a href="#Java-8-优化HashMap" class="headerlink" title="Java 8 优化HashMap"></a>Java 8 优化HashMap</h2><p>当<code>TREEIFY_THRESHOLD &gt; 8</code> 时，bucket就会从<code>likedList</code>转变成<code>balanced tree</code>（<strong>红黑树</strong>）。<br>当<code>UNTREEIFY_THRESHOLD 《 6</code>时，bucket就会从<code>balanced tree</code>转变成linkedList`。<br>性能：<strong>O(n) -&gt; O(logn)</strong> (空间也会增加)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">     <span class="keyword">final</span> K key;</div><div class="line">     V value;</div><div class="line">     Node&lt;K,V&gt; next;<span class="comment">//Node replace Entry.</span></div><div class="line">     ...</div></pre></td></tr></table></figure></p>
+<p>java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash; <span class="comment">// inherited from Node&lt;K,V&gt;</span></div><div class="line">    <span class="keyword">final</span> K key; <span class="comment">// inherited from Node&lt;K,V&gt;</span></div><div class="line">    V value; <span class="comment">// inherited from Node&lt;K,V&gt;</span></div><div class="line">    Node&lt;K,V&gt; next; <span class="comment">// inherited from Node&lt;K,V&gt;</span></div><div class="line">    Entry&lt;K,V&gt; before, after;<span class="comment">// inherited from LinkedHashMap.Entry&lt;K,V&gt;</span></div><div class="line">    TreeNode&lt;K,V&gt; parent;</div><div class="line">    TreeNode&lt;K,V&gt; left;</div><div class="line">    TreeNode&lt;K,V&gt; right;</div><div class="line">    TreeNode&lt;K,V&gt; prev;</div><div class="line">    <span class="keyword">boolean</span> red;</div><div class="line">    ...</div></pre></td></tr></table></figure></p>
+<p>因为TreeNode extends LinkedHashMap.Entry。所以可以使用原来的Entry.<br><img src="/images/internal_storage_java8_hashmap.jpg" alt="node"></p>
+<h2 id="优化建议"><a href="#优化建议" class="headerlink" title="优化建议"></a>优化建议</h2><ul>
+<li>使用合适的hashCode()减少冲突。</li>
+<li>合理初始化HashMap容量，避免resize。默认16*0.75=12，当插入12th时，扩容。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/HashMap/">HashMap</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/HashMap/">HashMap</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/04/17/HashMap-工作原理/" data-title="HashMap 工作原理" data-url="http://zhangliting.github.io/2017/04/17/HashMap-工作原理/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangliting"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="../../../../css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../黑客与画家书摘/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          黑客与画家书摘
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../12/MongoDB-in-practice/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MongoDB in practice</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap-工作原理"><span class="nav-number">1.</span> <span class="nav-text">HashMap 工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#example"><span class="nav-number">1.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Put方法解析"><span class="nav-number">1.2.</span> <span class="nav-text">Put方法解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-方法解析"><span class="nav-number">1.3.</span> <span class="nav-text">get()方法解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap初始容量"><span class="nav-number">1.4.</span> <span class="nav-text">HashMap初始容量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap是线程不安全的"><span class="nav-number">1.5.</span> <span class="nav-text">HashMap是线程不安全的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-优化HashMap"><span class="nav-number">1.6.</span> <span class="nav-text">Java 8 优化HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化建议"><span class="nav-number">1.7.</span> <span class="nav-text">优化建议</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+<script src="../../../../js/bootstrap.js"></script>
+<script src="../../../../js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>
