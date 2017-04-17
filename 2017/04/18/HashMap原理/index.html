@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hashmap 工作原理 | Hello World</title>
+  <title>hashmap原理 | Hello World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="zhangliting blog IT" />
@@ -16,17 +16,17 @@
 hash算法，将任何变量或对象，计算一个唯一的值。
 map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数据。12345678static class Entry&amp;lt;K, V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt;&amp;#123;final K key;V value;Entry&amp;lt;K, V&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap 工作原理">
-<meta property="og:url" content="http://zhangliting.github.io/2017/04/17/HashMap-工作原理/index.html">
+<meta property="og:title" content="HashMap原理">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/18/HashMap原理/index.html">
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="HashMap 工作原理
 概念
 hash算法，将任何变量或对象，计算一个唯一的值。
 map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数据。12345678static class Entry&amp;lt;K, V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt;&amp;#123;final K key;V value;Entry&amp;lt;K, V&amp;">
 <meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
-<meta property="og:updated_time" content="2017-04-17T13:55:02.000Z">
+<meta property="og:updated_time" content="2017-04-17T17:09:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HashMap 工作原理">
+<meta name="twitter:title" content="HashMap原理">
 <meta name="twitter:description" content="HashMap 工作原理
 概念
 hash算法，将任何变量或对象，计算一个唯一的值。
@@ -49,9 +49,9 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
     
   <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="../../../../js/jquery-3.1.1.min.js"></script>
+  <script src="/js/jquery-3.1.1.min.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" >
@@ -86,15 +86,15 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../index.html">Home</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../archives">Archives</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../categories">Categories</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../about">About</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
                     
               </ul>
             </div>
@@ -106,6 +106,14 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
 </header>
 
 
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
 
 
   <div id="container">
@@ -113,14 +121,14 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-HashMap-工作原理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-HashMap原理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="../../../../images/pose.jpg" rel="gallery_cj1m9yh8u0001fotu2a9zzu1j">
-        <img src="../../../../images/pose.jpg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="/images/pose.jpg" rel="gallery_cj1mdmi3l00013ctuv0wbijuu">
+        <img src="/images/pose.jpg" itemprop="image">
       </a>
     
   </div>
@@ -131,7 +139,7 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      HashMap 工作原理
+      HashMap原理
     </h1>
   
 
@@ -139,8 +147,8 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
     
     <div class="article-meta">
       
-	Posted on <a href="" class="article-date">
-	  <time datetime="2017-04-17T13:49:04.000Z" itemprop="datePublished">April 17, 2017</time>
+	Posted on <a href="/2017/04/18/HashMap原理/" class="article-date">
+	  <time datetime="2017-04-17T16:58:37.000Z" itemprop="datePublished">四月 18, 2017</time>
 	</a>
 
     </div>
@@ -195,18 +203,18 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../../../categories/HashMap/">HashMap</a>
+    <a class="article-category-link" href="/categories/HashMap/">HashMap</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/HashMap/">HashMap</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li></ul>
 
       
         
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2017/04/17/HashMap-工作原理/" data-title="HashMap 工作原理" data-url="http://zhangliting.github.io/2017/04/17/HashMap-工作原理/"></div>
+	 <div class="ds-thread" data-thread-key="/2017/04/18/HashMap原理/" data-title="HashMap原理" data-url="http://zhangliting.github.io/2017/04/18/HashMap原理/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -223,7 +231,7 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
 	<!-- 多说公共JS代码 end -->
 	
 	</div>
-	<link rel="stylesheet" href="../../../../css/comment.css">
+	<link rel="stylesheet" href="/css/comment.css">
 
 
       
@@ -233,19 +241,10 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
     
 <nav id="article-nav">
   
-    <a href="../黑客与画家书摘/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          黑客与画家书摘
-        
-      </div>
-    </a>
   
-  
-    <a href="../../12/MongoDB-in-practice/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MongoDB in practice</div>
+    <a href="/2017/04/18/黑客与画家书摘/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">黑客与画家书摘</div>
     </a>
   
 </nav>
@@ -257,7 +256,7 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
 
   <aside id="sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">文章目录</strong>
     
       <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap-工作原理"><span class="nav-number">1.</span> <span class="nav-text">HashMap 工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#example"><span class="nav-number">1.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Put方法解析"><span class="nav-number">1.2.</span> <span class="nav-text">Put方法解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-方法解析"><span class="nav-number">1.3.</span> <span class="nav-text">get()方法解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap初始容量"><span class="nav-number">1.4.</span> <span class="nav-text">HashMap初始容量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap是线程不安全的"><span class="nav-number">1.5.</span> <span class="nav-text">HashMap是线程不安全的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-优化HashMap"><span class="nav-number">1.6.</span> <span class="nav-text">Java 8 优化HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化建议"><span class="nav-number">1.7.</span> <span class="nav-text">优化建议</span></a></li></ol></li></ol>
     
@@ -290,15 +289,15 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
     </div>
     <!-- <nav id="mobile-nav">
   
-    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+    <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="../../../../categories" class="mobile-nav-link">Categories</a>
+    <a href="/categories" class="mobile-nav-link">Categories</a>
   
-    <a href="../../../../tags" class="mobile-nav-link">Tags</a>
+    <a href="/tags" class="mobile-nav-link">Tags</a>
   
-    <a href="../../../../about" class="mobile-nav-link">About</a>
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -338,13 +337,13 @@ map, 将对象通过key,映射到值。examplehashmap使用内部类:Entry存数
 </script>
 
 
-  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
-  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="../../../../js/script.js"></script>
-<script src="../../../../js/bootstrap.js"></script>
-<script src="../../../../js/main.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
 
 
 
