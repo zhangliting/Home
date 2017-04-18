@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java 8 简明教程 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="zhangliting blog IT" />
+  
+  
+  
+  
+  <meta name="description" content="Java 8 简明教程
+“Java is still not dead–and people are starting to fingure that out”.
+
+接口默认方法
+java 8 可以在接口中使用default定义默认方法。可以多个
+example:1234567interface Formula &amp;#123;    double calculate(int a);    defau">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 简明教程">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/18/Java-8-简明教程/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="Java 8 简明教程
+“Java is still not dead–and people are starting to fingure that out”.
+
+接口默认方法
+java 8 可以在接口中使用default定义默认方法。可以多个
+example:1234567interface Formula &amp;#123;    double calculate(int a);    defau">
+<meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
+<meta property="og:updated_time" content="2017-04-18T14:42:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 8 简明教程">
+<meta name="twitter:description" content="Java 8 简明教程
+“Java is still not dead–and people are starting to fingure that out”.
+
+接口默认方法
+java 8 可以在接口中使用default定义默认方法。可以多个
+example:1234567interface Formula &amp;#123;    double calculate(int a);    defau">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java-8-简明教程" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/pose.jpg" rel="gallery_cj1nnr3x20001nstutcsrejjr">
+        <img src="/images/pose.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java 8 简明教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/04/18/Java-8-简明教程/" class="article-date">
+	  <time datetime="2017-04-18T14:34:18.000Z" itemprop="datePublished">四月 18, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-8-简明教程"><a href="#Java-8-简明教程" class="headerlink" title="Java 8 简明教程"></a>Java 8 简明教程</h1><blockquote>
+<p>“Java is still not dead–and people are starting to fingure that out”.</p>
+</blockquote>
+<h2 id="接口默认方法"><a href="#接口默认方法" class="headerlink" title="接口默认方法"></a>接口默认方法</h2><ul>
+<li>java 8 可以在接口中使用<code>default</code>定义默认方法。<strong>可以多个</strong></li>
+<li>example:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Math.sqrt(a);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h2><ul>
+<li>数组排序</li>
+<li>老的方式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; names = Arrays.asList(<span class="string">"peter"</span>, <span class="string">"anna"</span>, <span class="string">"mike"</span>, <span class="string">"xenia"</span>);</div><div class="line"><span class="comment">//匿名内部类</span></div><div class="line">Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> b.compareTo(a);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>java 8 Lambda</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</div><div class="line">    <span class="keyword">return</span> b.compareTo(a);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>进一步简化</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.sort(names, (String a, String b) -&gt; b.compareTo(a));</div></pre></td></tr></table></figure>
+<ul>
+<li>再简化，省略参数类型。编译器会自动识别参数类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">names.sort((a, b) -&gt; b.compareTo(a));</div></pre></td></tr></table></figure>
+<h2 id="函数接口"><a href="#函数接口" class="headerlink" title="函数接口"></a>函数接口</h2><ul>
+<li>一个Lamda表达式对应于一个函数接口中的抽象方法。</li>
+<li>一个函数接口有且只有一个抽象方法。</li>
+<li><code>@FunctionalInterface</code>（省略不报错）注解告诉编译器这是函数接口，以保证只有一个抽象方法。</li>
+<li>Example:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Converter</span>&lt;<span class="title">F</span>, <span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Converter&lt;String, Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</div><div class="line">Integer converted = converter.convert(<span class="string">"123"</span>);</div><div class="line">System.out.println(converted);    <span class="comment">// 123</span></div></pre></td></tr></table></figure>
+<h2 id="方法和构造函数引用"><a href="#方法和构造函数引用" class="headerlink" title="方法和构造函数引用"></a>方法和构造函数引用</h2><ul>
+<li>java 8 允许使用<code>::</code>关键字引用对象的方法和构造函数</li>
+<li><p>引用静态方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Converter&lt;String, Integer&gt; converter = Integer::valueOf;</div><div class="line">Integer converted = converter.convert(<span class="string">"123"</span>);</div><div class="line">System.out.println(converted);   <span class="comment">// 123</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>引用非静态方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</div><div class="line">    <span class="function">String <span class="title">startsWith</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Something something = <span class="keyword">new</span> Something();</div><div class="line">Converter&lt;String, String&gt; converter = something::startsWith;</div><div class="line">String converted = converter.convert(<span class="string">"Java"</span>);</div><div class="line">System.out.println(converted);    <span class="comment">// "J"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>引用构造函数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    String firstName;</div><div class="line">    String lastName;</div><div class="line"></div><div class="line">    Person() &#123;&#125;</div><div class="line"></div><div class="line">    Person(String firstName, String lastName) &#123;</div><div class="line">        <span class="keyword">this</span>.firstName = firstName;</div><div class="line">        <span class="keyword">this</span>.lastName = lastName;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Java编译器会根据函数接口方法的参数，自动选择符合声明的构造方法。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt; </span>&#123;</div><div class="line">    <span class="function">P <span class="title">create</span><span class="params">(String firstName, String lastName)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</div><div class="line">Person person = personFactory.create(<span class="string">"Peter"</span>, <span class="string">"Parker"</span>);</div></pre></td></tr></table></figure>
+<h2 id="Lambda-表达式的范围"><a href="#Lambda-表达式的范围" class="headerlink" title="Lambda 表达式的范围"></a>Lambda 表达式的范围</h2><p>与匿名内部类类似， 你可以在Lambda表达式中访问<code>final局部变量</code>、<code>实例变量</code>以及<code>静态变量</code>。</p>
+<h3 id="访问局部变量"><a href="#访问局部变量" class="headerlink" title="访问局部变量"></a>访问局部变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">int</span> num = <span class="number">1</span>;</div><div class="line">Converter&lt;Integer, String&gt; stringConverter =</div><div class="line">        (from) -&gt; String.valueOf(from + num);</div><div class="line"></div><div class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<ul>
+<li>与匿名内部类不同的是，被Lambda表达式使用的变量默认为final，可以省略final。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</div><div class="line">Converter&lt;Integer, String&gt; stringConverter =</div><div class="line">        (from) -&gt; String.valueOf(from + num);</div><div class="line"></div><div class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>num</code>默认final，以下代码<code>num = 3</code>会编译错误。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</div><div class="line">Converter&lt;Integer, String&gt; stringConverter =</div><div class="line">        (from) -&gt; String.valueOf(from + num);</div><div class="line">num = <span class="number">3</span>;</div></pre></td></tr></table></figure>
+<h3 id="访问实例变量和静态变量"><a href="#访问实例变量和静态变量" class="headerlink" title="访问实例变量和静态变量"></a>访问实例变量和静态变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lambda4</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> outerStaticNum;</div><div class="line">    <span class="keyword">int</span> outerNum;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testScopes</span><span class="params">()</span> </span>&#123;</div><div class="line">        Converter&lt;Integer, String&gt; stringConverter1 = (from) -&gt; &#123;</div><div class="line">            outerNum = <span class="number">23</span>;</div><div class="line">            <span class="keyword">return</span> String.valueOf(from);</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        Converter&lt;Integer, String&gt; stringConverter2 = (from) -&gt; &#123;</div><div class="line">            outerStaticNum = <span class="number">72</span>;</div><div class="line">            <span class="keyword">return</span> String.valueOf(from);</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="访问函数接口默认方法"><a href="#访问函数接口默认方法" class="headerlink" title="访问函数接口默认方法"></a>访问函数接口默认方法</h3><ul>
+<li>默认方法<strong>不能</strong>通过Lambda表达式调用。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Formula formula = (a) -&gt; sqrt(a * <span class="number">100</span>);<span class="comment">//错误</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Java-8-内置函数接口"><a href="#Java-8-内置函数接口" class="headerlink" title="Java 8 内置函数接口"></a>Java 8 内置函数接口</h2><ul>
+<li><p>旧接口升级成函数接口</p>
+<ul>
+<li><code>Comparator</code></li>
+<li><code>Runnable</code></li>
+</ul>
+</li>
+<li><p>类似 <a href="https://code.google.com/p/guava-libraries/" target="_blank" rel="external">Google Guava</a> library.</p>
+</li>
+</ul>
+<h3 id="Predicate-判断"><a href="#Predicate-判断" class="headerlink" title="Predicate (判断)"></a>Predicate (判断)</h3><ul>
+<li>Predicate 接受一个参数，返回boolean类型。</li>
+<li><p>定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Evaluates this predicate on the given argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> t the input argument</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if the input argument matches the predicate,</div><div class="line">     * otherwise &#123;<span class="doctag">@code</span> false&#125;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</div><div class="line">    ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>example</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Predicate&lt;String&gt; predicate = (s) -&gt; s.length() &gt; <span class="number">0</span>;</div><div class="line"></div><div class="line">predicate.test(<span class="string">"foo"</span>);              <span class="comment">// true</span></div><div class="line">predicate.negate().test(<span class="string">"foo"</span>);     <span class="comment">// false</span></div><div class="line"></div><div class="line">Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;</div><div class="line">Predicate&lt;Boolean&gt; isNull = Objects::isNull;</div><div class="line"></div><div class="line">Predicate&lt;String&gt; isEmpty = String::isEmpty;</div><div class="line">Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Functions-函数"><a href="#Functions-函数" class="headerlink" title="Functions (函数)"></a>Functions (函数)</h3><ul>
+<li>Functions 接受一个参数，返回一个处理后的参数。</li>
+<li><p>定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Applies this function to the given argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> t the function argument</div><div class="line">     * <span class="doctag">@return</span> the function result</div><div class="line">     */</div><div class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</div><div class="line">    ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>example</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Function&lt;String, Integer&gt; toInteger = Integer::valueOf;</div><div class="line">Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);</div><div class="line"></div><div class="line">backToString.apply(<span class="string">"123"</span>);     <span class="comment">// "123"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Suppliers-生产者）"><a href="#Suppliers-生产者）" class="headerlink" title="Suppliers (生产者）"></a>Suppliers (生产者）</h3><ul>
+<li>Suppliers 不接受参数，返回一个对象。</li>
+<li><p>定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Gets a result.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> a result</div><div class="line">     */</div><div class="line">    <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>example</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Supplier&lt;Person&gt; personSupplier = Person::<span class="keyword">new</span>;</div><div class="line">personSupplier.get();   <span class="comment">// new Person</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Consumers-消费者"><a href="#Consumers-消费者" class="headerlink" title="Consumers (消费者)"></a>Consumers (消费者)</h3><ul>
+<li>Consumers 接受一个参数，不返回。</li>
+<li><p>定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Performs this operation on the given argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> t the input argument</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(T t)</span></span>;</div><div class="line">    ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>example</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Consumer&lt;Person&gt; greeter = (p) -&gt; System.out.println(<span class="string">"Hello, "</span> + p.firstName);</div><div class="line">greeter.accept(<span class="keyword">new</span> Person(<span class="string">"Luke"</span>, <span class="string">"Skywalker"</span>));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Comparator-比较器"><a href="#Comparator-比较器" class="headerlink" title="Comparator (比较器)"></a>Comparator (比较器)</h3><ul>
+<li>java 8 增加了默认方法</li>
+<li><p>定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(T o1, T o2)</span></span>;</div><div class="line">    ...</div></pre></td></tr></table></figure>
+</li>
+<li><p>example</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Comparator&lt;Person&gt; comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);</div><div class="line"></div><div class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">"John"</span>, <span class="string">"Doe"</span>);</div><div class="line">Person p2 = <span class="keyword">new</span> Person(<span class="string">"Alice"</span>, <span class="string">"Wonderland"</span>);</div><div class="line"></div><div class="line">comparator.compare(p1, p2);             <span class="comment">// &gt; 0</span></div><div class="line">comparator.reversed().compare(p1, p2);  <span class="comment">// &lt; 0</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><ul>
+<li>Optionals 可以避免 <code>NullPointerException</code>. </li>
+<li>Optional是一个容器，空或者非空。<br>example</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Optional&lt;String&gt; optional = Optional.of(<span class="string">"bam"</span>);</div><div class="line"></div><div class="line">optional.isPresent();           <span class="comment">// true</span></div><div class="line">optional.get();                 <span class="comment">// "bam"</span></div><div class="line">optional.orElse(<span class="string">"fallback"</span>);    <span class="comment">// "bam"</span></div><div class="line"></div><div class="line">optional.ifPresent((s) -&gt; System.out.println(s.charAt(<span class="number">0</span>)));     <span class="comment">// "b"</span></div></pre></td></tr></table></figure>
+<h2 id="Streams-流）"><a href="#Streams-流）" class="headerlink" title="Streams ( 流）"></a>Streams ( 流）</h2><ul>
+<li><code>java.util.Stream</code> 可以执行一系列的流操作。</li>
+<li><code>java.util.Collection</code> like lists or sets (maps are not supported) 可以转化成<code>Stream</code>.</li>
+<li>Stream 可以并行执行。</li>
+</ul>
+<p><img src="/images/streams.png" alt="stream"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; stringCollection = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">stringCollection.add(<span class="string">"ddd2"</span>);</div><div class="line">stringCollection.add(<span class="string">"aaa2"</span>);</div><div class="line">stringCollection.add(<span class="string">"bbb1"</span>);</div><div class="line">stringCollection.add(<span class="string">"aaa1"</span>);</div><div class="line">stringCollection.add(<span class="string">"bbb3"</span>);</div><div class="line">stringCollection.add(<span class="string">"ccc"</span>);</div><div class="line">stringCollection.add(<span class="string">"bbb2"</span>);</div><div class="line">stringCollection.add(<span class="string">"ddd1"</span>);</div></pre></td></tr></table></figure>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><ul>
+<li>Filter 接受一个Predicate，根据Predicate过滤集合，这是一个中间操作。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">stringCollection</div><div class="line">    .stream()</div><div class="line">    .filter((s) -&gt; s.startsWith(<span class="string">"a"</span>))</div><div class="line">    .forEach(System.out::println);</div><div class="line"></div><div class="line"><span class="comment">// "aaa2", "aaa1"</span></div></pre></td></tr></table></figure>
+<h3 id="Sorted"><a href="#Sorted" class="headerlink" title="Sorted"></a>Sorted</h3><ul>
+<li>Sorted 是中间操作，默认按自然顺序排序，可以接受一个<code>Comparator</code>。</li>
+<li>Sorted 不会影响原来集合的排序。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">stringCollection</div><div class="line">    .stream()</div><div class="line">    .sorted()</div><div class="line">    .filter((s) -&gt; s.startsWith(<span class="string">"a"</span>))</div><div class="line">    .forEach(System.out::println);</div><div class="line"></div><div class="line"><span class="comment">// "aaa1", "aaa2"</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(stringCollection);</div><div class="line"><span class="comment">// ddd2, aaa2, bbb1, aaa1, bbb3, ccc, bbb2, ddd1</span></div></pre></td></tr></table></figure>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
+<li>Map 是中间操作，接受一个<code>Function</code>，一对一的映射。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">stringCollection</div><div class="line">    .stream()</div><div class="line">    .map(String::toUpperCase)</div><div class="line">    .sorted((a, b) -&gt; b.compareTo(a))</div><div class="line">    .forEach(System.out::println);</div><div class="line"></div><div class="line"><span class="comment">// "DDD2", "DDD1", "CCC", "BBB3", "BBB2", "AAA2", "AAA1"</span></div></pre></td></tr></table></figure>
+<h3 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h3><ul>
+<li>Match是一个终止操作，接受<code>Predicate</code>，返回boolean。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> anyStartsWithA =</div><div class="line">    stringCollection</div><div class="line">        .stream()</div><div class="line">        .anyMatch((s) -&gt; s.startsWith(<span class="string">"a"</span>));</div><div class="line"></div><div class="line">System.out.println(anyStartsWithA);      <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="keyword">boolean</span> allStartsWithA =</div><div class="line">    stringCollection</div><div class="line">        .stream()</div><div class="line">        .allMatch((s) -&gt; s.startsWith(<span class="string">"a"</span>));</div><div class="line"></div><div class="line">System.out.println(allStartsWithA);      <span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="keyword">boolean</span> noneStartsWithZ =</div><div class="line">    stringCollection</div><div class="line">        .stream()</div><div class="line">        .noneMatch((s) -&gt; s.startsWith(<span class="string">"z"</span>));</div><div class="line"></div><div class="line">System.out.println(noneStartsWithZ);      <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h3><ul>
+<li>Count 是一个终止操作，计算返回的元素个数，返回<code>long</code>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> startsWithB =</div><div class="line">    stringCollection</div><div class="line">        .stream()</div><div class="line">        .filter((s) -&gt; s.startsWith(<span class="string">"b"</span>))</div><div class="line">        .count();</div><div class="line"></div><div class="line">System.out.println(startsWithB);    <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<h3 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h3><ul>
+<li>Reduce是终止操作，接受<code>BiFunction</code>。返回<code>Optional</code>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Optional&lt;String&gt; reduced =</div><div class="line">    stringCollection</div><div class="line">        .stream()</div><div class="line">        .sorted()</div><div class="line">        .reduce((s1, s2) -&gt; s1 + <span class="string">"#"</span> + s2);</div><div class="line"></div><div class="line">reduced.ifPresent(System.out::println);</div><div class="line"><span class="comment">// "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"</span></div></pre></td></tr></table></figure>
+<h3 id="Collect"><a href="#Collect" class="headerlink" title="Collect"></a>Collect</h3><ul>
+<li><p>将流转成集合的终止操作，<code>Collectors.toList()</code>, <code>Collectors.toSet()</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">List&lt;Person&gt; filtered =</div><div class="line">    persons</div><div class="line">        .stream()</div><div class="line">        .filter(p -&gt; p.name.startsWith(<span class="string">"P"</span>))</div><div class="line">        .collect(Collectors.toList());</div><div class="line"></div><div class="line">System.out.println(filtered);    <span class="comment">// [Peter, Pamela]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>分组 <code>Collectors.groupingBy()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Map&lt;Integer, List&lt;Person&gt;&gt; personsByAge = persons</div><div class="line">    .stream()</div><div class="line">    .collect(Collectors.groupingBy(p -&gt; p.age));</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>Collections.summaizeingInt()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">IntSummaryStatistics ageSummary =</div><div class="line">    persons</div><div class="line">        .stream()</div><div class="line">        .collect(Collectors.summarizingInt(p -&gt; p.age));</div><div class="line"></div><div class="line">System.out.println(ageSummary);</div><div class="line"><span class="comment">// IntSummaryStatistics&#123;count=4, sum=76, min=12, average=19.000000, max=23&#125;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>Collections.joining()</code>;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String phrase = persons</div><div class="line">    .stream()</div><div class="line">    .filter(p -&gt; p.age &gt;= <span class="number">18</span>)</div><div class="line">    .map(p -&gt; p.name)</div><div class="line">    .collect(Collectors.joining(<span class="string">" and "</span>, <span class="string">"In Germany "</span>, <span class="string">" are of legal age."</span>));</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>Collection.toMap()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Map&lt;Integer, String&gt; map = persons</div><div class="line">    .stream()</div><div class="line">    .collect(Collectors.toMap(</div><div class="line">        p -&gt; p.age,</div><div class="line">        p -&gt; p.name,</div><div class="line">        (name1, name2) -&gt; name1 + <span class="string">";"</span> + name2));</div><div class="line"></div><div class="line">System.out.println(map);</div><div class="line"><span class="comment">// &#123;18=Max, 23=Peter;Pamela, 12=David&#125;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义Collection</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Collector&lt;Person, StringJoiner, String&gt; personNameCollector =</div><div class="line">    Collector.of(</div><div class="line">        () -&gt; <span class="keyword">new</span> StringJoiner(<span class="string">" | "</span>),          <span class="comment">// supplier</span></div><div class="line">        (j, p) -&gt; j.add(p.name.toUpperCase()),  <span class="comment">// accumulator</span></div><div class="line">        (j1, j2) -&gt; j1.merge(j2),               <span class="comment">// combiner</span></div><div class="line">        StringJoiner::toString);                <span class="comment">// finisher</span></div><div class="line"></div><div class="line">String names = persons</div><div class="line">    .stream()</div><div class="line">    .collect(personNameCollector);</div><div class="line"></div><div class="line">System.out.println(names);  <span class="comment">// MAX | PETER | PAMELA | DAVID</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="FlatMap"><a href="#FlatMap" class="headerlink" title="FlatMap"></a>FlatMap</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Streams7</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">        String name;</div><div class="line">        List&lt;Bar&gt; bars = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">        Foo(String name) &#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Bar</span> </span>&#123;</div><div class="line">        String name;</div><div class="line"></div><div class="line">        Bar(String name) &#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"><span class="comment">//        test1();</span></div><div class="line">        test2();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">        IntStream.range(<span class="number">1</span>, <span class="number">4</span>)</div><div class="line">            .mapToObj(num -&gt; <span class="keyword">new</span> Foo(<span class="string">"Foo"</span> + num))</div><div class="line">            .peek(f -&gt; IntStream.range(<span class="number">1</span>, <span class="number">4</span>)</div><div class="line">                .mapToObj(num -&gt; <span class="keyword">new</span> Bar(<span class="string">"Bar"</span> + num + <span class="string">" &lt;- "</span> + f.name))</div><div class="line">                .forEach(f.bars::add))</div><div class="line">            .flatMap(f -&gt; f.bars.stream())</div><div class="line">            .forEach(b -&gt; System.out.println(b.name));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;Foo&gt; foos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">        IntStream</div><div class="line">            .range(<span class="number">1</span>, <span class="number">4</span>)</div><div class="line">            .forEach(num -&gt; foos.add(<span class="keyword">new</span> Foo(<span class="string">"Foo"</span> + num)));</div><div class="line"></div><div class="line">        foos.forEach(f -&gt;</div><div class="line">            IntStream</div><div class="line">                .range(<span class="number">1</span>, <span class="number">4</span>)</div><div class="line">                .forEach(num -&gt; f.bars.add(<span class="keyword">new</span> Bar(<span class="string">"Bar"</span> + num + <span class="string">" &lt;- "</span> + f.name))));</div><div class="line"></div><div class="line">        foos.stream()</div><div class="line">            .flatMap(f -&gt; f.bars.stream())</div><div class="line">            .forEach(b -&gt; System.out.println(b.name));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Optinal的flatMap使用<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Optional.of(<span class="keyword">new</span> Outer())</div><div class="line">    .flatMap(o -&gt; Optional.ofNullable(o.nested))</div><div class="line">    .flatMap(n -&gt; Optional.ofNullable(n.inner))</div><div class="line">    .flatMap(i -&gt; Optional.ofNullable(i.foo))</div><div class="line">    .ifPresent(System.out::println);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Stream-进阶"><a href="#Stream-进阶" class="headerlink" title="Stream 进阶"></a>Stream 进阶</h2><h3 id="其他的Stream"><a href="#其他的Stream" class="headerlink" title="其他的Stream"></a>其他的Stream</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">Stream.of(<span class="string">"a1"</span>, <span class="string">"a2"</span>, <span class="string">"a3"</span>)</div><div class="line">    .findFirst()</div><div class="line">    .ifPresent(System.out::println);  <span class="comment">// a1</span></div><div class="line">    </div><div class="line">IntStream.range(<span class="number">1</span>, <span class="number">4</span>)</div><div class="line">    .forEach(System.out::println);</div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="comment">// int array to stream</span></div><div class="line">Arrays.stream(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;)</div><div class="line">    .map(n -&gt; <span class="number">2</span> * n + <span class="number">1</span>)</div><div class="line">    .average()</div><div class="line">    .ifPresent(System.out::println);  <span class="comment">// 5.0</span></div><div class="line">    </div><div class="line">Stream.of(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>)</div><div class="line">    .mapToInt(Double::intValue)</div><div class="line">    .mapToObj(i -&gt; <span class="string">"a"</span> + i)</div><div class="line">    .forEach(System.out::println);</div><div class="line"></div><div class="line"><span class="comment">// a1</span></div><div class="line"><span class="comment">// a2</span></div><div class="line"><span class="comment">// a3</span></div></pre></td></tr></table></figure>
+<h3 id="Stream处理顺序"><a href="#Stream处理顺序" class="headerlink" title="Stream处理顺序"></a>Stream处理顺序</h3><ul>
+<li><p>以下代码不会打印，因为没有终止操作。只有终止操作存在的时候，中间操作才虎执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Stream.of(<span class="string">"d2"</span>, <span class="string">"a2"</span>, <span class="string">"b1"</span>, <span class="string">"b3"</span>, <span class="string">"c"</span>)</div><div class="line">    .filter(s -&gt; &#123;</div><div class="line">        System.out.println(<span class="string">"filter: "</span> + s);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>只要anymatch满足，就不会继续执行别的元素。由此可见，第一个元素走完全部，才会执行后面的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Stream.of(<span class="string">"d2"</span>, <span class="string">"a2"</span>, <span class="string">"b1"</span>, <span class="string">"b3"</span>, <span class="string">"c"</span>)</div><div class="line">    .map(s -&gt; &#123;</div><div class="line">        System.out.println(<span class="string">"map: "</span> + s);</div><div class="line">        <span class="keyword">return</span> s.toUpperCase();</div><div class="line">    &#125;)</div><div class="line">    .anyMatch(s -&gt; &#123;</div><div class="line">        System.out.println(<span class="string">"anyMatch: "</span> + s);</div><div class="line">        <span class="keyword">return</span> s.startsWith(<span class="string">"A"</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"><span class="comment">// map:      d2</span></div><div class="line"><span class="comment">// anyMatch: D2</span></div><div class="line"><span class="comment">// map:      a2</span></div><div class="line"><span class="comment">// anyMatch: A2</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Stream的处理顺序很重要，尽量先筛选再处理。</p>
+</li>
+</ul>
+<h3 id="Stream-重复使用"><a href="#Stream-重复使用" class="headerlink" title="Stream 重复使用"></a>Stream 重复使用</h3><ul>
+<li>一旦Stream终止，流就会关闭，不能再使用。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Stream&lt;String&gt; stream =</div><div class="line">    Stream.of(<span class="string">"d2"</span>, <span class="string">"a2"</span>, <span class="string">"b1"</span>, <span class="string">"b3"</span>, <span class="string">"c"</span>)</div><div class="line">        .filter(s -&gt; s.startsWith(<span class="string">"a"</span>));</div><div class="line"></div><div class="line">stream.anyMatch(s -&gt; <span class="keyword">true</span>);    <span class="comment">// ok</span></div><div class="line">stream.noneMatch(s -&gt; <span class="keyword">true</span>);   <span class="comment">// exception</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java.lang.IllegalStateException: stream has already been operated upon or closed</div><div class="line">    at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:229)</div><div class="line">    at java.util.stream.ReferencePipeline.noneMatch(ReferencePipeline.java:459)</div><div class="line">    at com.winterbe.java8.Streams5.test7(Streams5.java:38)</div><div class="line">    at com.winterbe.java8.Streams5.main(Streams5.java:28)</div></pre></td></tr></table></figure>
+<p>解决方法：用中间过程的流创建一个<code>Supplier</code>，返回<code>Stream</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Supplier&lt;Stream&lt;String&gt;&gt; streamSupplier =</div><div class="line">    () -&gt; Stream.of(<span class="string">"d2"</span>, <span class="string">"a2"</span>, <span class="string">"b1"</span>, <span class="string">"b3"</span>, <span class="string">"c"</span>)</div><div class="line">            .filter(s -&gt; s.startsWith(<span class="string">"a"</span>));</div><div class="line"></div><div class="line">streamSupplier.get().anyMatch(s -&gt; <span class="keyword">true</span>);   <span class="comment">// ok</span></div><div class="line">streamSupplier.get().noneMatch(s -&gt; <span class="keyword">true</span>);  <span class="comment">// ok</span></div></pre></td></tr></table></figure>
+<h2 id="Parallel-Streams-（并行流）"><a href="#Parallel-Streams-（并行流）" class="headerlink" title="Parallel Streams （并行流）"></a>Parallel Streams （并行流）</h2><p>First we create a large list of unique elements:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> max = <span class="number">1000000</span>;</div><div class="line">List&lt;String&gt; values = <span class="keyword">new</span> ArrayList&lt;&gt;(max);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; max; i++) &#123;</div><div class="line">    UUID uuid = UUID.randomUUID();</div><div class="line">    values.add(uuid.toString());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now we measure the time it takes to sort a stream of this collection.</p>
+<h3 id="Sequential-Sort"><a href="#Sequential-Sort" class="headerlink" title="Sequential Sort"></a>Sequential Sort</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line"></div><div class="line"><span class="keyword">long</span> count = values.stream().sorted().count();</div><div class="line">System.out.println(count);</div><div class="line"></div><div class="line"><span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line"></div><div class="line"><span class="keyword">long</span> millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);</div><div class="line">System.out.println(String.format(<span class="string">"sequential sort took: %d ms"</span>, millis));</div><div class="line"></div><div class="line"><span class="comment">// sequential sort took: 899 ms</span></div></pre></td></tr></table></figure>
+<h3 id="Parallel-Sort"><a href="#Parallel-Sort" class="headerlink" title="Parallel Sort"></a>Parallel Sort</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line"></div><div class="line"><span class="keyword">long</span> count = values.parallelStream().sorted().count();</div><div class="line">System.out.println(count);</div><div class="line"></div><div class="line"><span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line"></div><div class="line"><span class="keyword">long</span> millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);</div><div class="line">System.out.println(String.format(<span class="string">"parallel sort took: %d ms"</span>, millis));</div><div class="line"></div><div class="line"><span class="comment">// parallel sort took: 472 ms</span></div></pre></td></tr></table></figure>
+<p>As you can see both code snippets are almost identical but the parallel sort is roughly 50% faster. All you have to do is change <code>stream()</code> to <code>parallelStream()</code>.</p>
+<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><ul>
+<li><code>Map</code>不能直接转化成<code>Stream</code>，<code>map.keySet().stream()</code>, <code>map.values().stream()</code> and <code>map.entrySet().stream()</code>. </li>
+<li><code>Map</code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">    map.putIfAbsent(i, <span class="string">"val"</span> + i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">map.forEach((id, val) -&gt; System.out.println(val));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">map.computeIfPresent(<span class="number">3</span>, (num, val) -&gt; val + num);</div><div class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></div><div class="line"></div><div class="line">map.computeIfPresent(<span class="number">9</span>, (num, val) -&gt; <span class="keyword">null</span>);</div><div class="line">map.containsKey(<span class="number">9</span>);     <span class="comment">// false</span></div><div class="line"></div><div class="line">map.computeIfAbsent(<span class="number">23</span>, num -&gt; <span class="string">"val"</span> + num);</div><div class="line">map.containsKey(<span class="number">23</span>);    <span class="comment">// true</span></div><div class="line"></div><div class="line">map.computeIfAbsent(<span class="number">3</span>, num -&gt; <span class="string">"bam"</span>);</div><div class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></div></pre></td></tr></table></figure>
+<p>Next, we learn how to remove entries for a given key, only if it’s currently mapped to a given value:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">map.remove(<span class="number">3</span>, <span class="string">"val3"</span>);</div><div class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></div><div class="line"></div><div class="line">map.remove(<span class="number">3</span>, <span class="string">"val33"</span>);</div><div class="line">map.get(<span class="number">3</span>);             <span class="comment">// null</span></div></pre></td></tr></table></figure>
+<p>Another helpful method:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">map.getOrDefault(<span class="number">42</span>, <span class="string">"not found"</span>);  <span class="comment">// not found</span></div></pre></td></tr></table></figure>
+<p>Merging entries of a map is quite easy:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">map.merge(<span class="number">9</span>, <span class="string">"val9"</span>, (value, newValue) -&gt; value.concat(newValue));</div><div class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9</span></div><div class="line"></div><div class="line">map.merge(<span class="number">9</span>, <span class="string">"concat"</span>, (value, newValue) -&gt; value.concat(newValue));</div><div class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9concat</span></div></pre></td></tr></table></figure>
+<p>Merge either put the key/value into the map if no entry for the key exists, or the merging function will be called to change the existing value.</p>
+<h2 id="Date-API"><a href="#Date-API" class="headerlink" title="Date API"></a>Date API</h2><p>Java 8 引入新的日期和时间接口， <code>java.time</code>.新的日期接口与<a href="http://www.joda.org/joda-time/" target="_blank" rel="external">Joda-Time</a> library 兼容, however it’s <a href="http://blog.joda.org/2009/11/why-jsr-310-isn-joda-time_4941.html" target="_blank" rel="external">not the same</a>.</p>
+<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p>Clock 提供当前的时间和日期，是带时区的。 可以替代 <code>System.currentTimeMillis()</code> 。<br> <code>Instant</code>表示即使时间，可以转 <code>java.util.Date</code> objects.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Clock clock = Clock.systemDefaultZone();</div><div class="line"><span class="keyword">long</span> millis = clock.millis();</div><div class="line"></div><div class="line">Instant instant = clock.instant();</div><div class="line">Date legacyDate = Date.from(instant);   <span class="comment">// legacy java.util.Date</span></div></pre></td></tr></table></figure>
+<h3 id="Timezones"><a href="#Timezones" class="headerlink" title="Timezones"></a>Timezones</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">System.out.println(ZoneId.getAvailableZoneIds());</div><div class="line"><span class="comment">// prints all available timezone ids</span></div><div class="line"></div><div class="line">ZoneId zone1 = ZoneId.of(<span class="string">"Europe/Berlin"</span>);</div><div class="line">ZoneId zone2 = ZoneId.of(<span class="string">"Brazil/East"</span>);</div><div class="line">System.out.println(zone1.getRules());</div><div class="line">System.out.println(zone2.getRules());</div><div class="line"></div><div class="line"><span class="comment">// ZoneRules[currentStandardOffset=+01:00]</span></div><div class="line"><span class="comment">// ZoneRules[currentStandardOffset=-03:00]</span></div></pre></td></tr></table></figure>
+<h3 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LocalTime now1 = LocalTime.now(zone1);</div><div class="line">LocalTime now2 = LocalTime.now(zone2);</div><div class="line"></div><div class="line">System.out.println(now1.isBefore(now2));  <span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="keyword">long</span> hoursBetween = ChronoUnit.HOURS.between(now1, now2);</div><div class="line"><span class="keyword">long</span> minutesBetween = ChronoUnit.MINUTES.between(now1, now2);</div><div class="line"></div><div class="line">System.out.println(hoursBetween);       <span class="comment">// -3</span></div><div class="line">System.out.println(minutesBetween);     <span class="comment">// -239</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LocalTime late = LocalTime.of(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</div><div class="line">System.out.println(late);       <span class="comment">// 23:59:59</span></div><div class="line"></div><div class="line">DateTimeFormatter germanFormatter =</div><div class="line">    DateTimeFormatter</div><div class="line">        .ofLocalizedTime(FormatStyle.SHORT)</div><div class="line">        .withLocale(Locale.GERMAN);</div><div class="line"></div><div class="line">LocalTime leetTime = LocalTime.parse(<span class="string">"13:37"</span>, germanFormatter);</div><div class="line">System.out.println(leetTime);   <span class="comment">// 13:37</span></div></pre></td></tr></table></figure>
+<h3 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LocalDate today = LocalDate.now();</div><div class="line">LocalDate tomorrow = today.plus(<span class="number">1</span>, ChronoUnit.DAYS);</div><div class="line">LocalDate yesterday = tomorrow.minusDays(<span class="number">2</span>);</div><div class="line"></div><div class="line">LocalDate independenceDay = LocalDate.of(<span class="number">2014</span>, Month.JULY, <span class="number">4</span>);</div><div class="line">DayOfWeek dayOfWeek = independenceDay.getDayOfWeek();</div><div class="line">System.out.println(dayOfWeek);    <span class="comment">// FRIDAY</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">DateTimeFormatter germanFormatter =</div><div class="line">    DateTimeFormatter</div><div class="line">        .ofLocalizedDate(FormatStyle.MEDIUM)</div><div class="line">        .withLocale(Locale.GERMAN);</div><div class="line"></div><div class="line">LocalDate xmas = LocalDate.parse(<span class="string">"24.12.2014"</span>, germanFormatter);</div><div class="line">System.out.println(xmas);   <span class="comment">// 2014-12-24</span></div></pre></td></tr></table></figure>
+<h3 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LocalDateTime sylvester = LocalDateTime.of(<span class="number">2014</span>, Month.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</div><div class="line"></div><div class="line">DayOfWeek dayOfWeek = sylvester.getDayOfWeek();</div><div class="line">System.out.println(dayOfWeek);      <span class="comment">// WEDNESDAY</span></div><div class="line"></div><div class="line">Month month = sylvester.getMonth();</div><div class="line">System.out.println(month);          <span class="comment">// DECEMBER</span></div><div class="line"></div><div class="line"><span class="keyword">long</span> minuteOfDay = sylvester.getLong(ChronoField.MINUTE_OF_DAY);</div><div class="line">System.out.println(minuteOfDay);    <span class="comment">// 1439</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Instant instant = sylvester</div><div class="line">        .atZone(ZoneId.systemDefault())</div><div class="line">        .toInstant();</div><div class="line"></div><div class="line">Date legacyDate = Date.from(instant);</div><div class="line">System.out.println(legacyDate);     <span class="comment">// Wed Dec 31 23:59:59 CET 2014</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">DateTimeFormatter formatter =</div><div class="line">    DateTimeFormatter</div><div class="line">        .ofPattern(<span class="string">"MMM dd, yyyy - HH:mm"</span>);</div><div class="line"></div><div class="line">LocalDateTime parsed = LocalDateTime.parse(<span class="string">"Nov 03, 2014 - 07:13"</span>, formatter);</div><div class="line">String string = formatter.format(parsed);</div><div class="line">System.out.println(string);     <span class="comment">// Nov 03, 2014 - 07:13</span></div></pre></td></tr></table></figure>
+<p>Unlike <code>java.text.NumberFormat</code> the new <code>DateTimeFormatter</code> is immutable and <strong>thread-safe</strong>.</p>
+<h2 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h2><p>Annotations in Java 8 are repeatable. Let’s dive directly into an example to figure that out.</p>
+<p>First, we define a wrapper annotation which holds an array of the actual annotations:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@interface</span> Hints &#123;</div><div class="line">    Hint[] value();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Repeatable</span>(Hints.class)</div><div class="line"><span class="meta">@interface</span> Hint &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Java 8 enables us to use multiple annotations of the same type by declaring the annotation <code>@Repeatable</code>.</p>
+<h3 id="Variant-1-Using-the-container-annotation-old-school"><a href="#Variant-1-Using-the-container-annotation-old-school" class="headerlink" title="Variant 1: Using the container annotation (old school)"></a>Variant 1: Using the container annotation (old school)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Hints</span>(&#123;<span class="meta">@Hint</span>(<span class="string">"hint1"</span>), <span class="meta">@Hint</span>(<span class="string">"hint2"</span>)&#125;)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<h3 id="Variant-2-Using-repeatable-annotations-new-school"><a href="#Variant-2-Using-repeatable-annotations-new-school" class="headerlink" title="Variant 2: Using repeatable annotations (new school)"></a>Variant 2: Using repeatable annotations (new school)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Hint</span>(<span class="string">"hint1"</span>)</div><div class="line"><span class="meta">@Hint</span>(<span class="string">"hint2"</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>Using variant 2 the java compiler implicitly sets up the <code>@Hints</code> annotation under the hood. That’s important for reading annotation information via reflection.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Hint hint = Person.class.getAnnotation(Hint.class);</div><div class="line">System.out.println(hint);                   <span class="comment">// null</span></div><div class="line"></div><div class="line">Hints hints1 = Person.class.getAnnotation(Hints.class);</div><div class="line">System.out.println(hints1.value().length);  <span class="comment">// 2</span></div><div class="line"></div><div class="line">Hint[] hints2 = Person.class.getAnnotationsByType(Hint.class);</div><div class="line">System.out.println(hints2.length);          <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>Although we never declared the <code>@Hints</code> annotation on the <code>Person</code> class, it’s still readable via <code>getAnnotation(Hints.class)</code>. However, the more convenient method is <code>getAnnotationsByType</code> which grants direct access to all annotated <code>@Hint</code> annotations.</p>
+<p>Furthermore the usage of annotations in Java 8 is expanded to two new targets:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE_PARAMETER, ElementType.TYPE_USE&#125;)</div><div class="line"><span class="meta">@interface</span> MyAnnotation &#123;&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/04/18/Java-8-简明教程/" data-title="Java 8 简明教程" data-url="http://zhangliting.github.io/2017/04/18/Java-8-简明教程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangliting"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="/css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/18/Java-面试题( 2 )/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Java 面试题(2)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/18/Java面试题（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Java面试题（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-8-简明教程"><span class="nav-number">1.</span> <span class="nav-text">Java 8 简明教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口默认方法"><span class="nav-number">1.1.</span> <span class="nav-text">接口默认方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda-表达式"><span class="nav-number">1.2.</span> <span class="nav-text">Lambda 表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数接口"><span class="nav-number">1.3.</span> <span class="nav-text">函数接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法和构造函数引用"><span class="nav-number">1.4.</span> <span class="nav-text">方法和构造函数引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda-表达式的范围"><span class="nav-number">1.5.</span> <span class="nav-text">Lambda 表达式的范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问局部变量"><span class="nav-number">1.5.1.</span> <span class="nav-text">访问局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问实例变量和静态变量"><span class="nav-number">1.5.2.</span> <span class="nav-text">访问实例变量和静态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问函数接口默认方法"><span class="nav-number">1.5.3.</span> <span class="nav-text">访问函数接口默认方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-内置函数接口"><span class="nav-number">1.6.</span> <span class="nav-text">Java 8 内置函数接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Predicate-判断"><span class="nav-number">1.6.1.</span> <span class="nav-text">Predicate (判断)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions-函数"><span class="nav-number">1.6.2.</span> <span class="nav-text">Functions (函数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Suppliers-生产者）"><span class="nav-number">1.6.3.</span> <span class="nav-text">Suppliers (生产者）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumers-消费者"><span class="nav-number">1.6.4.</span> <span class="nav-text">Consumers (消费者)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator-比较器"><span class="nav-number">1.6.5.</span> <span class="nav-text">Comparator (比较器)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional"><span class="nav-number">1.7.</span> <span class="nav-text">Optional</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streams-流）"><span class="nav-number">1.8.</span> <span class="nav-text">Streams ( 流）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter"><span class="nav-number">1.8.1.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sorted"><span class="nav-number">1.8.2.</span> <span class="nav-text">Sorted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">1.8.3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match"><span class="nav-number">1.8.4.</span> <span class="nav-text">Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Count"><span class="nav-number">1.8.5.</span> <span class="nav-text">Count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reduce"><span class="nav-number">1.8.6.</span> <span class="nav-text">Reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collect"><span class="nav-number">1.8.7.</span> <span class="nav-text">Collect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FlatMap"><span class="nav-number">1.8.8.</span> <span class="nav-text">FlatMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream-进阶"><span class="nav-number">1.9.</span> <span class="nav-text">Stream 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的Stream"><span class="nav-number">1.9.1.</span> <span class="nav-text">其他的Stream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream处理顺序"><span class="nav-number">1.9.2.</span> <span class="nav-text">Stream处理顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-重复使用"><span class="nav-number">1.9.3.</span> <span class="nav-text">Stream 重复使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parallel-Streams-（并行流）"><span class="nav-number">1.10.</span> <span class="nav-text">Parallel Streams （并行流）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequential-Sort"><span class="nav-number">1.10.1.</span> <span class="nav-text">Sequential Sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Sort"><span class="nav-number">1.10.2.</span> <span class="nav-text">Parallel Sort</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maps"><span class="nav-number">1.11.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-API"><span class="nav-number">1.12.</span> <span class="nav-text">Date API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clock"><span class="nav-number">1.12.1.</span> <span class="nav-text">Clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timezones"><span class="nav-number">1.12.2.</span> <span class="nav-text">Timezones</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LocalTime"><span class="nav-number">1.12.3.</span> <span class="nav-text">LocalTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LocalDate"><span class="nav-number">1.12.4.</span> <span class="nav-text">LocalDate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LocalDateTime"><span class="nav-number">1.12.5.</span> <span class="nav-text">LocalDateTime</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Annotations"><span class="nav-number">1.13.</span> <span class="nav-text">Annotations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variant-1-Using-the-container-annotation-old-school"><span class="nav-number">1.13.1.</span> <span class="nav-text">Variant 1: Using the container annotation (old school)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variant-2-Using-repeatable-annotations-new-school"><span class="nav-number">1.13.2.</span> <span class="nav-text">Variant 2: Using repeatable annotations (new school)</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>
