@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关系型数据库工作原理 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="zhangliting blog IT" />
+  
+  
+  
+  
+  <meta name="description" content="关系型数据库工作原理
+英文原文：http://coding-geek.com/how-databases-work/
+##概述
+
+低层次和高层次的数据库组件
+查询优化的过程
+事务和缓冲池管理
+
+O(1) vs O(n²)概念
+时间复杂度是用来看看算法处理给定的数据需要多长时间。
+时间复杂度的重点在于：随着数据的增加，需要处理的时间的变化。
+
+
+
+O(1)的复杂度保持不变（常量）
+O(log(n))">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关系型数据库工作原理">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/21/关系型数据库工作原理/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="关系型数据库工作原理
+英文原文：http://coding-geek.com/how-databases-work/
+##概述
+
+低层次和高层次的数据库组件
+查询优化的过程
+事务和缓冲池管理
+
+O(1) vs O(n²)概念
+时间复杂度是用来看看算法处理给定的数据需要多长时间。
+时间复杂度的重点在于：随着数据的增加，需要处理的时间的变化。
+
+
+
+O(1)的复杂度保持不变（常量）
+O(log(n))">
+<meta property="og:image" content="http://zhangliting.github.io/images/main_databases.jpg">
+<meta property="og:updated_time" content="2017-04-20T14:15:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关系型数据库工作原理">
+<meta name="twitter:description" content="关系型数据库工作原理
+英文原文：http://coding-geek.com/how-databases-work/
+##概述
+
+低层次和高层次的数据库组件
+查询优化的过程
+事务和缓冲池管理
+
+O(1) vs O(n²)概念
+时间复杂度是用来看看算法处理给定的数据需要多长时间。
+时间复杂度的重点在于：随着数据的增加，需要处理的时间的变化。
+
+
+
+O(1)的复杂度保持不变（常量）
+O(log(n))">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/main_databases.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-关系型数据库工作原理" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/main_databases.jpg" rel="gallery_cj1qi0yyy000xv4tu2482db0g">
+        <img src="/images/main_databases.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      关系型数据库工作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/04/21/关系型数据库工作原理/" class="article-date">
+	  <time datetime="2017-04-20T15:13:37.000Z" itemprop="datePublished">四月 20, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关系型数据库工作原理"><a href="#关系型数据库工作原理" class="headerlink" title="关系型数据库工作原理"></a>关系型数据库工作原理</h1><hr>
+<p>英文原文：<a href="http://coding-geek.com/how-databases-work/" target="_blank" rel="external">http://coding-geek.com/how-databases-work/</a><br><img src="/images/main_databases.jpg" alt=""></p>
+<p>##概述</p>
+<ul>
+<li>低层次和高层次的数据库组件</li>
+<li>查询优化的过程</li>
+<li>事务和缓冲池管理</li>
+</ul>
+<h2 id="O-1-vs-O-n²"><a href="#O-1-vs-O-n²" class="headerlink" title="O(1) vs O(n²)"></a>O(1) vs O(n²)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>时间复杂度是用来看看算法处理给定的数据需要多长时间。</li>
+<li>时间复杂度的重点在于：随着数据的增加，需要处理的时间的变化。</li>
+</ul>
+<p><img src="/images/TimeComplexity.png" alt="time_complexity"></p>
+<ul>
+<li>O(1)的复杂度保持不变（常量）</li>
+<li>O(log(n))的复杂度较低</li>
+<li>O(log(n)*n)和O(n）增加迅速</li>
+<li>O(n²)的复杂度是最糟的</li>
+</ul>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>当数据量小的时候，O(1)和O(n²)区别并不明显，但是当数据量上亿时，就天差地别了。</p>
+<a id="more"></a>
+<h3 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h3><ul>
+<li>在一个良好的哈希表中查找元素的复杂度O(1)。</li>
+<li>在一个良好的平衡树种搜索的复杂度O(log(n)）。</li>
+<li>在数组中查找的复杂度O(n)。</li>
+<li>最好的排序方法复杂度O(n*log(n))</li>
+<li>坏的排序方法复杂度O(n²)。</li>
+</ul>
+<p><strong>复杂度</strong>：  </p>
+<ul>
+<li>一般情况</li>
+<li>最好情况</li>
+<li>最坏情况</li>
+</ul>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><blockquote>
+<p>归并两个N/2的有序数组，只需要N次操作。<br>将问题分割成可以结局的小问题。（分治思想）</p>
+</blockquote>
+<p><img src="/images/merge_sort_3.png" alt="merge"></p>
+<ol>
+<li>比较两个数组中当前位置的元素。</li>
+<li>将较小的元素放到新的数组里。</li>
+<li>从较小的元素所在的数组，继续取一个元素与较大的元素比较。</li>
+<li>重复1,2,3步骤，知道一个数组结束。</li>
+<li>将另一个素组的剩余元素移到新的数组里。</li>
+</ol>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">array mergeSort(array a)</div><div class="line">   if(length(a)==1)</div><div class="line">      return a[0];</div><div class="line">   end if</div><div class="line"></div><div class="line">   //recursive calls</div><div class="line">   [left_array right_array] := split_into_2_equally_sized_arrays(a);</div><div class="line">   array new_left_array := mergeSort(left_array);</div><div class="line">   array new_right_array := mergeSort(right_array);</div><div class="line"></div><div class="line">   //merging the 2 small ordered arrays into a big one</div><div class="line">   array result := merge(new_left_array,new_right_array);</div><div class="line">   return result;</div></pre></td></tr></table></figure>
+<ul>
+<li>分割阶段，将数组分成更小的数组。</li>
+<li>排序阶段，将小的数组合并成更大的数组。</li>
+</ul>
+<p><img src="/images/merge_sort_1.png" alt="division"></p>
+<p><img src="/images/merge_sort_2.png" alt="sorting"></p>
+<ul>
+<li>分割成log(n)步，每一步需要n次操作。所以时间复杂度O(n*log(n))。</li>
+</ul>
+<h3 id="为什么归并排序如此强大"><a href="#为什么归并排序如此强大" class="headerlink" title="为什么归并排序如此强大"></a>为什么归并排序如此强大</h3><ol>
+<li>你可以不创建新的数组，减少内存占用。（原位）</li>
+<li>你可以只加载需要排序的部分，减少I/O操作和内存占用。（外部排序）</li>
+<li>你可以在多线程服务器上运行。（分布式归并排序）（Hadoop）</li>
+</ol>
+<h2 id="数组，树和哈希表"><a href="#数组，树和哈希表" class="headerlink" title="数组，树和哈希表"></a>数组，树和哈希表</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>二维数组是最简单的数据结构，一张表可以看作一个二维数组。<br><img src="/images/array.png" alt="array"></p>
+<ul>
+<li>每一行是一个主体。</li>
+<li>列描述对象的特征。</li>
+<li>每一列存储特定的类型（整数，字符串，日期等）的数据。</li>
+</ul>
+<p>当你查找某一行数据时，需要遍历N行。</p>
+<h3 id="树和数据库索引"><a href="#树和数据库索引" class="headerlink" title="树和数据库索引"></a>树和数据库索引</h3><p>二叉排序树是满足一下条件的二叉树：</p>
+<ul>
+<li>左子树上所有节点的值均小于等于它的根节点的值。</li>
+<li>右子树上所有节点的值均大于党羽它的根节点的值。</li>
+<li>左右子树也都是二叉排序树。</li>
+</ul>
+<p><img src="/images/BST.png" alt="binary_search_tree"></p>
+<blockquote>
+<p>二叉排序树查询的时间复杂度是<code>O(log(n))</code>,即是树的高度。<br>对表中的任何字段加数据库索引，时间复杂度O(n) -&gt; O(log(n))</p>
+</blockquote>
+<h3 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h3><p>当你需要查找某个范围内的所有值是，就需要遍历整棵树。时间复杂度O(n)。<br>为了解决范围查询的问题，需要B+树<br><strong>定义</strong>：</p>
+<blockquote>
+<ul>
+<li>只有最低的节点（叶子节点）存储信息</li>
+<li>其他节点只是为了路由到正确的节点</li>
+</ul>
+</blockquote>
+<p><img src="/images/database_index.png" alt="B_tree"></p>
+<p>B+树的节点数增加了一倍，查询的时间复杂度<code>O(log(n)) + M</code>。M是范围查询中的个数。<br>如果你要查询40~100之间的值：</p>
+<ol>
+<li>你需要查询40，或者最接近的值。</li>
+<li>然后使用链接找到节点的后继节点，直到100。</li>
+</ol>
+<p>当增加或删除数据的时候：</p>
+<ul>
+<li>必须保持节点之间的顺序。（自有序）</li>
+<li>尽量最小化树的高度。（自平衡）</li>
+</ul>
+<p>插入和删除B+的时间复杂度是O(logn)，这就是为什么使用<strong>过多的索引并不是一个好主意</strong>。会减慢数据的插入和删除时间，同事增加事务管理的工作量。</p>
+<h3 id="Hash-table"><a href="#Hash-table" class="headerlink" title="Hash table"></a>Hash table</h3><blockquote>
+<p><strong>哈希表</strong>示一种根据Key快速找到值得数据结构。<br>定义：</p>
+<ul>
+<li>需要定义Key。</li>
+<li>需要一个哈希函数，计算哈希值。</li>
+<li>一个比较Key的方法。</li>
+</ul>
+</blockquote>
+<p><strong>example</strong><br><img src="/images/hash_table.png" alt="hash_table"></p>
+<p>找到78只需要2个操作，找到59，需要7个操作。<br>真正的挑战是找到一个好的哈希函数，减少哈希冲突。<br>好的哈希表复杂度<code>O(1)</code>。</p>
+<h3 id="哈希表-vs-数组"><a href="#哈希表-vs-数组" class="headerlink" title="哈希表 vs 数组"></a>哈希表 vs 数组</h3><blockquote>
+<ul>
+<li>哈希表可以半加载到内存，另一半在磁盘。</li>
+<li>数组必须连续空间。</li>
+<li>哈希表的Key可以使用任何键。</li>
+</ul>
+</blockquote>
+<h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p>数据库是一个提供数据访问和修改的数据集合。文件系统同样能做到。<br><strong>区别</strong>：</p>
+<ul>
+<li>数据库使用事务，以确保数据的安全和一致。</li>
+<li>能够快速处理大量的数据。</li>
+</ul>
+<p><img src="/images/global_overview.png" alt="overview"></p>
+<p>一个数据库由多个彼此交互的组件构成。<br><strong>核心组件</strong></p>
+<blockquote>
+<ul>
+<li>进程管理：很多数据库有自己的进程/线程池。为了达到纳秒级，很多数据库使用自己的线程，而不是操作系统的。</li>
+<li>网络管理：网络I/O是一个大问题，尤其对于分布式数据库。</li>
+<li>文件系统管理：磁盘I/O是数据库的瓶颈，良好的文件系统管理很重要。</li>
+<li>内存管理：为了避免大量的磁盘I/O，需要一个高效的内存管理，尤其处理大量查询的时候。</li>
+<li>安全管理：用于管理认证和用户授权。</li>
+<li>客户端管理：管理客户端的连接。</li>
+<li>。。。</li>
+</ul>
+</blockquote>
+<p><strong>数据库工具</strong></p>
+<blockquote>
+<ul>
+<li>备份管理器：用于保存和恢复的数据库。</li>
+<li>恢复管理器：用于数据库崩溃后重新启动数据库。</li>
+<li>监视管理：用于记录数据库的活动，并提供工具来监控数据库</li>
+<li>管理员：用于存储元数据（如名称和表的结构），并提供工具来管理数据库，模式，表空间，…</li>
+</ul>
+</blockquote>
+<p><strong>查询管理器</strong></p>
+<blockquote>
+<ul>
+<li>查询分析器：检查查询是否有效</li>
+<li>查询重写：预先优化查询</li>
+<li>查询优化：优化查询</li>
+<li>查询执行：编译和执行查询</li>
+</ul>
+</blockquote>
+<p><strong>数据管理</strong></p>
+<blockquote>
+<ul>
+<li>事务管理：处理事务</li>
+<li>高速缓存管理器：把数据在内存中使用它们之前和磁盘上写他们之前把内存中的数据</li>
+<li>数据访问管理：访问磁盘上的数据</li>
+</ul>
+</blockquote>
+<h3 id="客户端管理器"><a href="#客户端管理器" class="headerlink" title="客户端管理器"></a>客户端管理器</h3><p><img src="/images/client_manager.png" alt="client-manager"><br>客户端管理器是处理数据库和客户端交互的一部分，客户端可以是终端用户或终端应用。<br>客户端管理器提供访问数据库的多种方式：<code>JDBC</code>，<code>ODBC</code>，<code>OLE-DB</code>…</p>
+<p><strong>连接数据库</strong></p>
+<blockquote>
+<ol>
+<li>管理器首先验证你的权限（用户名和密码），然后检查你时候有访问数据库的权限。这些权限由数据库管理员设置。</li>
+<li>检查时候有可用的线程用于处理你的查询。</li>
+<li>同时检查数据库是否过载。</li>
+<li>客户端会等待一段时间，如果等待超时，关闭连接并返回错误信息。</li>
+<li>连接成功，客户端会发送你的查询给查询管理器，SQL就会被执行。</li>
+<li>当插到部分数据，就会返回给客户端。</li>
+<li>关闭数据库连接，显示结果。</li>
+</ol>
+</blockquote>
+<h3 id="查询管理器"><a href="#查询管理器" class="headerlink" title="查询管理器"></a>查询管理器</h3><p>这是数据库的强大所在。在这里，查询语句被转化成可以快速执行的代码。</p>
+<blockquote>
+<ol>
+<li>查询语句首先被解析，看看它是否有效。</li>
+<li>然后重写删除无用的操作，并添加一些优化。</li>
+<li>再优化，以提高性能，并转化为执行和数据访问计划。</li>
+<li>随后该计划被编译。</li>
+<li>最后，执行。</li>
+</ol>
+</blockquote>
+<h4 id="查询分析器"><a href="#查询分析器" class="headerlink" title="查询分析器"></a>查询分析器</h4><p>查询分析器会检查SQL的语法是否正确，然后使用数据库的元数据检查：</p>
+<ul>
+<li>表是否存在</li>
+<li>字段是否存在</li>
+<li>当前操作是否可以在字段上执行</li>
+<li>检查是否有读写的权限</li>
+</ul>
+<p>这个过程常常将SQL被解析成语法树</p>
+<h4 id="SQL重写"><a href="#SQL重写" class="headerlink" title="SQL重写"></a>SQL重写</h4><p>重写的目的：</p>
+<blockquote>
+<ul>
+<li>预先优化查询</li>
+<li>避免不必要的操作</li>
+<li>帮助优化器找到最佳的解决方案</li>
+</ul>
+</blockquote>
+<p>通过执行一系列的规则：</p>
+<blockquote>
+<ul>
+<li>视图合并：如果查询语句使用了视图，转化成视图的SQL。</li>
+<li>子查询展平：由于子查询很难优化，所以需要重写展平。</li>
+</ul>
+</blockquote>
+<p>example<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> PERSON.*</div><div class="line"><span class="keyword">FROM</span> PERSON</div><div class="line"><span class="keyword">WHERE</span> PERSON.person_key <span class="keyword">IN</span></div><div class="line">(<span class="keyword">SELECT</span> MAILS.person_key</div><div class="line"><span class="keyword">FROM</span> MAILS</div><div class="line"><span class="keyword">WHERE</span> MAILS.mail <span class="keyword">LIKE</span> <span class="string">'christophe%'</span>);</div></pre></td></tr></table></figure></p>
+<p>转变成<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> PERSON.*</div><div class="line"><span class="keyword">FROM</span> PERSON, MAILS</div><div class="line"><span class="keyword">WHERE</span> PERSON.person_key = MAILS.person_key</div><div class="line"><span class="keyword">and</span> MAILS.mail <span class="keyword">LIKE</span> <span class="string">'christophe%'</span>;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>移出不必要的操作：比如在<code>Unique</code>约束的字段上使用<code>distinct</code></li>
+<li>消除冗余的连接：比如你有两个连接条件，其中一个隐藏在试图中。</li>
+<li>常量计算评估：比如<code>where age &gt; 10 + 2</code> 转成 <code>where age &gt; 12</code></li>
+<li>分区修剪：如果你使用分区表，重写器知道使用哪个分区。</li>
+<li>自定义规则：</li>
+<li>Olap装换：</li>
+</ul>
+<h4 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h4><p>数据库会统计表信息</p>
+<ul>
+<li>表中的行数/页</li>
+<li>表中每一列的数据长度（最大，最小，均值）</li>
+<li>标的索引信息</li>
+</ul>
+<p>这些统计有助于优化查询，评估磁盘I/O，内存占用。<br>Oracle：<code>USER/ALL/DBA_TABLES and USER/ALL/DBA_TAB_COLUMNS</code></p>
+<h3 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h3><p>全表扫描：简单的读取整个表或者索引。从磁盘I/O的角度，全表扫描明显比全索引扫描更费时。</p>
+<p>范围扫描：比如，<code>where age &gt; 20 and age &lt; 40</code>可以使用索引的范围扫描，前提是建立索引。时间复杂度<code>log(n)+m</code>。</p>
+<p>唯一扫描：<code>where age = 30</code></p>
+<h4 id="关联row-id"><a href="#关联row-id" class="headerlink" title="关联row id"></a>关联row id</h4><p>索引只保存了当前索引字段的值，并没有一条数据的完整记录，需要通过索引字段关联row id。</p>
+<p>example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT LASTNAME, FIRSTNAME from PERSON WHERE AGE = 28</div></pre></td></tr></table></figure></p>
+<p>利用索引只能找到age，需要返回表中查找其他字段。</p>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><p><img src="/images/nested_loop_join.png" alt="join"><br>对于每个outer中的元素，在inner中查找相等的元素。<br>时间复杂度<code>O(N*M)</code><br>伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">nested_loop_join(array outer, array inner)</div><div class="line">  for each row a in outer</div><div class="line">    for each row b in inner</div><div class="line">      if (match_join_condition(a,b))</div><div class="line">        write_result_in_output(a,b)</div><div class="line">      end if</div><div class="line">    end for</div><div class="line">   end for</div></pre></td></tr></table></figure>
+<h4 id="Hash-join"><a href="#Hash-join" class="headerlink" title="Hash join"></a>Hash join</h4><p><img src="/images/hash_join.png" alt="hash-join"></p>
+<ul>
+<li>获得inner的所有元素</li>
+<li>使用inner在内存中建立hash表</li>
+<li>遍历outer中的元素</li>
+<li>计算outer的hash值，在hash表中查找</li>
+</ul>
+<p>时间复杂度<code>O(M+N)</code> <strong>(The time complexity is (M/X) <em> N + cost_to_create_hash_table(M) + cost_of_hash_function</em>N)</strong>. X 是bucket个数，足够多时，可以忽略。</p>
+<h4 id="Merge-join"><a href="#Merge-join" class="headerlink" title="Merge join"></a>Merge join</h4><p>归并连接是唯一一个产生有序结果的连接。</p>
+<p><img src="/images/merge_join.png" alt="merge-join"></p>
+<p>前提是集合已经有序（不考虑重复元素的情况）</p>
+<ul>
+<li>比较两个集合当前的元素（从第一开始）。</li>
+<li>如果相等，将它们放到结果中，继续比较。</li>
+<li>如果不相等，将较小的元素所在的集合向后找一个，继续比较。</li>
+<li>重复前面的步骤，直到其中一个集合结束。</li>
+</ul>
+<p>排序两个集合需要<code>O(n*log(n)) + m*log(m))</code><br>归并连接时间复杂度<code>O(N+M)</code></p>
+<h4 id="哪一个是最好的？"><a href="#哪一个是最好的？" class="headerlink" title="哪一个是最好的？"></a>哪一个是最好的？</h4><p>如果有一个最好的类型的连接，就不会有多种类型。这个问题是非常困难的，因为很多因素会喜欢打：</p>
+<ul>
+<li>在可用内存量：没有足够的内存，你可以告别强大的散列连接（至少满内存哈希联接）</li>
+<li>2个的数据集的大小。例如，如果你有一个大表，一个非常小的一个，嵌套循环连接会比散列快加入，因为哈希连接有一个昂贵的创建哈希。如果你有2个非常大的表格嵌套循环连接将是非常昂贵的CPU。</li>
+<li>该存在 的 指标。随着2个B +树索引明智的选择似乎是合并连接<br>如果结果需要进行排序：即使你未排序的数据集时，您可能需要使用昂贵的合并连接（与排序），因为在最后的结果将被排序，你就可以链与另一个合并连接的结果（或者也许是因为查询请求隐含/明确的排序结果与ORDER BY / GROUP BY / DISTINCT操作）</li>
+<li>如果关系已经排序：在这种情况下，合并连接是最佳人选</li>
+<li>该类型的连接，你正在做的：这是一个等值连接（即：tableA.col1 = tableB.col2）？它是一个内部联接，一个外连接，一个笛卡尔积或自连接？某些连接可以在某些情况下无法正常工作。</li>
+<li>该数据的分布。如果连接条件的数据是倾斜（例如你在自己的姓氏加入的人，但很多人都有相同的），使用散列连接将是一场灾难，因为哈希函数将产生不良分布式桶。</li>
+<li>如果你想联接由执行多个线程/进程</li>
+</ul>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p><strong>5张表关联</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SELECT * from PERSON, MOBILES, MAILS,ADRESSES, BANK_ACCOUNTS</div><div class="line">WHERE</div><div class="line">PERSON.PERSON_ID = MOBILES.PERSON_ID</div><div class="line">AND PERSON.PERSON_ID = MAILS.PERSON_ID</div><div class="line">AND PERSON.PERSON_ID = ADRESSES.PERSON_ID</div><div class="line">AND PERSON.PERSON_ID = BANK_ACCOUNTS.PERSON_ID</div></pre></td></tr></table></figure></p>
+<p>问题：</p>
+<ul>
+<li>使用哪种关联？（hash join, merge join, nested join）</li>
+<li>join的先后顺序？<br><img src="/images/join_ordering_problem.png" alt="join-order"></li>
+</ul>
+<p>这里有很多种组合的可能性，我们不可能去计算每一种可能的性能。更何况还有OUTER JOIN, CROSS JOIN,<br>GROUP BY, ORDER BY….<br>看看数据库是怎么做的？<br><code>动态规划</code> <code>贪心算法</code></p>
+<h4 id="查询计划缓存"><a href="#查询计划缓存" class="headerlink" title="查询计划缓存"></a>查询计划缓存</h4><p>由于创建一个执行计划非常耗时，许多数据库都会缓存查询计划。<br>数据库会设置一个threshold（阀值），当表的统计数据发生改变时，及时更新查询计划。</p>
+<h3 id="数据管理器"><a href="#数据管理器" class="headerlink" title="数据管理器"></a>数据管理器</h3><p><img src="/images/data_manager.png" alt="data-manager"><br>这个阶段，查询管理器执行查询，需要获取表中的数据和索引。<br>但是存在2个问题：</p>
+<ul>
+<li>关系型数据库使用事务模型。</li>
+<li>取数据是最耗时的操作。</li>
+</ul>
+<h4 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h4><p><img src="/images/cache_manager.png" alt="cache"></p>
+<p>就像之前提到的，数据库的瓶颈是磁盘I/O。所有数据库使用缓存管理器提高性能。<br>查询执行器会先向缓存管理器请求数据。<br>缓存管理器在内存中维持一个缓存池。从内存中直接拿数据显然很快。</p>
+<p>这里涉及<code>缓存预取</code> <code>缓存命中策略</code> <code>缓存清除策略</code><br><code>LRU</code>(最近最少使用)<br><img src="/images/LRU.png" alt="LRU"></p>
+<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h3><h4 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h4><p><img src="/images/dollar_low.jpg" alt="dollar"></p>
+<ul>
+<li>Atomicity：原子性。一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
+<li>Consistency：持久性。事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+<li>Isolation：一致性。只有符合要求的数据保存到数据库。符合预期。</li>
+<li>Durability：隔离性。两个事务的执行顺序不影响执行的结果。</li>
+</ul>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>最高-&gt;最低</p>
+<ul>
+<li><code>Serializable</code> 可序列化：<code>SQLite</code>默认级别，两个事务完全不影响，100%隔离。</li>
+<li><code>Repeatable read</code> 可重复读：<code>MySQ</code>L默认级别，当事务A修改了相同的记录，事务B不能看到A修改的记录，所以B可以重复读。但是A新增的记录（提交），B可以看到。如：select count(*) 会增加一条，这是<code>幻读</code>。</li>
+<li><code>Read committed</code> 读已提交：<code>Oracle</code>，<code>PostgreSQL</code>，<code>SQL Server</code>的默认级别，当事务A修改了相同的记录并提交，事务B可以看到A更新的记录。这是<code>不可重复读</code></li>
+<li><code>ead uncommitted</code> 读未提交：事务A修改了相同的记录，未提交，事务B可以看到A修改的记录。当A滚记录，B又看到了之前的记录。这是<code>脏读</code>。</li>
+</ul>
+<h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><p>解决并发访问冲突的方式：<code>锁</code>（悲观锁）， <code>数据版本</code>（乐观锁，类似git。修改的主干的拷贝，需要解决冲突）</p>
+<p><strong>悲观锁</strong></p>
+<ul>
+<li>如果某个事务需要一条数据，就给这条数据加上锁。</li>
+<li>如果其他事务也想要这条数据，就必须等待之前的事务释放索。<br>这也叫做<code>排它锁</code></li>
+</ul>
+<p><strong>共享锁</strong></p>
+<ul>
+<li>如果一个只需要读这条数据A，就加共享锁，然后读取数据。</li>
+<li>如果第二个事务也只读A，也加共享锁，然后读数据。</li>
+<li>如果第三个事务需要修改A，就需要加排它锁，但是必须等待之前所有的共享锁释放。</li>
+<li>同样，数据A已经加上了排它锁，一个事务读数据A，需要等待排它锁释放。</li>
+</ul>
+<p><img src="/images/lock_manager.png" alt="lock"><br>从图中可以看出，排它锁和共享锁不能共存。<br>锁保存在hash表中，key是加锁的数据，value是哪个事务加的锁。</p>
+<p><strong>死锁</strong><br><img src="/images/deadlock.png" alt="dead-lock"><br>事务A给data1加排它锁，事务B给data2加排它锁。<br>事务A等待data2释放锁，事务B等待data1释放锁。</p>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><p>当数据库崩溃时，为了保持数据一致性：</p>
+<ul>
+<li><code>拷贝</code>：每一个事务在拷贝的数据上修改，提交时，更新主干数据。</li>
+<li><code>事务日志</code>：每次修改数据时，都会记录到日志中。</li>
+</ul>
+<p>大多数数据库使用事务日志恢复数据库，因为拷贝很耗性能。</p>
+<p><img src="/images/log_manager.png" alt="log-manager"></p>
+<p><img src="/images/ARIES_log_writing.png" alt="log-process"></p>
+<p>每一次修改数据提交，都会经历<code>1-&gt;2-&gt;3-&gt;4-&gt;5</code><br>为了性能，步骤5可以在commit之后执行，因为一旦崩溃还可以从日志中恢复。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>数据库我们想得复杂和强大<br>其他：</p>
+<ul>
+<li>分布式数据库和全局事务</li>
+<li>数据库快照</li>
+<li>高效存储数据</li>
+<li>内存管理</li>
+</ul>
+<p>如果别人问题数据库是怎么工作的，你现在有能力告诉他：</p>
+<p><img src="/images/magic_low2.gif" alt="magic"></p>
+<p><strong>推荐</strong>：<br><a href="http://db.cs.berkeley.edu/papers/fntdb07-architecture.pdf" target="_blank" rel="external">“Architecture of Database System”</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/04/21/关系型数据库工作原理/" data-title="关系型数据库工作原理" data-url="http://zhangliting.github.io/2017/04/21/关系型数据库工作原理/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangliting"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="/css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/04/21/一生受益的10句话/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">一生受益的10句话</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关系型数据库工作原理"><span class="nav-number">1.</span> <span class="nav-text">关系型数据库工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#O-1-vs-O-n²"><span class="nav-number">1.1.</span> <span class="nav-text">O(1) vs O(n²)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">1.1.2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入"><span class="nav-number">1.1.3.</span> <span class="nav-text">深入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">1.2.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思想"><span class="nav-number">1.2.1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码"><span class="nav-number">1.2.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么归并排序如此强大"><span class="nav-number">1.2.3.</span> <span class="nav-text">为什么归并排序如此强大</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组，树和哈希表"><span class="nav-number">1.3.</span> <span class="nav-text">数组，树和哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">1.3.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树和数据库索引"><span class="nav-number">1.3.2.</span> <span class="nav-text">树和数据库索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引"><span class="nav-number">1.3.3.</span> <span class="nav-text">B+树索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-table"><span class="nav-number">1.3.4.</span> <span class="nav-text">Hash table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希表-vs-数组"><span class="nav-number">1.3.5.</span> <span class="nav-text">哈希表 vs 数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总览"><span class="nav-number">1.4.</span> <span class="nav-text">总览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端管理器"><span class="nav-number">1.4.1.</span> <span class="nav-text">客户端管理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询管理器"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询分析器"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">查询分析器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL重写"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">SQL重写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#统计"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">统计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询优化"><span class="nav-number">1.4.3.</span> <span class="nav-text">查询优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联row-id"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">关联row id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内连接"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash-join"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">Hash join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Merge-join"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">Merge join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哪一个是最好的？"><span class="nav-number">1.4.3.5.</span> <span class="nav-text">哪一个是最好的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">1.4.3.6.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询计划缓存"><span class="nav-number">1.4.3.7.</span> <span class="nav-text">查询计划缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据管理器"><span class="nav-number">1.4.4.</span> <span class="nav-text">数据管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存管理"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">缓存管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务管理"><span class="nav-number">1.4.5.</span> <span class="nav-text">事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ACID"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">1.4.5.2.</span> <span class="nav-text">事务隔离级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁"><span class="nav-number">1.4.5.3.</span> <span class="nav-text">锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志管理"><span class="nav-number">1.4.6.</span> <span class="nav-text">日志管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>
