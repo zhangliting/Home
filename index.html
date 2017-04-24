@@ -6,8 +6,6 @@
   <title>Hello World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    <meta name="keywords" content="zhangliting blog IT" />
-  
   
   
   
@@ -48,6 +46,20 @@
 
 </head>
 
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
 
 
   <body>
@@ -94,14 +106,6 @@
 </header>
 
 
-  <div style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
-      </div>
-
-  </div>
-
 
 
   <div id="container">
@@ -131,6 +135,7 @@
 	  <time datetime="2017-04-24T13:04:32.000Z" itemprop="datePublished">四月 24, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -188,6 +193,7 @@ Thread1234567891011Runnable task = () -&gt; &#123;    String threadNa...
 	  <time datetime="2017-04-24T13:03:13.000Z" itemprop="datePublished">四月 24, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -244,6 +250,7 @@ Thread1234567891011Runnable task = () -&gt; &#123;    String threadNa...
 	  <time datetime="2017-04-24T12:56:35.000Z" itemprop="datePublished">四月 24, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -300,6 +307,7 @@ Thread1234567891011Runnable task = () -&gt; &#123;    String threadNa...
 	  <time datetime="2017-04-24T12:54:16.000Z" itemprop="datePublished">四月 24, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -356,6 +364,7 @@ Clock为instant,date,time 提供时间，是包含时区的。123456// get the c
 	  <time datetime="2017-04-20T15:13:37.000Z" itemprop="datePublished">四月 20, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -426,6 +435,7 @@ O(log(...
 	  <time datetime="2017-04-20T15:02:42.000Z" itemprop="datePublished">四月 20, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -484,6 +494,7 @@ O(log(...
 	  <time datetime="2017-04-19T14:26:09.000Z" itemprop="datePublished">四月 19, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -560,6 +571,7 @@ service类不应该含有工具方法。
 	  <time datetime="2017-04-19T14:16:29.000Z" itemprop="datePublished">四月 19, 2017</time>
 	</a>
 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -658,29 +670,41 @@ I call it my billion-dollar mistake. It was the invention of the null reference 
 
     	<ul class="clearfix widget-social-icons">   
     	
-   			<li><a href="https://github.com/zhangliting" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="https://github.com/iTimeTraveler" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="http://www.yoursite.com" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li> 
+          
    		
-   			<li><a href="null" title="Flickr"><i class="fa fa-flickr" aria-hidden="true"></i></a></li> 
-
+          
+     			  <li><a href="null" title="Flickr"><i class="fa fa-flickr" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+            <li><a href="mailto:null?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
+          
    		
    		</ul>
 
@@ -852,6 +876,12 @@ I call it my billion-dollar mistake. It was the invention of the null reference 
   <div class="clearfix container">
       <div class="site-info">
 	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
       </div>
       <div class="site-credit">
         Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
@@ -882,9 +912,6 @@ I call it my billion-dollar mistake. It was the invention of the null reference 
   
 </nav> -->
     
-<div style="display: none;">
-  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-</div>
 
 <!-- mathjax config similar to math.stackexchange -->
 
@@ -930,16 +957,25 @@ I call it my billion-dollar mistake. It was the invention of the null reference 
 
 
 
-  </div>
 
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-  
 
   <div style="display: none;">
     <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
   </div>
 
 
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
 </body>
 </html>

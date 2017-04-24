@@ -214,7 +214,7 @@ body {
   transform: scale(1.4, 3.2);
 }
 .outer {
-  max-width: 1210px;
+  max-width: 1040px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -229,8 +229,8 @@ body {
 .inner {
   display: inline;
   float: left;
-  width: 98.31932773109243%;
-  margin: 0 0.840336134453782%;
+  width: 98.0392156862745%;
+  margin: 0 0.980392156862745%;
 }
 .left,
 .alignleft {
@@ -267,8 +267,8 @@ body {
   #main {
     display: inline;
     float: left;
-    width: 69.74789915966386%;
-    margin: 0 0.840336134453782%;
+    width: 64.70588235294117%;
+    margin: 0 0.980392156862745%;
   }
 }
 .archive-year,
@@ -457,7 +457,7 @@ body {
 }
 .article-header h1 {
   margin: 0 0 3px 0;
-  font-size: 2em;
+  font-size: 1.6em;
   line-height: 1.2;
 }
 .article-header h1 a {
@@ -1628,8 +1628,8 @@ pre .xml .cdata {
   #sidebar {
     display: inline;
     float: left;
-    width: 26.89075630252101%;
-    margin: 0 0.840336134453782%;
+    width: 31.372549019607842%;
+    margin: 0 0.980392156862745%;
   }
 }
 @media screen and (max-width: 479px) {
@@ -1684,12 +1684,12 @@ pre .xml .cdata {
 }
 .widget_athemes_tabs .widget ul li a {
   margin: 0;
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-transform: uppercase;
   line-height: 1.2;
   color: #222;
   font-weight: 700;
-  font-family: "Yanone Kaffeesatz", "方正姚体", Arial, Helvetica, sans-serif;
+  font-family: "Yanone Kaffeesatz", "微软雅黑", Arial, Helvetica, sans-serif;
 }
 .widget_athemes_tabs .widget ul li a:hover {
   color: #ff2828;
