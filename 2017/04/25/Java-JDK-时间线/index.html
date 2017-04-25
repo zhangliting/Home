@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java jdk 时间线 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JavaJDK" />
+  
+  
+  
+  
+  <meta name="description" content="Java SE 9 特性Possible Release Date : September 22, 2016
+Proposed features are:
+
+Support for multi-gigabyte heaps
+Better native code integration
+Self-tuning JVM
+Java Module System
+Money and Currency API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java JDK 时间线">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/25/Java-JDK-时间线/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="Java SE 9 特性Possible Release Date : September 22, 2016
+Proposed features are:
+
+Support for multi-gigabyte heaps
+Better native code integration
+Self-tuning JVM
+Java Module System
+Money and Currency API">
+<meta property="og:image" content="http://zhangliting.github.io/images/java8.png">
+<meta property="og:updated_time" content="2017-04-25T14:07:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java JDK 时间线">
+<meta name="twitter:description" content="Java SE 9 特性Possible Release Date : September 22, 2016
+Proposed features are:
+
+Support for multi-gigabyte heaps
+Better native code integration
+Self-tuning JVM
+Java Module System
+Money and Currency API">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/java8.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Java-JDK-时间线" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/java8.png" rel="gallery_cj1xmupen000o3stugio7c1gb">
+        <img src="/images/java8.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Java JDK 时间线
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/04/25/Java-JDK-时间线/" class="article-date">
+	  <time datetime="2017-04-25T14:04:01.000Z" itemprop="datePublished">四月 25, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java-SE-9-特性"><a href="#Java-SE-9-特性" class="headerlink" title="Java SE 9 特性"></a>Java SE 9 特性</h2><p><strong>Possible Release Date</strong> : <code>September 22, 2016</code></p>
+<p>Proposed features are:</p>
+<ul>
+<li>Support for multi-gigabyte heaps</li>
+<li>Better native code integration</li>
+<li>Self-tuning JVM</li>
+<li>Java Module System</li>
+<li>Money and Currency API</li>
+<li>jshell: The Java Shell</li>
+<li>Automatic parallelization</li>
+</ul>
+<a id="more"></a>
+<h2 id="Java-SE-8-特性"><a href="#Java-SE-8-特性" class="headerlink" title="Java SE 8 特性"></a>Java SE 8 特性</h2><p>Release Date : <code>March 18, 2014</code></p>
+<p>Code name culture dropped. Included features were:</p>
+<ul>
+<li><code>Lambda expression</code> support in APIs</li>
+<li><code>Functional interface and</code>default methods`</li>
+<li><code>Optionals</code></li>
+<li><code>Nashorn</code> – JavaScript runtime which allows developers to embed JavaScript code within applications</li>
+<li>Annotation on Java Types</li>
+<li><code>Unsigned Integer</code> Arithmetic</li>
+<li>Repeating annotations</li>
+<li><code>New Date</code> and <code>Time</code> API</li>
+<li>Statically-linked JNI libraries</li>
+<li>Launch JavaFX applications from jar files</li>
+<li>Remove the permanent generation from GC</li>
+</ul>
+<h2 id="Java-SE-7-特性"><a href="#Java-SE-7-特性" class="headerlink" title="Java SE 7 特性"></a>Java SE 7 特性</h2><p>Release Date : <code>July 28, 2011</code></p>
+<p>This release was called “Dolphin”. Included features were:</p>
+<ul>
+<li>JVM support for dynamic languages</li>
+<li>Compressed 64-bit pointers</li>
+<li><code>Strings in switch</code></li>
+<li><code>Automatic resource management in try-statement</code></li>
+<li>The diamond operator</li>
+<li>Simplified varargs method declaration</li>
+<li>Binary integer literals</li>
+<li><code>Underscores in numeric literals</code></li>
+<li><code>Improved exception handling</code></li>
+<li><code>ForkJoin</code> Framework</li>
+<li><code>NIO 2.0</code> having support for multiple file systems, file metadata and symbolic links</li>
+<li><code>WatchService</code></li>
+<li><code>Timsort</code> is used to sort collections and arrays of objects instead of merge sort</li>
+<li>APIs for the graphics features</li>
+<li>Support for new network protocols, including SCTP and Sockets Direct Protocol</li>
+</ul>
+<h2 id="Java-SE-6-特性"><a href="#Java-SE-6-特性" class="headerlink" title="Java SE 6 特性"></a>Java SE 6 特性</h2><p>Release Date : <code>December 11, 2006</code></p>
+<p>This release was called “Mustang”. Sun dropped the “.0” from the version number and version became Java SE 6. Included features were:</p>
+<ul>
+<li>Scripting Language Support</li>
+<li>Performance improvements</li>
+<li>JAX-WS</li>
+<li>JDBC 4.0</li>
+<li>Java Compiler API</li>
+<li>JAXB 2.0 and StAX parser</li>
+<li>Pluggable annotations</li>
+<li>New GC algorithms</li>
+</ul>
+<h2 id="J2SE-5-0-特性"><a href="#J2SE-5-0-特性" class="headerlink" title="J2SE 5.0 特性"></a>J2SE 5.0 特性</h2><p>Release Date : <code>September 30, 2004</code></p>
+<p>This release was called “Tiger”. Most of the features, which are asked in java interviews, were added in this release.</p>
+<p>Version was also called 5.0 rather than 1.5. Included features are listed down below:</p>
+<ul>
+<li><code>Generics</code></li>
+<li><code>Annotations</code></li>
+<li><code>Autoboxing/unboxing</code></li>
+<li><code>Enumerations</code></li>
+<li><code>Varargs</code></li>
+<li><code>Enhanced for each loop</code></li>
+<li><code>Static imports</code></li>
+<li>New concurrency utilities in <code>java.util.concurrent</code></li>
+<li><code>Scanner</code> class for parsing data from various input streams and buffers.</li>
+</ul>
+<h2 id="J2SE-1-4-特性"><a href="#J2SE-1-4-特性" class="headerlink" title="J2SE 1.4 特性"></a>J2SE 1.4 特性</h2><p>Release Date : <code>February 6, 2002</code></p>
+<p>This release was called “Merlin”. Included features were:</p>
+<ul>
+<li><code>assert</code> keyword</li>
+<li><code>Regular expressions</code></li>
+<li>Exception chaining</li>
+<li>Internet Protocol version 6 (IPv6) support</li>
+<li>New I/O; <code>NIO</code></li>
+<li>Logging API</li>
+<li>Image I/O API</li>
+<li>Integrated XML parser and XSLT processor (JAXP)</li>
+<li>Integrated security and cryptography extensions (JCE, JSSE, JAAS)</li>
+<li>Java Web Start</li>
+<li>Preferences API (java.util.prefs)</li>
+</ul>
+<h2 id="J2SE-1-3-特性"><a href="#J2SE-1-3-特性" class="headerlink" title="J2SE 1.3 特性"></a>J2SE 1.3 特性</h2><p>Release Date : <code>May 8, 2000</code></p>
+<p>This release was called “Kestrel”. Included features were:</p>
+<ul>
+<li>HotSpot JVM</li>
+<li>Java Naming and Directory Interface (JNDI)</li>
+<li>Java Platform Debugger Architecture (JPDA)</li>
+<li>JavaSound</li>
+<li>Synthetic proxy classes</li>
+</ul>
+<h2 id="J2SE-1-2-特性"><a href="#J2SE-1-2-特性" class="headerlink" title="J2SE 1.2 特性"></a>J2SE 1.2 特性</h2><p>Release Date : <code>December 8, 1998</code></p>
+<p>This release was called “Playground”. This was a major release in terms of number of classes added (almost trippled the size). “J2SE” term was introduced to distinguish the code platform from J2EE and J2ME. Included features were:</p>
+<ul>
+<li>strictfp keyword</li>
+<li>Swing graphical API</li>
+<li>Sun’s JVM was equipped with a JIT compiler for the first time</li>
+<li>Java plug-in</li>
+<li><code>Collections</code> framework</li>
+</ul>
+<h2 id="JDK-1-特性"><a href="#JDK-1-特性" class="headerlink" title="JDK 1 特性"></a>JDK 1 特性</h2><p>Release Date : January 23, 1996</p>
+<p>This was the initial release and was originally called Oak. This had very unstable APIs and one java web browser named WebRunner.</p>
+<p>The first stable version, JDK 1.0.2, was called Java 1.</p>
+<p>On February 19, 1997, JDK 1.1 was released havind a list of big features such as:</p>
+<ul>
+<li>AWT event model</li>
+<li>Inner classes</li>
+<li>JavaBeans</li>
+<li><code>JDBC</code></li>
+<li>RMI</li>
+<li><code>Reflection which</code>supported Introspection only, no modification at runtime was possible.</li>
+<li>JIT (Just In Time) compiler for Windows</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK/">JDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'zhangliting';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/04/25/Recursion-and-Backtracking/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Recursion and Backtracking</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-SE-9-特性"><span class="nav-number">1.</span> <span class="nav-text">Java SE 9 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-SE-8-特性"><span class="nav-number">2.</span> <span class="nav-text">Java SE 8 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-SE-7-特性"><span class="nav-number">3.</span> <span class="nav-text">Java SE 7 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-SE-6-特性"><span class="nav-number">4.</span> <span class="nav-text">Java SE 6 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J2SE-5-0-特性"><span class="nav-number">5.</span> <span class="nav-text">J2SE 5.0 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J2SE-1-4-特性"><span class="nav-number">6.</span> <span class="nav-text">J2SE 1.4 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J2SE-1-3-特性"><span class="nav-number">7.</span> <span class="nav-text">J2SE 1.3 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J2SE-1-2-特性"><span class="nav-number">8.</span> <span class="nav-text">J2SE 1.2 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK-1-特性"><span class="nav-number">9.</span> <span class="nav-text">JDK 1 特性</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261796719&web_id=1261796719" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

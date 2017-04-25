@@ -3,26 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第三方支付平台设计 | Hello World</title>
+  <title>recursion and backtracking | Hello World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="支付" />
+  <meta name="keywords" content="算法" />
   
   
   
   
-  <meta name="description" content="第三方支付平台设计1234567891011121314st=&amp;gt;start: Starts1=&amp;gt;subroutine: 客户选购商品s2=&amp;gt;subroutine: 商户提交支付订单s3=&amp;gt;subroutine: 第三方支付平台处理s4=&amp;gt;subroutine: 向银行发起扣款请求s5=&amp;gt;subroutine: 返扣款付结果s6=&amp;gt;subroutine: 返">
+  <meta name="description" content="Recursion and Backtracking递归和回溯
+
+方法自己调用自己的方法，叫做递归。就像电影 《盗梦空间》，梦中有梦。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第三方支付平台设计">
-<meta property="og:url" content="http://zhangliting.github.io/2017/03/22/第三方支付平台设计/index.html">
+<meta property="og:title" content="Recursion and Backtracking">
+<meta property="og:url" content="http://zhangliting.github.io/2017/04/25/Recursion-and-Backtracking/index.html">
 <meta property="og:site_name" content="Hello World">
-<meta property="og:description" content="第三方支付平台设计1234567891011121314st=&amp;gt;start: Starts1=&amp;gt;subroutine: 客户选购商品s2=&amp;gt;subroutine: 商户提交支付订单s3=&amp;gt;subroutine: 第三方支付平台处理s4=&amp;gt;subroutine: 向银行发起扣款请求s5=&amp;gt;subroutine: 返扣款付结果s6=&amp;gt;subroutine: 返">
-<meta property="og:image" content="http://zhangliting.github.io/images/third-pay.png">
-<meta property="og:updated_time" content="2017-04-18T15:02:12.000Z">
+<meta property="og:description" content="Recursion and Backtracking递归和回溯
+
+方法自己调用自己的方法，叫做递归。就像电影 《盗梦空间》，梦中有梦。">
+<meta property="og:image" content="http://zhangliting.github.io/images/algorithm.jpg">
+<meta property="og:updated_time" content="2017-04-25T14:14:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第三方支付平台设计">
-<meta name="twitter:description" content="第三方支付平台设计1234567891011121314st=&amp;gt;start: Starts1=&amp;gt;subroutine: 客户选购商品s2=&amp;gt;subroutine: 商户提交支付订单s3=&amp;gt;subroutine: 第三方支付平台处理s4=&amp;gt;subroutine: 向银行发起扣款请求s5=&amp;gt;subroutine: 返扣款付结果s6=&amp;gt;subroutine: 返">
-<meta name="twitter:image" content="http://zhangliting.github.io/images/third-pay.png">
+<meta name="twitter:title" content="Recursion and Backtracking">
+<meta name="twitter:description" content="Recursion and Backtracking递归和回溯
+
+方法自己调用自己的方法，叫做递归。就像电影 《盗梦空间》，梦中有梦。">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/algorithm.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
   
@@ -126,14 +132,14 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-第三方支付平台设计" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Recursion-and-Backtracking" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/images/third-pay.png" rel="gallery_cj1xmupfe001l3stuj9lq06cs">
-        <img src="/images/third-pay.png" itemprop="image">
+      <a class="article-gallery-img fancybox" href="/images/algorithm.jpg" rel="gallery_cj1xmupf5001b3stu1vmk3t9v">
+        <img src="/images/algorithm.jpg" itemprop="image">
       </a>
     
   </div>
@@ -144,7 +150,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      第三方支付平台设计
+      Recursion and Backtracking
     </h1>
   
 
@@ -152,8 +158,8 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/03/22/第三方支付平台设计/" class="article-date">
-	  <time datetime="2017-03-22T14:04:29.000Z" itemprop="datePublished">三月 22, 2017</time>
+	Posted on <a href="/2017/04/25/Recursion-and-Backtracking/" class="article-date">
+	  <time datetime="2017-04-25T13:59:51.000Z" itemprop="datePublished">四月 25, 2017</time>
 	</a>
 
       
@@ -164,32 +170,43 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第三方支付平台设计"><a href="#第三方支付平台设计" class="headerlink" title="第三方支付平台设计"></a>第三方支付平台设计</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: Start</div><div class="line">s1=&gt;subroutine: 客户选购商品</div><div class="line">s2=&gt;subroutine: 商户提交支付订单</div><div class="line">s3=&gt;subroutine: 第三方支付平台处理</div><div class="line">s4=&gt;subroutine: 向银行发起扣款请求</div><div class="line">s5=&gt;subroutine: 返扣款付结果</div><div class="line">s6=&gt;subroutine: 返回商户显示购买成功</div><div class="line">s7=&gt;subroutine: 转发支付请求</div><div class="line">s8=&gt;subroutine: 客户输入支付卡号、密码</div><div class="line">cond=&gt;condition: 直连支付？</div><div class="line">ed=&gt;end: End</div><div class="line"></div><div class="line">st-&gt;s1-&gt;s2-&gt;cond(yes)-&gt;s3-&gt;s4-&gt;s5-&gt;s6-&gt;ed</div><div class="line">cond(no)-&gt;s7-&gt;s8-&gt;s5</div></pre></td></tr></table></figure>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h1><p><img src="/images/third-pay.png?raw=true" alt="pay_flow"></p>
+        <h1 id="Recursion-and-Backtracking"><a href="#Recursion-and-Backtracking" class="headerlink" title="Recursion and Backtracking"></a>Recursion and Backtracking</h1><p><strong>递归和回溯</strong></p>
 <blockquote>
+<p>方法自己调用自己的方法，叫做<code>递归</code>。就像电影 《盗梦空间》，梦中有梦。</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function dream()</div><div class="line">    print "Dreaming"</div><div class="line">    dream()</div></pre></td></tr></table></figure>
+<p><code>回溯</code>法将问题分解成更小的通用的解法。每一个回溯方法必须有一个<code>终止条件</code>。终止条件是我们已经知道的结果。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">function <span class="title">factorial</span><span class="params">(x)</span></span></div><div class="line">    <span class="keyword">if</span> x is 0                    <span class="comment">// base case</span></div><div class="line">        <span class="keyword">return</span> 1</div><div class="line">    <span class="keyword">return</span> x*<span class="title">factorial</span><span class="params">(x<span class="number">-1</span>)</span>       <span class="comment">// break into smaller problem(s)</span></div></pre></td></tr></table></figure></p>
+<p><img src="/images/0e2df2e.png" alt="facotrial"></p>
+<p>使用回溯法的前提：</p>
+<ul>
+<li>问题可以分成更小的通用的类型。</li>
+<li>必须有终止条件。</li>
+<li>在stackoverflow之前达到终止条件。</li>
+</ul>
+<p><strong>N-Queens Problem</strong></p>
 <blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>2060c955d6671c89822d8098dfa0d22d5a923c30</p>
+<p>给定一个N*N的棋盘，我们需要把N个皇后放在棋盘上，满足皇后不会被其他皇后攻击，水平，垂直，对角线会被攻击。</p>
 </blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<ul>
+<li>终止条件是N=0，返回成功解决问题。</li>
+<li>当棋盘遍历结束但是N&gt;0，需要回溯上一步。</li>
+</ul>
+<p>伪代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">is_attacked( x, y, board[][], N)</div><div class="line">    <span class="comment">//checking for row and column</span></div><div class="line">    <span class="keyword">if</span> any cell in xth row is <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    <span class="keyword">if</span> any cell in yth column is <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line"></div><div class="line">    <span class="comment">//checking for diagonals</span></div><div class="line">    <span class="keyword">if</span> any cell (p, q) having p+q = x+y is <span class="number">1</span>          </div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    <span class="keyword">if</span> any cell (p, q) having p-q = x-y is <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line"></div><div class="line"></div><div class="line">N-Queens( board[][], N )</div><div class="line">    <span class="keyword">if</span> N is <span class="number">0</span>                     <span class="comment">//All queens have been placed</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    <span class="keyword">for</span> i = <span class="number">1</span> to N &#123;</div><div class="line">        <span class="keyword">for</span> j = <span class="number">1</span> to N &#123;</div><div class="line">            <span class="keyword">if</span> is_attacked(i, j, board, N) is <span class="literal">true</span></div><div class="line">                skip it and move to next cell</div><div class="line">            board[i][j] = <span class="number">1</span>            <span class="comment">//Place current queen at cell (i,j)</span></div><div class="line">            <span class="keyword">if</span> N-Queens( board, N<span class="number">-1</span>) is <span class="literal">true</span>    <span class="comment">// Solve subproblem</span></div><div class="line">                <span class="keyword">return</span> <span class="literal">true</span>                   <span class="comment">// if solution is found return true</span></div><div class="line">            board[i][j] = <span class="number">0</span>            <span class="comment">/* if solution is not found undo whatever changes </span></div><div class="line">                                       were made i.e., remove  current queen from (i,j)*/</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p><img src="/images/e41bbd1.png" alt="queen"></p>
+<p>结果：</p>
+<p><img src="/images/389855c.png" alt="result"></p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/支付/">支付</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 
       
         
@@ -225,19 +242,19 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
-    <a href="/2017/03/27/Java-Bit-操作优化算法/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/25/Java-JDK-时间线/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          Java Bit 操作优化算法
+          Java JDK 时间线
         
       </div>
     </a>
   
   
-    <a href="/2017/03/21/阿里巴巴Java技术手册/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/04/25/Bit-Manipulation/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">阿里巴巴技术手册</div>
+      <div class="article-nav-title">Bit Manipulation</div>
     </a>
   
 </nav>
@@ -251,7 +268,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三方支付平台设计"><span class="nav-number">1.</span> <span class="nav-text">第三方支付平台设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Recursion-and-Backtracking"><span class="nav-number">1.</span> <span class="nav-text">Recursion and Backtracking</span></a></li></ol>
     
     </div>
   </aside>
