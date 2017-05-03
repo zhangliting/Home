@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字符串匹配算法 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="算法" />
+  
+  
+  
+  
+  <meta name="description" content="字符串基本操作字符串时字符的有序集合。
+举例：给定N长度的字符串S，所有字符向右移动K个位置，K&amp;lt;=N。1234567891011void shiftByK(char S[], char shiftedS[], int N, int K) &amp;#123;    // Iterate through the length of given string    for(int i=0; i&amp;lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串匹配算法">
+<meta property="og:url" content="http://zhangliting.github.io/2017/05/03/字符串匹配算法/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="字符串基本操作字符串时字符的有序集合。
+举例：给定N长度的字符串S，所有字符向右移动K个位置，K&amp;lt;=N。1234567891011void shiftByK(char S[], char shiftedS[], int N, int K) &amp;#123;    // Iterate through the length of given string    for(int i=0; i&amp;lt;">
+<meta property="og:image" content="http://zhangliting.github.io/images/algorithm.jpg">
+<meta property="og:updated_time" content="2017-05-03T15:02:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串匹配算法">
+<meta name="twitter:description" content="字符串基本操作字符串时字符的有序集合。
+举例：给定N长度的字符串S，所有字符向右移动K个位置，K&amp;lt;=N。1234567891011void shiftByK(char S[], char shiftedS[], int N, int K) &amp;#123;    // Iterate through the length of given string    for(int i=0; i&amp;lt;">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/algorithm.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-字符串匹配算法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/algorithm.jpg" rel="gallery_cj296lygy001oy0vnciqlowkk">
+        <img src="/images/algorithm.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      字符串匹配算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/03/字符串匹配算法/" class="article-date">
+	  <time datetime="2017-05-03T15:01:42.000Z" itemprop="datePublished">五月 3, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="字符串基本操作"><a href="#字符串基本操作" class="headerlink" title="字符串基本操作"></a>字符串基本操作</h2><p>字符串时字符的有序集合。</p>
+<p>举例：给定N长度的字符串S，所有字符向右移动K个位置，K&lt;=N。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">shiftByK</span><span class="params">(<span class="keyword">char</span> S[], <span class="keyword">char</span> shiftedS[], <span class="keyword">int</span> N, <span class="keyword">int</span> K)</span> </span>&#123;</div><div class="line">    <span class="comment">// Iterate through the length of given string</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</div><div class="line">        <span class="comment">// Find the index for this current character in shiftedS[]</span></div><div class="line">        <span class="keyword">int</span> idx = (i+K) % N;</div><div class="line">        <span class="comment">// Copy that character at the found index idx</span></div><div class="line">        shiftedS[idx] = S[i];</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// Add a NULL character to mark the end of string</span></div><div class="line">    shiftedS[N] = <span class="string">'\0'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="字符串搜索"><a href="#字符串搜索" class="headerlink" title="字符串搜索"></a>字符串搜索</h2><p>举例：从字符从T中找到字符P出现的次数。</p>
+<p><strong>暴力方法</strong>：判断Ti…Tk是等于P。时间复杂度 $ O(P*T) $</p>
+<p>伪代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i = <span class="number">0</span> to length(T)-length(P):</div><div class="line"></div><div class="line">    Found = <span class="literal">true</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> j = i to i + length(P) - <span class="number">1</span>:</div><div class="line"></div><div class="line">        <span class="keyword">if</span> P[j-i] not equal to T[j]:</div><div class="line"></div><div class="line">            Found = False</div><div class="line"></div><div class="line">    <span class="keyword">if</span> Found = True </div><div class="line"></div><div class="line">        answer = answer + <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p><strong>KMP</strong>算法(Knuth Morris Pratt algori算法)<br>此算法通过运用对这个词在不匹配时本身就包含足够的信息来确定下一个匹配将在哪里开始的发现，从而避免重新检查先前匹配的字符。<br>时间复杂度$ O(P+T) $</p>
+<p>举例：<br>&gt;<br>S：abc<code>x</code>abcdabxabcdabcdabcy<br>P: abc<code>d</code>abcy</p>
+<p>首先匹配到abc，x与d不匹配，这时不需要从头开始匹配，因为d之前的abc是唯一的，所以只写从x位置开始。<br>&gt;<br>S：abc<code>x</code>abcdabxabcdabcdabcy<br>P:    <code>a</code>bcdabcy</p>
+<p>因为x与a不匹配，继续后移。<br>&gt;<br>S：abcxabcdab<code>x</code>abcdabcdabcy<br>P:     abcdab<code>c</code>y</p>
+<p>因为x与c不匹配，再看c之前的字符串abcdab，前缀ab和后缀ab相同，所以直接从ab之后的字符c开始匹配。<br>&gt;<br>S：abcxabcdab<code>x</code>abcdabcdabcy<br>P:         ab<code>c</code>dabcy</p>
+<p>不匹配，继续后移。<br>&gt;<br>S：abcxabcdabxabcdabc<code>d</code>abcy<br>P:            abcdabc<code>y</code></p>
+<p>d与y不匹配，再看y之前的字符从abcdabc，前缀abc与后缀abc相同，直接从abc之后的d开始匹配。<br>&gt;<br>S：abcxabcdabxabcd<code>abcdabcy</code><br>P:                <code>abcdabcy</code><br>完全匹配，找到了。</p>
+<p>现在的问题是怎么实现高效的next方法</p>
+<p>举例：字符从aabaabaaa，找next数组<br>&gt;<br>P: aabaabaaa<br>i: 012345678<br>n:</p>
+<p>首先j在对一个字符，i在第二个字符，第一个字符的next总是0</p>
+<blockquote>
+<p>   ji<br>P: aabaabaaa<br>i: 012345678<br>n: 0</p>
+</blockquote>
+<p>j=a,i=a,相同,所有i的next是j的下标+1</p>
+<blockquote>
+<p>   ji<br>P: aabaabaaa<br>i: 012345678<br>n: 01</p>
+</blockquote>
+<p>因为上一次是相同的，i，j同时向后移一位。j=a,i=b,不相同，j退到j之前字符的next值de位置，即0。</p>
+<blockquote>
+<p>   j i<br>P: aabaabaaa<br>i: 012345678<br>n: 01<br>因为j=a,i=b,不同，所以i向后移一位。</p>
+<p>   j  i<br>P: aabaabaaa<br>i: 012345678<br>n: 010<br>j=a,i=a,相同，所有i的next是j的下标+1。重复以上的规则，最后得到：</p>
+<pre><code>j      i
+</code></pre><p>P: aabaabaaa<br>i: 012345678<br>n: 010123452</p>
+</blockquote>
+<p>利用next数组，我们可以知道当字符不匹配是，因为冲那个位置开始匹配。</p>
+<p>举例：<br>&gt;<br>S：ab<code>x</code>abcabcaby<br>P: ab<code>c</code>aby<br>n: 0<code>0</code>0120</p>
+<p>当x与c不匹配是，我们察看c之前的字符的next是0,所有需要从第一个字符开始与x匹配。</p>
+<p>实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Date 09/22/2014</div><div class="line"> * <span class="doctag">@author</span> tusroy</div><div class="line"> * </div><div class="line"> * Do pattern matching using KMP algorithm</div><div class="line"> * </div><div class="line"> * Runtime complexity - O(m + n) where m is length of text and n is length of pattern</div><div class="line"> * Space complexity - O(n)</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SubstringSearch</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Slow method of pattern matching</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasSubstring</span><span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">char</span>[] pattern)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; text.length &amp;&amp; j &lt; pattern.length)&#123;</div><div class="line">            <span class="keyword">if</span>(text[i] == pattern[j])&#123;</div><div class="line">                i++;</div><div class="line">                j++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                j=<span class="number">0</span>;</div><div class="line">                k++;</div><div class="line">                i = k;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(j == pattern.length)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Compute temporary array to maintain size of suffix which is same as prefix</div><div class="line">     * Time/space complexity is O(size of pattern)</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] computeTemporaryArray(<span class="keyword">char</span> pattern[])&#123;</div><div class="line">        <span class="keyword">int</span> [] lps = <span class="keyword">new</span> <span class="keyword">int</span>[pattern.length];</div><div class="line">        <span class="keyword">int</span> index =<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i &lt; pattern.length;)&#123;</div><div class="line">            <span class="keyword">if</span>(pattern[i] == pattern[index])&#123;</div><div class="line">                lps[i] = index + <span class="number">1</span>;</div><div class="line">                index++;</div><div class="line">                i++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span>(index != <span class="number">0</span>)&#123;</div><div class="line">                    index = lps[index-<span class="number">1</span>];</div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    lps[i] =<span class="number">0</span>;</div><div class="line">                    i++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> lps;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * KMP algorithm of pattern matching.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">KMP</span><span class="params">(<span class="keyword">char</span> []text, <span class="keyword">char</span> []pattern)</span></span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> lps[] = computeTemporaryArray(pattern);</div><div class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; text.length &amp;&amp; j &lt; pattern.length)&#123;</div><div class="line">            <span class="keyword">if</span>(text[i] == pattern[j])&#123;</div><div class="line">                i++;</div><div class="line">                j++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">if</span>(j!=<span class="number">0</span>)&#123;</div><div class="line">                    j = lps[j-<span class="number">1</span>];</div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    i++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(j == pattern.length)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        </div><div class="line">        String str = <span class="string">"abcxabcdabcdabcy"</span>;</div><div class="line">        String subString = <span class="string">"abcdabcy"</span>;</div><div class="line">        SubstringSearch ss = <span class="keyword">new</span> SubstringSearch();</div><div class="line">        <span class="keyword">boolean</span> result = ss.KMP(str.toCharArray(), subString.toCharArray());</div><div class="line">        System.out.print(result);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'zhangliting';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/03/图论/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">图论</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串基本操作"><span class="nav-number">1.</span> <span class="nav-text">字符串基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串搜索"><span class="nav-number">2.</span> <span class="nav-text">字符串搜索</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261796719&web_id=1261796719" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

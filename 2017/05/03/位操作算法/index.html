@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>位操作算法 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="算法" />
+  
+  
+  
+  
+  <meta name="description" content="一些使用位操作提高性能的算法和技巧.
+判断一个整数是2的幂常规的方法：O(logN)12345678910bool isPowerOfTwo(int x)    &amp;#123;        if(x == 0)            return false;        else        &amp;#123;            while(x % 2 == 0) x /= 2;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位操作算法">
+<meta property="og:url" content="http://zhangliting.github.io/2017/05/03/位操作算法/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="一些使用位操作提高性能的算法和技巧.
+判断一个整数是2的幂常规的方法：O(logN)12345678910bool isPowerOfTwo(int x)    &amp;#123;        if(x == 0)            return false;        else        &amp;#123;            while(x % 2 == 0) x /= 2;">
+<meta property="og:image" content="http://zhangliting.github.io/images/algorithm.jpg">
+<meta property="og:updated_time" content="2017-05-03T14:55:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="位操作算法">
+<meta name="twitter:description" content="一些使用位操作提高性能的算法和技巧.
+判断一个整数是2的幂常规的方法：O(logN)12345678910bool isPowerOfTwo(int x)    &amp;#123;        if(x == 0)            return false;        else        &amp;#123;            while(x % 2 == 0) x /= 2;">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/algorithm.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-位操作算法" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/algorithm.jpg" rel="gallery_cj296lygo001ey0vn8oifeyu6">
+        <img src="/images/algorithm.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      位操作算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/03/位操作算法/" class="article-date">
+	  <time datetime="2017-05-03T14:53:05.000Z" itemprop="datePublished">五月 3, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一些使用位操作提高性能的算法和技巧.</p>
+<h2 id="判断一个整数是2的幂"><a href="#判断一个整数是2的幂" class="headerlink" title="判断一个整数是2的幂"></a>判断一个整数是2的幂</h2><p>常规的方法：O(logN)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">while</span>(x % <span class="number">2</span> == <span class="number">0</span>) x /= <span class="number">2</span>;</div><div class="line">            <span class="keyword">return</span> (x == <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>通过观察发现，整数X和X-1具有相同的部分，<strong>除了X的二进制最右边的1以及1右边的比特位</strong>，都是通过X反转而成。<br>比如：</p>
+<blockquote>
+<p>Let, x = 4 = (<code>100</code>)<br>x - 1 = 3 = (<code>011</code>)<br>Let, x = 6 = (1<code>10</code>)<br>x - 1 = 5 = (1<code>01</code>)</p>
+</blockquote>
+<p>所以使用X&amp;(X-1)可以消除最右边的1比特位。因为整数不是0且是2的幂，有且只有一个比特位是1，消除了一个，就是0了<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// x will check if x == 0 and !(x &amp; (x - 1)) will check if x is a power of 2 or not</span></div><div class="line">        <span class="keyword">return</span> (x &amp;&amp; !(x &amp; (x - <span class="number">1</span>)));</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="计算1比特的个数"><a href="#计算1比特的个数" class="headerlink" title="计算1比特的个数"></a>计算1比特的个数</h2><p>原理同上：只需要K次就能消除所有的1比特位，所以O(K)。K就是1的个数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">count_one</span> <span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">while</span>( n )</div><div class="line">            &#123;</div><div class="line">            n = n&amp;(n<span class="number">-1</span>);</div><div class="line">               count++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> count;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="判断第i个比特位置1-or-0"><a href="#判断第i个比特位置1-or-0" class="headerlink" title="判断第i个比特位置1 or 0"></a>判断第i个比特位置1 or 0</h2><p>利用 <code>1 &lt;&lt; i == 2^i</code><br>比如：<br>N=20={10100},判断第二个比特位置（从0开始）。1 &lt;&lt; 2={100}。{10100} &amp; {100} = {100} = 22 = 4(non-zero number)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span> <span class="params">(<span class="keyword">int</span> N)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>( N &amp; (<span class="number">1</span> &lt;&lt; i) )</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="生成集合的子集"><a href="#生成集合的子集" class="headerlink" title="生成集合的子集"></a>生成集合的子集</h2><p><strong>拥有N个元素的子集个数是2^N。</strong><br>我们可以用1 or 0 表示是否出现在子集中。<br>如：</p>
+<blockquote>
+<p>A = {a, b, c}</p>
+<p>0 = (000)2 = {}<br>1 = (001)2 = {c}<br>2 = (010)2 = {b}<br>3 = (011)2 = {b, c}<br>4 = (100)2 = {a}<br>5 = (101)2 = {a, c}<br>6 = (110)2 = {a, b}<br>7 = (111)2 = {a, b, c}</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">possibleSubsets</span><span class="params">(<span class="keyword">char</span> A[], <span class="keyword">int</span> N)</span></span></div><div class="line">   &#123;</div><div class="line">       <span class="comment">//0 - 2^N</span></div><div class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; (<span class="number">1</span> &lt;&lt; N); ++i)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; N;++j)</div><div class="line">               <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))</div><div class="line">                   <span class="built_in">cout</span> &lt;&lt; A[j] &lt;&lt; ‘ ‘;</div><div class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="找出不大于N的最大的2的幂"><a href="#找出不大于N的最大的2的幂" class="headerlink" title="找出不大于N的最大的2的幂"></a>找出不大于N的最大的2的幂</h2><p>思路：找到权重最大的1(最左边），将它右边的所有位设置1。这时所有位置都是1，加1就是大于N的2的幂，右移1位就是不大于的最大的2的幂。<br>如：<br>N=21={<code>10101</code>}，这里权重最大的1在第四位置（从0开始），所以答案是2^4=16。<br>改变权重最大的1右边所有的值为1。<br>即<code>{11111}=31=N+(N-1)=2*N-1=21=Y</code>。答案是<code>(Y+1) &gt;&gt; 1</code></p>
+<p>所以现在的问题是怎么讲右边的都置1。<br>比如：N={1000000000000000}</p>
+<p><code>N = N | (N &gt;&gt; 1)</code><br><img src="/images/3fb910b.jpg" alt="1"><br><code>N = N | (N &gt;&gt; 2)</code><br><img src="/images/4682f09.jpg" alt="2"><br><code>N = N | (N &gt;&gt; 4)</code><br><img src="/images/53261d4.jpg" alt="3"><br><code>N = N| (N &gt;&gt; 8)</code><br><img src="/images/5f05f51.jpg" alt="4"></p>
+<p>实现<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">largest_power</span><span class="params">(<span class="keyword">long</span> N)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//changing all right side bits to 1.</span></div><div class="line">        N = N| (N&gt;&gt;<span class="number">1</span>);</div><div class="line">        N = N| (N&gt;&gt;<span class="number">2</span>);</div><div class="line">        N = N| (N&gt;&gt;<span class="number">4</span>);</div><div class="line">        N = N| (N&gt;&gt;<span class="number">8</span>);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//as now the number is 2 * x-1, where x is required answer, so adding 1 and dividing it by 2. </span></div><div class="line">        <span class="keyword">return</span> (N+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="其他技巧"><a href="#其他技巧" class="headerlink" title="其他技巧"></a>其他技巧</h2><p><strong>x ^ ( x &amp; (x-1))</strong> 返回X最后面的1比特的二进制形式。<br>例如：</p>
+<blockquote>
+<p>x = 10 = (1010)2 ` x &amp; (x-1) = (1010)2 &amp; (1001)2 = (1000)2<br>x ^ (x &amp; (x-1)) = (1010)2 ^ (1000)2 = (0010)2</p>
+</blockquote>
+<p><strong>x &amp; (-x)</strong> 也可以实现<br>例如：</p>
+<blockquote>
+<p>x = 10 = (1010)2<br>(-x) = -10 = (0110)2 补码=反码+1<br>x &amp; (-x) = (1010)2 &amp; (0110)2 = (0010)2</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'zhangliting';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/03/数据结构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          数据结构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/03/递归和回溯/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">递归和回溯</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个整数是2的幂"><span class="nav-number">1.</span> <span class="nav-text">判断一个整数是2的幂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算1比特的个数"><span class="nav-number">2.</span> <span class="nav-text">计算1比特的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断第i个比特位置1-or-0"><span class="nav-number">3.</span> <span class="nav-text">判断第i个比特位置1 or 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成集合的子集"><span class="nav-number">4.</span> <span class="nav-text">生成集合的子集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出不大于N的最大的2的幂"><span class="nav-number">5.</span> <span class="nav-text">找出不大于N的最大的2的幂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他技巧"><span class="nav-number">6.</span> <span class="nav-text">其他技巧</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261796719&web_id=1261796719" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
