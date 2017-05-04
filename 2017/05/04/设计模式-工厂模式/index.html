@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>设计模式-工厂模式 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Java设计模式" />
+  
+  
+  
+  
+  <meta name="description" content="工厂模式属于创建型模式。工厂模式有四种类型：
+
+工厂方法模式
+抽象工厂模式
+静态工厂方法
+简单工厂模式
+
+不使用设计模式
+当我一个人在家写代码，我不使用设计模式。
+小规模的项目，不需要经常修改的项目，我不使用设计模式。
+
+使用设计模式需要权衡它的优势和可读性、可理解性。
+工厂模式的目的是常见对象，对于简单的对象，我们可以直接使用构造器创建。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-工厂模式">
+<meta property="og:url" content="http://zhangliting.github.io/2017/05/04/设计模式-工厂模式/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="工厂模式属于创建型模式。工厂模式有四种类型：
+
+工厂方法模式
+抽象工厂模式
+静态工厂方法
+简单工厂模式
+
+不使用设计模式
+当我一个人在家写代码，我不使用设计模式。
+小规模的项目，不需要经常修改的项目，我不使用设计模式。
+
+使用设计模式需要权衡它的优势和可读性、可理解性。
+工厂模式的目的是常见对象，对于简单的对象，我们可以直接使用构造器创建。">
+<meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
+<meta property="og:updated_time" content="2017-05-04T13:20:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式-工厂模式">
+<meta name="twitter:description" content="工厂模式属于创建型模式。工厂模式有四种类型：
+
+工厂方法模式
+抽象工厂模式
+静态工厂方法
+简单工厂模式
+
+不使用设计模式
+当我一个人在家写代码，我不使用设计模式。
+小规模的项目，不需要经常修改的项目，我不使用设计模式。
+
+使用设计模式需要权衡它的优势和可读性、可理解性。
+工厂模式的目的是常见对象，对于简单的对象，我们可以直接使用构造器创建。">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-设计模式-工厂模式" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/pose.jpg" rel="gallery_cj2ag0rd7002cs8vnfr2c19m5">
+        <img src="/images/pose.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      设计模式-工厂模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/04/设计模式-工厂模式/" class="article-date">
+	  <time datetime="2017-05-04T13:17:16.000Z" itemprop="datePublished">五月 4, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>工厂模式属于创建型模式。<br>工厂模式有四种类型：</p>
+<ul>
+<li>工厂方法模式</li>
+<li>抽象工厂模式</li>
+<li>静态工厂方法</li>
+<li>简单工厂模式</li>
+</ul>
+<h2 id="不使用设计模式"><a href="#不使用设计模式" class="headerlink" title="不使用设计模式"></a>不使用设计模式</h2><ul>
+<li>当我一个人在家写代码，我不使用设计模式。</li>
+<li>小规模的项目，不需要经常修改的项目，我不使用设计模式。</li>
+</ul>
+<p>使用设计模式需要权衡它的<strong>优势</strong>和<strong>可读性、可理解性</strong>。</p>
+<p>工厂模式的目的是常见对象，对于简单的对象，我们可以直接使用构造器创建。</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleClass</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> Integer arg1;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> Integer arg2;</div><div class="line"></div><div class="line">   SimpleClass(Integer arg1, Integer arg2) &#123;</div><div class="line">      <span class="keyword">this</span>.arg1 = arg1;</div><div class="line">      <span class="keyword">this</span>.arg2 = arg2;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> Integer <span class="title">getArg1</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="keyword">return</span> arg1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> Integer <span class="title">getArg2</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="keyword">return</span> args;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BusinessClassXYZ</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunction</span><span class="params">()</span></span>&#123;</div><div class="line">      SimpleClass mySimpleClass = <span class="keyword">new</span> SimpleClass(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">       <span class="comment">// some stuff</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="何时需要工厂模式"><a href="#何时需要工厂模式" class="headerlink" title="何时需要工厂模式"></a>何时需要工厂模式</h2><h3 id="控制实例对象数量"><a href="#控制实例对象数量" class="headerlink" title="控制实例对象数量"></a>控制实例对象数量</h3><p>当企业应用想要限制实例的数量。如何保证只有一个(几个）实例对象。如<code>socket</code>,<code>database connection</code>。<br>你也许可以使用共享变量。但是：</p>
+<ul>
+<li>使用共享变量的方法与共享变量<strong>紧密耦合</strong>，因为它们都修改同一个变量。</li>
+<li>每个方法都要检查变量是否已经实例化，<strong>冗余代码</strong>。</li>
+</ul>
+<p>使用静态工厂方法，我们可以轻松做到。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="keyword">return</span> INSTANCE;</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassXXX</span></span>&#123;</div><div class="line">   ...</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunctionInClassXXX</span><span class="params">()</span></span>&#123;</div><div class="line">      Singleton instance = Singleton.getInstance();</div><div class="line">      <span class="comment">//some stuff</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassYYY</span></span>&#123;</div><div class="line">   ...</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunctionInClassYYY</span><span class="params">()</span></span>&#123;</div><div class="line">      Singleton instance = Singleton.getInstance();</div><div class="line">      <span class="comment">//some stuff</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="松耦合"><a href="#松耦合" class="headerlink" title="松耦合"></a>松耦合</h3><p>工厂模式的另一个优点是松耦合。<br>比如在一个大型项目里，你需要记录日志。不使用工厂模式，你需要实例化FileSystemLogger。<br>如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemLogger</span> </span>&#123;</div><div class="line">   ...</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeLog</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">   <span class="comment">//Implemation</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someFunctionInClassXXX</span><span class="params">(some parameters)</span></span>&#123;</div><div class="line">   FileSystemLogger logger= <span class="keyword">new</span> FileSystemLogger(some paramters);</div><div class="line">   logger.writeLog(<span class="string">"This is a log"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但你需要该成用数据库记录日志时，你需要改所有使用日志的方法。<br>如果你使用工厂模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">//this is an abstraction of a Logger</div><div class="line">public interface ILogger &#123;</div><div class="line">   public void writeLog(String s);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class FileSystemLogger implements ILogger &#123;</div><div class="line">   ...</div><div class="line">   public void writeLog(String s) &#123;</div><div class="line">      //Implemation</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class DatabaseLogger implements ILogger &#123;</div><div class="line">   ...</div><div class="line">   public void writeLog(String s) &#123;</div><div class="line">      //Implemation</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class FactoryLogger &#123;</div><div class="line">   public static ILogger createLogger() &#123;</div><div class="line">      //you can choose the logger you want</div><div class="line">      // as long as it&apos;s an ILogger</div><div class="line">      return new FileSystemLogger();</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">////////////////////some code using the factory</div><div class="line">public class SomeClass &#123;</div><div class="line">   public void someFunction() &#123;</div><div class="line">      //if the logger implementation changes</div><div class="line">      //you have nothing to change in this code</div><div class="line">      ILogger logger = FactoryLogger.createLogger();</div><div class="line">      logger.writeLog(&quot;This is a log&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你只需要修改createLogger()方法，这对客户端是透明的。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>有时，使用工厂设计模式可以提高代码的可读性，同时，通过封装降低了代码的复杂度。</p>
+<p>假设，你需要使用业务类Carcomparator比较两辆汽车。这个类需要连接数据库得到汽车的信息，同时需要连接文件系统得到比较算法。<br>不使用工厂模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatabaseConnection</span> </span>&#123;</div><div class="line">   DatabaseConnection(some parameters) &#123;</div><div class="line">      <span class="comment">// some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemConnection</span> </span>&#123;</div><div class="line">   FileSystemConnection(some parameters) &#123;</div><div class="line">      <span class="comment">// some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarComparator</span> </span>&#123;</div><div class="line">   CarComparator(DatabaseConnection dbConn, FileSystemConnection fsConn) &#123;</div><div class="line">      <span class="comment">// some stuff</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String car1, String car2)</span> </span>&#123;</div><div class="line">      <span class="comment">// some stuff with objets dbConn and fsConn</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarBusinessXY</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someFunctionInTheCodeThatNeedsToCompareCars</span><span class="params">()</span> </span>&#123;</div><div class="line">      DatabaseConnection db = <span class="keyword">new</span> DatabaseConnection(some parameters);</div><div class="line">      FileSystemConnection fs = <span class="keyword">new</span> FileSystemConnection(some parameters);</div><div class="line">      CarComparator carComparator = <span class="keyword">new</span> CarComparator(db, fs);</div><div class="line">      carComparator.compare(<span class="string">"Ford Mustang"</span>,<span class="string">"Ferrari F40"</span>);</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarBusinessZY</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someOtherFunctionInTheCodeThatNeedsToCompareCars</span><span class="params">()</span> </span>&#123;</div><div class="line">      DatabaseConnection db = <span class="keyword">new</span> DatabaseConnection(some parameters);</div><div class="line">      FileSystemConnection fs = <span class="keyword">new</span> FileSystemConnection(some parameters);</div><div class="line">      CarComparator carComparator = <span class="keyword">new</span> CarComparator(db, fs);</div><div class="line">      carComparator.compare(<span class="string">"chevrolet camaro 2015"</span>,<span class="string">"lamborghini diablo"</span>);</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你可以看出存在冗余的代码，如果修改了CarComparator的构造函数，业务类的代码也需要修改。<br>相反，使用工厂模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class Factory &#123;</div><div class="line">   public static CarComparator getCarComparator() &#123;</div><div class="line">      DatabaseConnection db = new DatabaseConnection(some parameters);</div><div class="line">      FileSystemConnection fs = new FileSystemConnection(some parameters);</div><div class="line">      reutrn new CarComparator(db, fs);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">//////////////////////////////some code using the factory</div><div class="line">public class CarBusinessXY &#123;</div><div class="line">   public void someFunctionInTheCodeThatNeedsToCompareCars() &#123;</div><div class="line">      CarComparator carComparator = Factory.getCarComparator();</div><div class="line">      carComparator.compare(&quot;Ford Mustang&quot;,&quot;Ferrari F40&quot;);</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div><div class="line">...</div><div class="line">public class CarBusinessZY &#123;</div><div class="line">   public void someOtherFunctionInTheCodeThatNeedsToCompareCars() &#123;</div><div class="line">      CarComparator carComparator = Factory.getCarComparator();</div><div class="line">      carComparator.compare(&quot;chevrolet camaro 2015&quot;,&quot;lamborghini diablo&quot;);</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>减少了代码和冗余</li>
+<li>有工厂负责创建，业务代码之需要获得创建的对象，专注于业务逻辑。</li>
+</ul>
+<h3 id="消除歧义"><a href="#消除歧义" class="headerlink" title="消除歧义"></a>消除歧义</h3><p>假设，有一个类用于多个不同的构造函数。怎么保证你没有使用错误的构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Example&#123;</div><div class="line">     //constructor one</div><div class="line">     public Example(double a, float b) &#123;</div><div class="line">         //...</div><div class="line">     &#125;</div><div class="line">    //constructor two</div><div class="line">     public Example(double a) &#123;</div><div class="line">         //...</div><div class="line">     &#125;</div><div class="line">     //constructor three</div><div class="line">     public Example(float a, double b) &#123;</div><div class="line">         //...</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也许，你可以借助于IDE辨别使用哪个构造函数，但是，你怎么实现相同参数的构造函数？<br>使用模式就可以：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span> </span>&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Complex <span class="title">fromCartesian</span><span class="params">(<span class="keyword">double</span> real, <span class="keyword">double</span> imag)</span> </span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Complex(real, imag);</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Complex <span class="title">fromPolar</span><span class="params">(<span class="keyword">double</span> rho, <span class="keyword">double</span> theta)</span> </span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">new</span> Complex(rho * Math.cos(theta), rho * Math.sin(theta));</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="function"><span class="keyword">private</span> <span class="title">Complex</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</div><div class="line">         <span class="comment">//...</span></div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>上面详细说明了工厂模式的优缺点。下面说明不同的设计模式。</p>
+<h3 id="静态工厂方法"><a href="#静态工厂方法" class="headerlink" title="静态工厂方法"></a>静态工厂方法</h3><p>引用Effective Java的作者Joshua Bloch</p>
+<blockquote>
+<p>“A class can provide a public static factory method, which is simply a static method that returns an instance of the class.”</p>
+</blockquote>
+<p>简言之，一个类提供一个静态方法，用于返回实例对象。</p>
+<p>UML<br><img src="/images/StaticFactory.png" alt="static-factory"></p>
+<p>example<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</div><div class="line">   Integer a;</div><div class="line">   Integer b;</div><div class="line"></div><div class="line">   MyClass(<span class="keyword">int</span> a, <span class="keyword">int</span> b)&#123;</div><div class="line">      <span class="keyword">this</span>.a=a;</div><div class="line">      <span class="keyword">this</span>.b=b;</div><div class="line">   &#125;;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">getInstance</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> MyClass(a, b);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">      <span class="comment">//instanciation with a constructor</span></div><div class="line">      MyClass a = <span class="keyword">new</span> MyClass(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line">      <span class="comment">//instanciation with a static factory method</span></div><div class="line">      MyClass b = MyClass.getInstance(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更深入一步，如果静态工厂方法可以实例化其他类。</p>
+<blockquote>
+<p>“Interfaces can’t have static methods, so by convention, static factory methods for an interface named Type are put in a noninstantiable class (Item 4) named Types.”</p>
+</blockquote>
+<p><img src="/images/StaticFactoryFull.png" alt="static"></p>
+<p>静态工厂方法返回一个抽象接口，可以通过接受参数选择返回具体的实例对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/////////////////////////the products</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mustang</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ferrari</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"><span class="comment">///////////////////////// the factory</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	choose which car you want</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="comment">/////////////////////////some code using the factory</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunctionInTheCode</span><span class="params">()</span></span>&#123;</div><div class="line">   Car myCar = CarFactory.getCar();</div><div class="line">   myCar.drive();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>“<strong>a static factory method is not the same as the Factory Method pattern</strong> from Design Patterns [Gamma95, p. 107]. The static factory method described in<br><strong>this item has no direct equivalent in Design Patterns</strong>.”</p>
+</blockquote>
+<p><strong>真实的例子</strong></p>
+<p>logging frameworks</p>
+<p>Java日志框架slf4j, logback, log4j 使用了一个抽象类LoggerFactory。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span></span>&#123;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="comment">//we're using the static factory method to get our logger</span></div><div class="line">   Logger logger = LoggerFactory.getLogger(Example.class);</div><div class="line"></div><div class="line">   logger.info(<span class="string">"This is an example."</span>);</div><div class="line">   &#125;</div><div class="line"></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>Java String class<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">12</span>;</div><div class="line">String integerAsString = String.valueOf(i);</div></pre></td></tr></table></figure></p>
+<h3 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h3><p>简单工厂算不上一种模式，简单工厂是一种工具：</p>
+<ul>
+<li>创建对象实例</li>
+<li>不使工厂方法模式</li>
+<li>也不是抽象工厂模式</li>
+</ul>
+<p><img src="/images/SimpleFactoryFull.png" alt="factory"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/////////////////////////the products</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mustang</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ferrari</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"><span class="comment">/////////////////////////The factory</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">   <span class="comment">//this class is instantiable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">CarFactory</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="comment">//some stuff</span></div><div class="line">   &#125;</div><div class="line">   <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	choose which car you want</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="comment">/////////////////////////some code using the factory</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunctionInTheCode</span><span class="params">()</span></span>&#123;</div><div class="line">   CarFactory carFactory = <span class="keyword">new</span> CarFactory();</div><div class="line">   Car myCar = carFactory.getCar();</div><div class="line">   myCar.drive();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="工厂模式-1"><a href="#工厂模式-1" class="headerlink" title="工厂模式"></a>工厂模式</h3><blockquote>
+<p>“Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses”</p>
+</blockquote>
+<p><img src="/images/FactoryMethodPattern.png" alt="factory-pattern"></p>
+<p><strong>为什么使用工厂模式代替简单工厂</strong><br>当需要不同的工厂的时候，比如，SportCarFactory, VintageCarFactory, LuxeCarFactory, CheapCarFactory…开发人员可以轻松的更换不同的工厂。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/////////////////////////the products</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mustang</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ferrari</span> <span class="keyword">implements</span> <span class="title">Car</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"><span class="comment">///////////////////////// the factory</span></div><div class="line"><span class="comment">//the definition of the interface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//the real factory with an implementation of the getCar() factory method</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteCarFactory</span> <span class="keyword">implements</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">   <span class="comment">//this class is instantiable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">CarFactory</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="comment">//some stuff</span></div><div class="line">   &#125;</div><div class="line">   <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="comment">//	choose which car you want</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Ferrari();</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="comment">/////////////////////////some code using the factory</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">someFunctionInTheCode</span><span class="params">()</span></span>&#123;</div><div class="line">   CarFactory carFactory = <span class="keyword">new</span> ConcreteCarFactory();</div><div class="line">   Car myCar = carFactory.getCar();</div><div class="line">   myCar.drive();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>真实的例子</strong></p>
+<p><strong>Java Collection</strong><br>Iterable<e> 接口返回Iterator<e>接口。<br>你不需要知道你使用的具体事什么类型的集合，HashSet or LinkedList，它们都可以使用工厂方法iterator()。具体的实现在子类中完成。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//here is a simplified definition of an iterator from the java source code</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//here comes the factory interface!</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function">Iterator&lt;T&gt; <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//here is a simplified definition of ArrayList from the java source code</span></div><div class="line"><span class="comment">//you can see that this class is a concrete factory that implements</span></div><div class="line"><span class="comment">//a factory method  iterator()</span></div><div class="line"><span class="comment">//Note : in the real Java source code, ArrayList is derived from</span></div><div class="line"><span class="comment">//AbstractList which is the one that implements the factory method pattern</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line"> <span class="comment">//the iterator() returns a subtype and an "anonymous" Iterator&lt;E&gt;</span></div><div class="line"> <span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span></div><div class="line">   &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> Iterator&lt;E&gt;()</div><div class="line">     &#123;</div><div class="line">	<span class="comment">//implementation of the methods hasNext(), next() and remove()</span></div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></e></e></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.Iterator;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] ars)</span></span>&#123;</div><div class="line">		<span class="comment">//instantiation of the (concrete factory) ArrayList</span></div><div class="line">		List&lt;Integer&gt; myArrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		<span class="comment">//calling the factory method iterator() of ArrayList</span></div><div class="line">		Iterator&lt;Integer&gt; myIterator = myArrayList.iterator();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Spring Bean Factory</strong><br>ApplicationContext实现了BeanFactory接口，其中有一个工厂方法getBean()返回Object类型的对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span></span>&#123;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//creation of the BeanFactory</span></div><div class="line">	ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"config.xml"</span>);</div><div class="line">	<span class="comment">//creation totaly different type of objets with the factory</span></div><div class="line">	MyType1 objectType1 = context.getBean(<span class="string">"myType1"</span>);</div><div class="line">	MyType2 objectType2 = context.getBean(<span class="string">"myType2"</span>);</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h3><blockquote>
+<p>“Provide an interface for creating families of related or dependent objects without specifying their concrete classes”</p>
+</blockquote>
+<p>抽象工厂可以看作工厂模式的一般化，包含了<strong>多个抽象工厂方法</strong>。<br><img src="/images/AbstractFactoryPattern.png" alt="abstract-factory"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/////////////////////////the different products</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Wheel</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RaceCarWheel</span> <span class="keyword">implements</span> <span class="title">Wheel</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Engine</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PowerfulEngine</span> <span class="keyword">implements</span> <span class="title">Engine</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="comment">//	some stuff</span></div><div class="line">   &#125;</div><div class="line">   ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/////////////////////////the factory</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> Engine <span class="title">getEngine</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">public</span> Wheel <span class="title">getWheel</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SportCarFactory</span> <span class="keyword">implements</span> <span class="title">CarFactory</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> Engine <span class="title">getEngine</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> PowerfulEngine();</div><div class="line">   &#125;</div><div class="line">   <span class="function"><span class="keyword">public</span> Wheel <span class="title">getWheel</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> RaceCarWheel();</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/////////////////////////some code using the factory</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someFunctionInTheCode</span><span class="params">()</span></span>&#123;</div><div class="line">      CarFactory carFactory = <span class="keyword">new</span> SportCarFactory();</div><div class="line">      Wheel myWheel= carFactory.getWheel();</div><div class="line">      Engine myEngine = carFactory.getEngine();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>真实的例子：<br>很多DAO框架使用抽象工厂模式，如Spring data  <code>CrudRepository</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">createObject(…) or persistObject(…)</div><div class="line">updateObject(…) or saveObject(…)</div><div class="line">deleteObject(…) or removeObject(…)</div><div class="line">readObject(…) or findObject(…)v</div></pre></td></tr></table></figure></p>
+<p>from Coding Geek:<br><a href="http://coding-geek.com/design-pattern-factory-patterns/" target="_blank" rel="external">Design Pattern: factory patterns</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'zhangliting';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/04/设计模式-单例，原型与构建器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          设计模式-单例，原型与构建器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/04/最好的编成语言/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">最好的编成语言</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用设计模式"><span class="nav-number">1.</span> <span class="nav-text">不使用设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时需要工厂模式"><span class="nav-number">2.</span> <span class="nav-text">何时需要工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#控制实例对象数量"><span class="nav-number">2.1.</span> <span class="nav-text">控制实例对象数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#松耦合"><span class="nav-number">2.2.</span> <span class="nav-text">松耦合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装"><span class="nav-number">2.3.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除歧义"><span class="nav-number">2.4.</span> <span class="nav-text">消除歧义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">3.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态工厂方法"><span class="nav-number">3.1.</span> <span class="nav-text">静态工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">3.2.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式-1"><span class="nav-number">3.3.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂"><span class="nav-number">3.4.</span> <span class="nav-text">抽象工厂</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261796719&web_id=1261796719" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
