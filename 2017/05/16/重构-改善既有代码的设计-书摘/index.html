@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>重构-改善既有代码的设计-书摘 | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="重构书摘" />
+  
+  
+  
+  
+  <meta name="description" content="重构-改善既有代码的设计-书摘
+重构是在不改变软件可观察行为的前提下改善其内部结构。设计模式为重构行为提供了目标，模式是你希望到达的目标，重构则是到达之路。
+重构，第一个案例
+如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。
+重构之前，首先检查自己是否有一套可靠的测试机制。这些测试必须有自我检验能力。
+重构技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重构-改善既有代码的设计-书摘">
+<meta property="og:url" content="http://zhangliting.github.io/2017/05/16/重构-改善既有代码的设计-书摘/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="重构-改善既有代码的设计-书摘
+重构是在不改变软件可观察行为的前提下改善其内部结构。设计模式为重构行为提供了目标，模式是你希望到达的目标，重构则是到达之路。
+重构，第一个案例
+如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。
+重构之前，首先检查自己是否有一套可靠的测试机制。这些测试必须有自我检验能力。
+重构技术">
+<meta property="og:image" content="http://zhangliting.github.io/images/pose.jpg">
+<meta property="og:updated_time" content="2017-05-16T13:56:30.846Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重构-改善既有代码的设计-书摘">
+<meta name="twitter:description" content="重构-改善既有代码的设计-书摘
+重构是在不改变软件可观察行为的前提下改善其内部结构。设计模式为重构行为提供了目标，模式是你希望到达的目标，重构则是到达之路。
+重构，第一个案例
+如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。
+重构之前，首先检查自己是否有一套可靠的测试机制。这些测试必须有自我检验能力。
+重构技术">
+<meta name="twitter:image" content="http://zhangliting.github.io/images/pose.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            <div class="site-description">A blog of Zhang Liting</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-重构-改善既有代码的设计-书摘" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/images/pose.jpg" rel="gallery_cj2rmgy16002e9kv155xcrddk">
+        <img src="/images/pose.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      重构-改善既有代码的设计-书摘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/16/重构-改善既有代码的设计-书摘/" class="article-date">
+	  <time datetime="2017-05-16T13:43:04.000Z" itemprop="datePublished">五月 16, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="重构-改善既有代码的设计-书摘"><a href="#重构-改善既有代码的设计-书摘" class="headerlink" title="重构-改善既有代码的设计-书摘"></a>重构-改善既有代码的设计-书摘</h1><blockquote>
+<p><strong>重构</strong>是在不改变软件可观察行为的前提下改善其内部结构。<br><strong>设计模式</strong>为重构行为提供了目标，模式是你希望到达的目标，重构则是到达之路。</p>
+<h2 id="重构，第一个案例"><a href="#重构，第一个案例" class="headerlink" title="重构，第一个案例"></a>重构，第一个案例</h2><ul>
+<li>如果你发现自己需要为程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。</li>
+<li>重构之前，首先检查自己是否有一套可靠的测试机制。这些测试必须有自我检验能力。</li>
+<li>重构技术就是以微小的步伐修改程序，如果你犯下错误，很容易便可以发现它。</li>
+<li>任何一个傻瓜都能写出计算机可以理解的代码，唯有写出人类容易理解的代码，才是优秀的程序员。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h2 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h2><ul>
+<li>三次法则：事不过三，三则重构。</li>
+<li>不要过早的发布接口，请修改你的代码所有权政策，使重构更顺畅。</li>
+</ul>
+<h2 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h2><ul>
+<li><strong>重复代码</strong>(Duplicated Code)<ul>
+<li>多于一处的相同代码</li>
+</ul>
+</li>
+<li><strong>过长函数</strong>(Long Method)<ul>
+<li>每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途命名。</li>
+<li>条件表达式和循环常常是提炼的信号。</li>
+</ul>
+</li>
+<li><strong>过大的类</strong>(Large Class)<ul>
+<li>大类内往往出现太多实例变量，可以将彼此相关的变量提炼至新类。</li>
+</ul>
+</li>
+<li><strong>过长参数列</strong>(Long Parameter List)</li>
+<li><strong>发散式变化</strong>(Divergent Change)<ul>
+<li>一个类受多种变化影响</li>
+</ul>
+</li>
+<li><strong>散弹式修改</strong>(Shotgun Surgery)<ul>
+<li>一种变化引发多个类相应修改</li>
+</ul>
+</li>
+<li><strong>依恋情结</strong>(Feature Envy)<ul>
+<li>哪个类拥有最多被此函数使用的数据，然后就把这个函数和那些数据放一起。</li>
+</ul>
+</li>
+<li><strong>数据泥团</strong>(Data Clumps)<ul>
+<li>删掉众多数据中的一项，如果其他数据不再有意义，你应该把这些数据封装成一个新的对象。</li>
+</ul>
+</li>
+<li><strong>基本类型偏执</strong>(Primitive Obsession)</li>
+<li><strong>switch惊悚现身</strong>(Switch Statements)<ul>
+<li>少用switch case，可以用多态替代。</li>
+</ul>
+</li>
+<li><strong>平行继承体系</strong>(Parallel Inheritance Hierarchies)</li>
+<li><strong>冗赘类</strong>(Lazy Class)</li>
+<li><strong>夸夸其谈未来性</strong>(Speculative Generality)</li>
+<li><strong>令人迷惑的暂时字段</strong>(Temporary Filed)<ul>
+<li>将临时变量放在实例变量</li>
+</ul>
+</li>
+<li><strong>过渡耦合的消息链</strong>(Message Chains)</li>
+<li><strong>中间人</strong>(Middle Man)</li>
+<li><strong>过渡亲昵</strong>(Inappropriate Intimacy)</li>
+<li><strong>异曲同工的类</strong>(Alternative Classes with Different Interfaces)</li>
+<li><strong>不完美的库类</strong>(Incomplete Library Class)</li>
+<li><strong>纯稚的数据类</strong>(Data Class)</li>
+<li><strong>被拒绝的遗赠</strong>(Refused Bequest)</li>
+<li><strong>过多的注释</strong>(Comments)<ul>
+<li>当你感觉需要注视时，请先尝试重构，试着让所有注释变得多余。</li>
+</ul>
+</li>
+</ul>
+<h2 id="构筑测试体系"><a href="#构筑测试体系" class="headerlink" title="构筑测试体系"></a>构筑测试体系</h2><ul>
+<li>确保所有测试都完全自动化，让它们检查自己的测试结果。</li>
+<li>一套测试就是一个强大的bug侦查器，能够大大缩减查找bug所需要的时间。</li>
+<li>每当你受到bug报告，请先写一个单元测试来暴露bug。</li>
+<li>考虑可能出错的边界条件，把测试火力集中在那儿。</li>
+</ul>
+<h2 id="重新组织函数"><a href="#重新组织函数" class="headerlink" title="重新组织函数"></a>重新组织函数</h2><p><code>Extract Method</code>最大的困难就是处理局部变量，而临时变量则是其中一个主要的困难源头。</p>
+<ul>
+<li><p>内联临时变量</p>
+<ul>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">double basePrice = anOrder.hasePrice();</div><div class="line">return (basePrice &gt; 100)</div><div class="line">//inline</div><div class="line">return (anOrder.basePrice() &gt; 1000)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>运用<code>Replace Temp with Query</code>去掉所有可去掉的临时变量。</p>
+<ul>
+<li>由于临时变量只在所属的函数内可见，所以它们会驱使你写出更长的函数，因为只有这样你才能访问到需要的临时变量。如果把临时变量替代为一个查询，那么同一个类中的所有函数都可以获得这份信息。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">double basePrice = quantity * itemPrice;</div><div class="line">//extract</div><div class="line">double basePrice()&#123;</div><div class="line">    return quantity * itemPrice;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果表达式非常复杂而难以阅读，引入解释性变量<code>Introduce Explaining Variable</code></p>
+<ul>
+<li>我更倾向于提炼成函数，因为可以被所有函数使用。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if(platform.toUpperCase().indexOf(&quot;MAC&quot;) &gt; -1)&#123;</div><div class="line">...</div><div class="line">//extract</div><div class="line">final boolean isMacOs = platform.toUpperCase().indexOf(&quot;MAC&quot;) &gt; -1;</div><div class="line">if(isMaOs)&#123;</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果临时变量被赋值超过一次（处理循环变量和结果收集变量），就应该分解临时变量<code>Split Temporary Variable</code>。</p>
+<ul>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">double temp = 1.0;</div><div class="line">System.out.println(temp);</div><div class="line">temp = 2.0;</div><div class="line">System.out.println(temp);</div><div class="line">//replace</div><div class="line">double a = 1.0;</div><div class="line">System.out.println(a);</div><div class="line">double b = 2.0;</div><div class="line">System.out.println(b);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果你在函数内对参数赋值，就得使用<code>Remove Assignments to Parameters</code>。</p>
+<ul>
+<li>因为对参数赋值降低了代码的清晰度，而且混用了按值传递和按引用传递。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int discount (int inputVal, int quantity, int yearToDate) &#123;</div><div class="line">    if(inputVal &gt; 50) inputVal -=2;</div><div class="line"> //replace</div><div class="line">int discount (int inputVal, int quantity, int yearToDate) &#123;</div><div class="line">    int result = inputVal;</div><div class="line">    if(inputVal &gt; 50) result -=2;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果临时变量太混乱，难以替换。使用<code>Replace Method with Method Object</code>。代价是引入一个新类。</p>
+</li>
+<li>替换算法<code>Substitute Algorithm</code>。使用简洁高效的算法。</li>
+</ul>
+<p>提炼函数的优点：</p>
+<blockquote>
+<ul>
+<li>函数细粒度越小，复用的机会就越大。</li>
+<li>使高层函数读起来就像一系列注释。</li>
+<li>函数细粒度越小，覆写也会越容易些。</li>
+</ul>
+</blockquote>
+<h2 id="在对象之间搬移特性"><a href="#在对象之间搬移特性" class="headerlink" title="在对象之间搬移特性"></a>在对象之间搬移特性</h2><ul>
+<li>如果一个类有太多行为，或如果一个类与另一个类有太多合作而形成高度耦合，就需要<strong>搬移函数</strong><code>Move Method</code><ul>
+<li>做法：在该函数最常引用的类中建立一个有着类似行为的新函数。将旧函数变成一个单纯的委托函数，或是将旧函数完全的移除。</li>
+</ul>
+</li>
+<li>如果发现，对于一个字段，在其所在的类之外的另一个类中有更多函数使用了它，就应该考虑<strong>搬移这个字段</strong><code>Move Filed</code>。<ul>
+<li>做法：在目标类新建一个字段，修改源字段的所有用户，令它们改用新字段。</li>
+</ul>
+</li>
+<li>某个类做了应该由两个类做的事，就需要<strong>提炼类</strong><code>Extract Class</code><ul>
+<li>做法：建立一个新类，将相关的字段和函数从旧类搬移到新类。</li>
+</ul>
+</li>
+<li>某个类没有做太多事情，就将这个类的所有特性搬移到另一个类中，然后移除原类。</li>
+<li><p>如果某个客户先通过服务对象的字段得到另一个对象，然后调用后者的函数，那么客户必须知晓这一层委托关系。万一委托关系发生变化，客户也得相应变化。你需要<strong>隐藏委托关系</strong><code>Hide Delegate</code></p>
+<ul>
+<li>做法：在服务类上建立客户所需的所有函数，用以隐藏委托关系。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//人</div><div class="line">class Person｛</div><div class="line">    Department department;</div><div class="line">    //getter and setter</div><div class="line">&#125;</div><div class="line">//部门</div><div class="line">class Department &#123;</div><div class="line">    private String chargeCode;</div><div class="line">    private Person manager;</div><div class="line">    //getter and setter</div><div class="line">&#125;</div><div class="line">//如果客户需要知道某人的经理是谁，必须先取得Department对象；</div><div class="line">manager = john.getDepartment().getManager();</div><div class="line">//在Person类中隐藏委托关系</div><div class="line">public Person getManager() &#123;</div><div class="line">    return department.getManager();</div><div class="line">&#125;</div><div class="line">//修改后</div><div class="line">manager = john.getManager();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如果你使用的类无法提供你需要的服务，就需要<strong>引入外加函数</strong><code>Introduce Foreign Method</code>。</p>
+</li>
+<li>做法：在客户类中建立一个函数，并以第一参数形式传入ige服务类事例。</li>
+<li><p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Date newStart = new Date (previousEnd.getYear(), previousEnd.getMonth(), priviousEnd.getDate()+1);</div><div class="line">// extract</div><div class="line">Date new Start = nextDay(previousEnd);</div><div class="line">private static Date nextDay(Date arg) &#123;</div><div class="line">    return new Date (arg.getYear(), arg.getMonth(), arg.getDate()+1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果上诉情况过多，就需要引入本地扩展<code>Introduce Local Extension</code>，使用<strong>子类扩展</strong>或<strong>包装类</strong>。</p>
+</li>
+</ul>
+<h2 id="重新组织数据"><a href="#重新组织数据" class="headerlink" title="重新组织数据"></a>重新组织数据</h2><ul>
+<li>自封装字段(Self Encapsulate Filed)<ul>
+<li>为字段建立setter/getter，并且只以这些函数来访问字段。</li>
+<li>好处：子类可以覆写函数改变获取数据的途径，支持延迟初始化。</li>
+<li>缺点：难以阅读。</li>
+</ul>
+</li>
+<li>以对象取代数据值(Replace Data Value with Object)<ul>
+<li>一个数据项与其它数据和行为一起才有意义，将数据项变成对象。</li>
+</ul>
+</li>
+<li>将值对象改为引用对象(Change Value to Reference)<ul>
+<li>从一个类衍生出许多批次相等的实例，希望它们替换为同一个对象，将这个值对象变成引用对象。</li>
+</ul>
+</li>
+<li>将引用对象改为值对象(Change Reference to Value)<ul>
+<li>一个引用对象很小且不可变，而且不易管理。将它变成一个值对象。</li>
+</ul>
+</li>
+<li>以对象取代数组(Replace Array with Object)<ul>
+<li>一个数组，其中的元素各代表不同的东西，以对象替代数组。</li>
+</ul>
+</li>
+<li>字面常量取代魔法数(Replace Magic Number with Symbolic Constant)<ul>
+<li>你有一个字面数值，带有特别含义，创建一个常量，根据其意义命名，并用字面数值替换这个常量。</li>
+<li>魔法数：具有特使意义，却又不能明确表现出这种意义的数字。</li>
+<li>一旦这些数发生改变，你就必须找到这些魔法数，并将它们全部修改一遍。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">double potentialEnerty(double mass, double height)&#123;</div><div class="line">    return mass * 9.81 * height;</div><div class="line">&#125;</div><div class="line">//replace</div><div class="line">double potentialEnergy(double mass, double height)&#123;</div><div class="line">    return mass * GRAVITATIONAL_CONSTANT * height;</div><div class="line">&#125;</div><div class="line">static final double GRAVITATIONAL_CONSTANT = 9.81;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="简化条件表达式"><a href="#简化条件表达式" class="headerlink" title="简化条件表达式"></a>简化条件表达式</h2><ul>
+<li><p>分解条件表达式(Decompose Conditional)</p>
+<ul>
+<li>一个复杂的条件语句，从if、then、else三个段落中分别提炼出独立的函数。</li>
+<li>可以突出条件逻辑，更清楚地表明每个分支的作用，并且突出每个分支的原因。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if(date.before(UMMER_START) || date.after(SUMMER_END))&#123;</div><div class="line">    charge = quantity * winterRate + winterServiceCharge;</div><div class="line">&#125; else &#123;</div><div class="line">    charge = quantity * summerate;</div><div class="line">&#125;</div><div class="line">//replace </div><div class="line">if(notSummer(date))&#123;</div><div class="line">    charge = winterCharge(quantity);</div><div class="line">&#125; else &#123;</div><div class="line">    charge = summerCharge(quantity);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>合并条件表达式(Consolidate Conditional Expression)</p>
+<ul>
+<li>一系列的条件测试，都得到相同的结果。将这些测试合并为一个条件表达式，并将这个条件表达式提炼成为一个独立函数。</li>
+<li>使检查的用意更清晰。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">double disablilitAmount()&#123;</div><div class="line">    if(seniority &lt; 2) reutrn 0;</div><div class="line">    if(monthsDisabled &gt; 12) return 0;</div><div class="line">    if(isPartTime) return 0;</div><div class="line">&#125;</div><div class="line">//replace </div><div class="line">double disabilityAmout()&#123;</div><div class="line">    if(isNotEligableForDisability()) return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>移除控制标记(Remove Control Flag)</p>
+<ul>
+<li>在一些列布尔表达式中，某个变量带有“控制标记”的作用，以break语句或者return语句取代控制标记。 </li>
+</ul>
+</li>
+<li><p>以卫语句取代嵌套条件表达式(Replace Nested Conditional with Guard Clauses)</p>
+<ul>
+<li>如果两条分支都是正常行为，就应该使用if…else…的条件表示式，如果某个条件极其罕见，就应该单独检查该条件，并在条件为真时立刻从函数中返回。这种单独检查常常被称为“卫语句”。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">double getPayAmout()&#123;</div><div class="line">    double result;</div><div class="line">    if(isDead)&#123;</div><div class="line">        result = deadAmount();</div><div class="line">    &#125; else &#123;</div><div class="line">        if(isSeparated)&#123;</div><div class="line">            result = separatedAmount();</div><div class="line">        &#125; else &#123;</div><div class="line">            if(isRetired)&#123;</div><div class="line">                result = retiredAmount();</div><div class="line">            &#125; else &#123;</div><div class="line">                result = normalPayAmount();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return  result;</div><div class="line">&#125;</div><div class="line">//replace </div><div class="line">double getPayAmount()&#123;</div><div class="line">    if(isDead) return deadAmount();</div><div class="line">    if(isSeparated) return separatedAmount();</div><div class="line">    if(isRetired) return retiredAmount();</div><div class="line">    return normalPayAmount();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>以多态取代条件表达式(Replace Conditional with Polymorphism)</p>
+<ul>
+<li>如果尼需要根据对象的不同类型而采取不同的行为，多态使你不必编写明显的条件表达式。</li>
+</ul>
+</li>
+<li>引入Null对象(Introduce Null Object)<ul>
+<li>你需要再三检查某个对象是否为null。将null值替换为null对象。 </li>
+<li>Java 8 已经引入了Optional类。</li>
+</ul>
+</li>
+<li>引入断言(Introduce Assertion)<ul>
+<li>某一段代码需要对程序状态做出某种假设，以断言明确表现这种假设。</li>
+<li>断言是一个条件表达式，应该总是为真。如果它失败，表示程序员犯了错误。因此断言的失败应该导致一个非受控异常(unchecked exception)。断言绝对不能被系统的其它部分使用。程序最后的成品往往将断言删除。</li>
+<li>在交流的角度上，断言可以帮助程序阅读这理解代码所做的假设；在调试的角度上，断言可以在距离bug最近的地方抓住它们。</li>
+<li>请只使用它来检查“一定必须为真”的条件。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">double getExpenseLimit()&#123;</div><div class="line">    //should have either expense limit or a pirmary project </div><div class="line">    return (expenseLimit != NULL_EXPENSE)? expenseLimit:primaryProjct.getMemberExpenseLimit();</div><div class="line">&#125;</div><div class="line">//replace </div><div class="line">double getExpenseLimit()&#123;</div><div class="line">    Assert.isTrue(expenseLimit != NULL_EXPENSE || primaryProject != null);</div><div class="line">    return (expenseLimit != NULL_EXPENSE)? expenseLimit:primaryProjct.getMemberExpenseLimit();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="简化函数调用"><a href="#简化函数调用" class="headerlink" title="简化函数调用"></a>简化函数调用</h2><ul>
+<li><p>函数改名(Rename Method)</p>
+<ul>
+<li>技巧：首先应该考虑给这个函数写上一句怎样的注释，然后想办法将注释变成函数名称。</li>
+<li>如果旧函数是public的接口，你可能无法安全地删除它，这种情况最好保留在原地，并将它标记为deprecated（不建议使用）。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public String getTelephoneNumber()&#123;</div><div class="line">    reutrn (&quot;(&quot; + officeAreaCode + &quot;) &quot; + officeNumber);</div><div class="line">&#125;</div><div class="line">//replace</div><div class="line">public String getTelephoneNumber()&#123;</div><div class="line">    return getOfficeTelephoneNumber();</div><div class="line">&#125;</div><div class="line">public String getOfficeTelephoneNumber()&#123;</div><div class="line">    reutrn (&quot;(&quot; + officeAreaCode + &quot;) &quot; + officeNumber);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>添加参数(Add Parameter)</p>
+</li>
+<li>移除参数(RemoveParameter)</li>
+<li>将查询函数和修改函数分离(Separate Query from Modifier)<ul>
+<li>某个函数既返回对象的状态值，又修改对象的状态。建立两个不同的函数，其中一个负责查询，另一个负责修改。 </li>
+<li>如果一个函数只提供一个值，那么是很好的，应该你可以任意调用这个函数，没有副作用。</li>
+<li>多线程环境下，需要synchoronized分离出的方法，保证一致性。</li>
+</ul>
+</li>
+<li><p>保持对象完整(Preserve Whole Object)</p>
+<ul>
+<li>你从某个对象中取出若干值，将它们作为某一次函数调用的参数。改为传递整个对象。</li>
+<li>优点：如果将来需要修改参数，就可以避免修改。同时减少了参数长度。</li>
+<li>缺点：函数与对象之间耦合，应该考虑将函数一道对象中。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int low = daysTempRange().getLow();</div><div class="line">int hight = daysTempRange().getHigh();</div><div class="line">withinPlan = plan.withinRange(low. high);</div><div class="line">//replace </div><div class="line">withinPlan = plan.withinRange(daysTempRange());</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>隐藏函数(Hide Method)</p>
+<ul>
+<li>一个类从来没有被其他任何类用到，将这个函数修改为private。</li>
+<li>尽可能降低函数的可见度。</li>
+</ul>
+</li>
+<li><p>工厂函数取代构造函数(Replace Constructor with Facotory Method)</p>
+<ul>
+<li>你希望在闯将对象时不仅仅做简单的构建动作。将构造函数替换为工厂函数。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Employee(int type)&#123;</div><div class="line">    this.type = type;</div><div class="line">&#125;</div><div class="line">//replace</div><div class="line">static Employee create(int type)&#123;</div><div class="line">    return new Employee(type)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>以异常取代错误码(Replace Error Code with Exception)</p>
+<ul>
+<li>将“普通程序“”与“错误处理”分开，使程序更容易理解。</li>
+<li>如果调用者有责任在调用钱检查必须状态，就抛出非受控异常（unchecked）</li>
+<li>如果想抛出受控异常（checked），你可以新建一个异常类，也可以使用现有的异常类。</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">int vithdraw(int amount)&#123;</div><div class="line">    if(amount &gt; balance)</div><div class="line">        return -1;</div><div class="line">    else &#123;</div><div class="line">        balance = amount;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//replace</div><div class="line">void withdraw(int amount) throws BalanceException&#123;</div><div class="line">    if(amount &gt; balance) throw new BalanceException();</div><div class="line">    balance = amount;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="处理概括关系"><a href="#处理概括关系" class="headerlink" title="处理概括关系"></a>处理概括关系</h2><ul>
+<li>字段上移：两个子类拥有相同的字段，将该字段移至超类。</li>
+<li>函数上移：有些函数，在各个子类中产生完全相同的结果，将函数移至超类。</li>
+<li>提炼超类：两个类有相似特性，为这两个类建立一个超类，将相同特性移至超类。</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/重构/">重构</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/书摘/">书摘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重构/">重构</a></li></ul>
+
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'zhangliting';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/16/Spring-Core-Tutorials/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Spring Core Tutorials
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/04/设计模式-单例，原型与构建器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">设计模式-单例，原型与构建器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#重构-改善既有代码的设计-书摘"><span class="nav-number">1.</span> <span class="nav-text">重构-改善既有代码的设计-书摘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重构，第一个案例"><span class="nav-number">1.1.</span> <span class="nav-text">重构，第一个案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重构原则"><span class="nav-number">1.2.</span> <span class="nav-text">重构原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码的坏味道"><span class="nav-number">1.3.</span> <span class="nav-text">代码的坏味道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构筑测试体系"><span class="nav-number">1.4.</span> <span class="nav-text">构筑测试体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新组织函数"><span class="nav-number">1.5.</span> <span class="nav-text">重新组织函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在对象之间搬移特性"><span class="nav-number">1.6.</span> <span class="nav-text">在对象之间搬移特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新组织数据"><span class="nav-number">1.7.</span> <span class="nav-text">重新组织数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简化条件表达式"><span class="nav-number">1.8.</span> <span class="nav-text">简化条件表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简化函数调用"><span class="nav-number">1.9.</span> <span class="nav-text">简化函数调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理概括关系"><span class="nav-number">1.10.</span> <span class="nav-text">处理概括关系</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261796719&web_id=1261796719" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
